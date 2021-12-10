@@ -40,6 +40,7 @@ export default makeStyles(theme=>({
         opacity: 1,
         display: "flex",
         justifyContent: "space-between",
+        flexDirection: "row",
         padding: 10,
         [theme.breakpoints.down('md')]: {
             width: "80%",
@@ -64,5 +65,34 @@ export default makeStyles(theme=>({
         [theme.breakpoints.down("md")]: {
             width: "100%"
         }
+    },
+    advertise: {
+        width: "100%",
+
+        // height: `calc(100vh - 70px)`,
+    },
+    cardmedia: {
+        width: 300,
+        maxHeight: 150,
+        margin: "auto"
+    },
+    container: {
+        margin: "50px 0px",
+        // width: "90%",
+        textAlign: "center",
+        padding: "50px 0px",
+        border: `1px solid ${alpha(theme.palette.common.black, 0.25)}`,
+        borderRadius: theme.shape.borderRadius,
+    },
+    tour: {
+        backgroundColor: colour,
+        color: theme.palette.common.white,
+        height: 50
+    },
+    inspection: {
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "10px 20px",
+        alignItems: "center"
     }
 }))
