@@ -33,6 +33,36 @@ export default makeStyles(theme=>({
         marginBottom: theme.spacing(3)
     },
     search: {
-        
+        backgroundColor: theme.palette.common.white,
+        width: "70%",
+        marginTop: 20,
+        borderRadius: theme.shape.borderRadius,
+        opacity: 1,
+        display: "flex",
+        justifyContent: "space-between",
+        padding: 10,
+        [theme.breakpoints.down('md')]: {
+            width: "80%",
+            flexDirection: "column"
+        }
+    },
+    autocomplete: {
+        width: "38%",
+        outline: "none",
+        border: "none",
+        marginRight: "2%",
+        [theme.breakpoints.down("md")]: {
+            width: "100%",
+            marginRight: "none",
+            marginBottom: "10px"
+        }
+    },
+    button: {
+        backgroundColor: colour,
+        color: theme.palette.common.white,
+        width: "20%",
+        [theme.breakpoints.down("md")]: {
+            width: "100%"
+        }
     }
 }))
