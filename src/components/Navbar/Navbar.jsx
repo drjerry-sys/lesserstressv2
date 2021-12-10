@@ -1,15 +1,38 @@
-import { AppBar, Toolbar, Link, Button, Badge, Avatar, IconButton, useMediaQuery } from '@material-ui/core';
+import { AppBar, Toolbar, Button, Badge, Avatar, useMediaQuery } from '@material-ui/core';
 import { Notifications, Bookmark } from '@material-ui/icons';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from "react-router-dom";
 import useStyles from './style';
 import logo from '../../assets/images/void.png';
 
 const Navbar = () => {
 
-    const classes = useStyles();
-    const isAuthPage = false;
-    const isAuthenticated = true;
+    const [scrolled, setScrolled] = useState(false);
+    const [isAuthPage, setIsAuthPage] = useState(false);
+    const { pathname: location } = useLocation();
+
+    const isAuthenticated = false;
+    const classes = useStyles({ scrolled });
     const isMobile = useMediaQuery('(max-width: 900px)');
+    
+    useEffect(()=>{
+        if (location === "/sign_up" || location === "/sign_in") {
+            setScrolled(true);
+            setIsAuthPage(true);
+        } else{
+            setIsAuthPage(false);
+        };
+
+    }, []);
+
+    
+    window.onscroll = () => {
+        if (!isAuthPage) {
+            setScrolled(window.pageYOffset > 10);
+        }
+        return () => window.onscroll = null;
+    };
+
 
     return (
         <AppBar position="fixed" className={classes.appbar}>
@@ -18,18 +41,19 @@ const Navbar = () => {
                     <img src={logo} className={classes.logo} alt="logo_void" />
                     {!isAuthPage && !isMobile && (
                         <>
-                            <Button variant="contained" className={classes.navigation} href="#contained-buttons">Home</Button>
-                            <Button variant="outlined" className={classes.navigation} href="#contained-buttons">Blog</Button>
-                            <Button variant="outlined" className={classes.navigation} href="#contained-buttons">Contact</Button>
-                            <Button variant="outlined" className={classes.navigation} href="#contained-buttons">Support</Button>    
+                            <Button variant="contained" className={classes.navigation} href="/">Home</Button>
+                            <Button variant="outlined" className={classes.navigation} href="/blog">Blog</Button>
+                            <Button variant="outlined" className={classes.navigation} href="/contact">Contact</Button>
+                            <Button variant="outlined" className={classes.navigation} href="/about">About</Button>    
+                            <Button variant="outlined" className={classes.navigation} href="/support">Support</Button>    
                         </>
                     )}
                 </div>
                 <div className={classes.menus}>
                 {!isAuthPage && !isAuthenticated && (
                     <>
-                        <Button variant="contained" className={classes.signup} href="#contained-buttons">Sign Up</Button>
-                        <Button variant="outlined" className={classes.signin} href="#contained-buttons">Sign In</Button>    
+                        <Button variant="contained" className={classes.signup} href="/sign_up">Sign Up</Button>
+                        <Button variant="outlined" className={classes.signin} href="/sign_in">Sign In</Button>    
                     </>
                 )}
                 {!isAuthPage && isAuthenticated && (
@@ -49,4 +73,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default Navbar;
