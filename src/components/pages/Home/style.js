@@ -76,23 +76,117 @@ export default makeStyles(theme=>({
         maxHeight: 150,
         margin: "auto"
     },
+    overall: {
+        padding: "20px 100px",
+        [theme.breakpoints.down("md")]: {
+            padding: "20px 30px"
+        }
+    },
     container: {
         margin: "50px 0px",
-        // width: "90%",
         textAlign: "center",
         padding: "50px 0px",
-        border: `1px solid ${alpha(theme.palette.common.black, 0.25)}`,
-        borderRadius: theme.shape.borderRadius,
+        [theme.breakpoints.down("md")]: {
+            margin: "20px 0",
+            padding: "30px 0"
+        }
     },
     tour: {
         backgroundColor: colour,
         color: theme.palette.common.white,
-        height: 50
+        height: 50,
+        marginTop: theme.spacing(3)
     },
     inspection: {
         display: "flex",
         justifyContent: "space-between",
         padding: "10px 20px",
-        alignItems: "center"
+        alignItems: "center",
+        flexDirection: "column"
+    },
+    roomTypes: {
+        [theme.breakpoints.down("md")]: {
+            marginTop: 20
+        }
+    },
+    roomContent: {
+        width: "60%",
+        [theme.breakpoints.down("md")]: {
+            width: "80%"
+        }
+    },
+    topAreas: {
+        // margin: "0px 50px",
+    },
+    areaText: {
+        fontSize: 25,
+        color: colour
+    },
+    areaImg: {
+        height: 300,
+        backgroundColor: alpha(colour, 0.9),
+        width: "inherit",
+        borderRadius: theme.shape.borderRadius,
+        margin: "auto auto",
+        color: theme.palette.common.white,
+    },
+    areaName: {
+        textAlign: "center",
+        lineHeight: "300px"
+    },
+    contentMedia: {
+        padding: "5px",
+        borderRadius: theme.shape.borderRadius
+    },
+    ratingdiv: {
+        display: "flex",
+        marginBottom: "10px"
+    },
+    rating: {
+        marginRight: "20px",
+    },
+    ratingChip: {
+        backgroundColor: colour,
+        color: theme.palette.common.white
+    },
+    properties: {
+        display: "flex",
+        alignItems: "center",
+    },
+    icon: {
+        fontSize: "15px",
+        marginRight: "10px",
+        color: "grey",
+    },
+    bottomContent: {
+        backgroundColor: "#deeaee",
+        padding: "10px",
+        borderRadius: theme.shape.borderRadius,
+        color: alpha(colour, 0.8),
+        marginTop: theme.spacing(3),
+        display: "flex",
+        justifyContent: "space-between"
+    },
+    price: {
+        fontSize: "20px",
+        fontWeight: 500,
+        textAlign: "center"
+    },
+    period: {
+        textAlign: "center"
+    },
+    trending: {
+        width: "100%"
+    },
+    browseAll: {
+        backgroundColor: colour,
+        color: theme.palette.common.white,
+        margin: "7px auto",
+        marginTop: theme.spacing(8),
+    },
+    bottomDiv: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
     }
 }))
