@@ -12,7 +12,7 @@ import asherifa from "../../../assets/images/for_rent_4.jfif"
 const Home = () => {
     
     const classes = useStyles();
-    const isAuthenticated = true;
+    const isAuthenticated = false;
 
     const ifeArea = [
         {area: 'Lagere'},

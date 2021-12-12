@@ -11,7 +11,7 @@ const Navbar = () => {
     const [isAuthPage, setIsAuthPage] = useState(false);
     const { pathname: location } = useLocation();
 
-    const isAuthenticated = true;
+    const isAuthenticated = false;
     const classes = useStyles({ scrolled });
     const isMobile = useMediaQuery('(max-width: 900px)');
     

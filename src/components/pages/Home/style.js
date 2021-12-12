@@ -1,5 +1,5 @@
 import { makeStyles, alpha } from '@material-ui/core';
-import image from "../../../assets/images/homejpg.jpg";
+import image from "../../../assets/images/bgpic2.jpeg";
 
 const colour = '#040459';
 
@@ -8,13 +8,12 @@ export default makeStyles(theme=>({
         height: "95vh",
         background: `url(${image})`,
         width: "100%",
-        backgroundPosition: "left top",
+        objectFit: "100%"
     },
     homeColor: {
         width: "100%",
         height: "inherit",
-        backgroundColor: colour,
-        opacity: 0.9,
+        backgroundColor: alpha(colour, 0.8),
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
