@@ -78,6 +78,7 @@ export default makeStyles(theme=>({
     },
     overall: {
         padding: "20px 100px",
+        backgroundColor: theme.palette.common.white,
         [theme.breakpoints.down("md")]: {
             padding: "20px 30px"
         }
@@ -169,14 +170,15 @@ export default makeStyles(theme=>({
     },
     price: {
         fontSize: "20px",
-        fontWeight: 500,
+        // fontWeight: 500,
         textAlign: "center"
     },
     period: {
         textAlign: "center"
     },
     trending: {
-        width: "100%"
+        width: "100%",
+        marginBottom: "50px",
     },
     browseAll: {
         backgroundColor: colour,
@@ -188,5 +190,110 @@ export default makeStyles(theme=>({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center"
+    },
+    secondWrapper: {
+        backgroundColor: "#f2f2f2",
+        width: "100%",
+        color: colour,
+        display: "flex",
+        flexDirection: "column",
+    },
+    howitworkswrapper: {
+        maxWidth: "50%",
+        margin: "40px auto",
+        [theme.breakpoints.down("md")]: {
+            maxWidth: "80%",
+            // margin: "40px auto",
+        }
+    },
+    howitworks: {
+        textAlign: "center",
+        marginBottom: "10px"
+    },
+    allyouneed: {
+        fontSize: "18px",
+        textAlign: "center"
+    },
+    findSubmmitSpace: {
+        margin: "0 auto",
+        marginBottom: "50px",
+        [theme.breakpoints.down("md")]: {
+            display: "flex",
+            flexDirection: "column"
+        }
+    },
+    find: {
+        padding: "10px 60px",
+        backgroundColor: colour,
+        color: theme.palette.common.white,
+    },
+    submit: {
+        padding: "10px 60px",
+        marginLeft: "20px",
+        boxShadow: theme.shadows[1],
+        color: colour,
+        [theme.breakpoints.down("md")]: {
+            marginLeft: "0",
+            width: "100%",
+            marginTop: "10px"
+        }
+    },
+    stepsection: {
+        padding: "30px 100px",
+        backgroundColor: "#f2f2f2",
+        [theme.breakpoints.down("md")]: {
+            padding: "20px 30px 0px"
+        }
+    },
+    chooseCard: {
+        height: "350px",
+        // width: "100%",
+        backgroundColor: theme.palette.common.white,
+        borderRadius: theme.shape.borderRadius,
+        display: "flex",
+        // justifyContent: "center",
+        flexDirection: "column"
+    },
+    round: {
+        width: "100px",
+        height: "100px",
+        borderRadius: "50px",
+        backgroundColor: alpha(theme.palette.common.black, 0.15),
+        margin: "0 auto",
+        marginTop: theme.spacing(4),
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    homeIcon: {
+        fontSize: "50px",
+        color: "white"
+    },
+    details: {
+        margin: "0 auto",
+        maxWidth: "80%",
+    },
+    stepAction: {
+        textAlign: "center",
+        fontSize: "20px",
+        fontWeight: 400,
+        color: colour,
+        padding: "30px 0 10px 0"
+    },
+    stepDetail: {
+        textAlign: "center",
+        fontSize: "15px",
+        color: colour,
+    },
+    findLocation: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        padding: "60px 0"
+    },
+    locationButton: {
+        backgroundColor: colour,
+        color: theme.palette.common.white,
+        margin: "0 auto"
     }
 }))

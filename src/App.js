@@ -1,6 +1,6 @@
 import React from 'react';
 import { Home, Navbar, Blog, SignIn, SignOut } from './components';
-import { Route, Redirect, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return ( 
