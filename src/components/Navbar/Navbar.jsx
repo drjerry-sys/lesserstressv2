@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Button, Badge, Avatar, useMediaQuery } from '@material-ui/core';
 import { Notifications, Bookmark } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import useStyles from './style';
 import logo from '../../assets/images/void.png';
 

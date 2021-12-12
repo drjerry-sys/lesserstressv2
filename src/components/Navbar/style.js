@@ -1,7 +1,6 @@
 import { makeStyles, alpha } from '@material-ui/core';
 
 const colour = '#040459';
-const check = false
 
 export default makeStyles(theme=> ({
     appbar: {
@@ -42,7 +41,6 @@ export default makeStyles(theme=> ({
     signin: {
         color: theme.palette.common.white,
         boxShadow: 'none',
-        border: 'none',
         marginLeft: 10,
         border: `1px solid ${alpha(theme.palette.common.white, 0.3)}`,
         "&:hover": {

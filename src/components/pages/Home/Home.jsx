@@ -1,6 +1,6 @@
 import React from 'react';
 import useStyles from './style';
-import { Typography, TextField, Button, Grid, Card, CardContent, CardMedia, Chip, CssBaseline, Box } from "@material-ui/core";
+import { Typography, TextField, Button, Grid, Card, CardContent, CardMedia, Chip, Box } from "@material-ui/core";
 import { Autocomplete, Rating } from "@material-ui/lab";
 import { CheckCircle, Search, PersonPinCircle, Schedule, Home as HomeIcon } from "@material-ui/icons";
 import Footer from "../../Footer/Footer";
@@ -51,8 +51,9 @@ const Home = () => {
                         <Button variant="contained" size="large" startIcon={<Search />} className={classes.button}>Search</Button>
                     </div>
                 </div>
+            </div>
+            <div className={classes.overall}>
                 <div style={{ height: "5vh"}} />
-                <div className={classes.overall}>
                     <Grid container>
                         <Grid item xs={12} sm={12} md={4} lg={4}>
                             <Card style={{ boxShadow: "none", backgroundColor: "transparent"}}>
@@ -94,30 +95,32 @@ const Home = () => {
                             </Card>
                         </Grid>
                     </Grid>
-                    <Grid container className={classes.container}>
-                        <Grid item xs={12} sm={12} md={8} lg={4} className={classes.gridItem}>
-                            <Typography variant="h2" style={{ fontWeight: 500 }}>22,000+</Typography>
-                            <Typography variant="subtitle1" style={{ fontSize: 20 }}>customers satisfied</Typography>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={8} lg={8} className={classes.gridItem}>
+                    <div className={classes.container}>
+                        <Grid container>
+                            <Grid item xs={12} sm={12} md={4} lg={4} className={classes.gridItem}>
+                                <Typography variant="h2" style={{ fontWeight: 500 }}>22,000+</Typography>
+                                <Typography variant="subtitle1" style={{ fontSize: 20 }}>customers satisfied</Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={8} lg={8} className={classes.gridItem}>
 
-                            <div className={classes.inspection}>
-                                <div className={classes.roomTypes}>
-                                    <Typography variant="h4">
-                                        Hi, {isAuthenticated ? "Jerry" : "there"}!
-                                    </Typography>
+                                <div className={classes.inspection}>
+                                    <div className={classes.roomTypes}>
+                                        <Typography variant="h4">
+                                            Hi, {isAuthenticated ? "Jerry" : "there"}!
+                                        </Typography>
+                                    </div>
+                                    <div className={classes.roomContent}>
+                                        <Typography variant="subtitle1" style={{textAlign: "justify"}}>
+                                            Book your Inspection experience today!
+                                            Schedule an Inspection, meet an Agent, or ask for more information and
+                                            Join the over 22,000 satisfied customer!
+                                        </Typography>
+                                    </div>
+                                    <Button variant="contained" className={classes.tour}>Schedule Inspection</Button>
                                 </div>
-                                <div className={classes.roomContent}>
-                                    <Typography variant="subtitle1" style={{textAlign: "justify"}}>
-                                        Book your Inspection experience today!
-                                        Schedule an Inspection, meet an Agent, or ask for more information and
-                                        Join the over 22,000 satisfied customer!
-                                    </Typography>
-                                </div>
-                                <Button variant="contained" className={classes.tour}>Schedule Inspection</Button>
-                            </div>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </div>
                     <div classNmae={classes.topAreas}>
                         <Typography gutterBottom variant="h4" className={classes.areaText}>Student Areas</Typography>
                         <Grid container spacing={2}>
@@ -146,7 +149,7 @@ const Home = () => {
                     <div className={classes.trending}>
                         <Typography gutterBottom style={{ marginTop: 60 }} variant="h4" className={classes.areaText}>Trending Spaces</Typography>
                         <Grid container spacing={3}>
-                            <Grid item md={6} lg={4}>
+                            <Grid item xs={12} sm={12} md={4} lg={4}>
                                 <Card>
                                     <CardMedia component="img" image={asherifa} className={classes.contentMedia} />
                                     <CardContent>
@@ -186,7 +189,7 @@ const Home = () => {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item md={6} lg={4}>
+                            <Grid item xs={12} sm={12} md={4} lg={4}>
                                 <Card>
                                     <CardMedia component="img" image={asherifa}  className={classes.contentMedia} />
                                     <CardContent>
@@ -226,7 +229,7 @@ const Home = () => {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item md={6} lg={4}>
+                            <Grid item xs={12} sm={12} md={4} lg={4}>
                                 <Card>
                                     <CardMedia component="img" image={asherifa} className={classes.contentMedia} />
                                     <CardContent>
@@ -289,7 +292,7 @@ const Home = () => {
                 </Box>
                 <Box className={classes.stepsection}>
                     <Grid container spacing={3}>
-                        <Grid item md={4} lg={4}>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
                             <div className={classes.chooseCard}>
                                 <div className={classes.round}>
                                     <HomeIcon className={classes.homeIcon} />
@@ -304,7 +307,7 @@ const Home = () => {
                                 </div>
                             </div>
                         </Grid>
-                        <Grid item md={4} lg={4}>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
                             <div className={classes.chooseCard}>
                                 <div className={classes.round}>
                                     <Schedule className={classes.homeIcon} />
@@ -319,7 +322,7 @@ const Home = () => {
                                 </div>
                             </div>
                         </Grid>
-                        <Grid item md={4} lg={4}>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
                             <div className={classes.chooseCard}>
                                 <div className={classes.round}>
                                     <PersonPinCircle className={classes.homeIcon} />
@@ -339,11 +342,7 @@ const Home = () => {
                         <Button variant="contained" className={classes.locationButton} mb={4}>Find a Location</Button>
                     </div>
                 </Box>
-                <Box className={classes.lastSection}>
-                </Box>
-                    <img src="" alt="" />
-                <Footer />
-            </div>
+            <Footer />
         </div>
     );
 };
