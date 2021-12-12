@@ -11,7 +11,7 @@ const SignIn = () => {
     return (
         <div className={classes.signup}>
             <Box className={classes.socialMedia}>
-                <Typography variant="subtitle1" className={classes.sign}>SIGN UP TO CONTINUE</Typography>
+                <Typography variant="subtitle1" className={classes.sign}>SIGN IN TO CONTINUE</Typography>
                 <div className={classes.facebook}>
                     <Facebook className={classes.icon} />
                     <Typography variant="subtitle1" className={classes.socialText}>Continue with Facebook</Typography>
@@ -29,7 +29,7 @@ const SignIn = () => {
             <Divider />
             <Typography variant="subtitle1" className={classes.haveAccount}>Don't have an account? <Link to="/sign_up">Sign up</Link></Typography>
             <Divider />
-            <Typography variant="subtitle2" className={classes.haveAccount}><Link to="/forgot_password" style={{textDecoration: "none", color: "grey"}}>Don't have an account?</Link></Typography>
+            <Typography variant="subtitle2" className={classes.haveAccount}><Link to="/forgot_password" style={{textDecoration: "none", color: "grey"}}>Forgot password?</Link></Typography>
         </div>
     )
 }

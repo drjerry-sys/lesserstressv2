@@ -16,7 +16,7 @@ const Navbar = () => {
     const isMobile = useMediaQuery('(max-width: 900px)');
     
     useEffect(()=>{
-        if (location === "/sign_up" || location === "/sign_in") {
+        if (location === "/sign_up" || location === "/sign_in" || location === "/forgot_password") {
             setScrolled(true);
             setIsAuthPage(true);
         } else{
