@@ -210,7 +210,7 @@ const Blog = () => {
             </Container>
             <Footer />
         </div>
-    )
-}
+    );
+};
 
 export default Blog;

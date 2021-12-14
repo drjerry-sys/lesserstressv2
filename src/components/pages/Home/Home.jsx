@@ -4,6 +4,7 @@ import { Typography, TextField, Button, Grid, Card, CardContent, CardMedia, Chip
 import { Autocomplete, Rating } from "@material-ui/lab";
 import { CheckCircle, Search, PersonPinCircle, Schedule, Home as HomeIcon } from "@material-ui/icons";
 import Footer from "../../Footer/Footer";
+import { useNavigate } from "react-router-dom";
 import priceImage from "../../../assets/illustrations/best_prices.png";
 import searchHouse from "../../../assets/illustrations/search_house.png";
 import roommate from "../../../assets/illustrations/roommate.png";
@@ -13,6 +14,7 @@ const Home = () => {
     
     const classes = useStyles();
     const isAuthenticated = false;
+    const navigate = useNavigate();
 
     const ifeArea = [
         {area: 'Lagere'},
@@ -27,6 +29,10 @@ const Home = () => {
         {priceRanges: "#150,000 - #200,000"},
         {priceRanges: "All"},
     ];
+
+    const handleSearch = () => {
+        navigate("/search_result");
+    };
     
     return (
         <div className={classes.home}>
@@ -48,7 +54,7 @@ const Home = () => {
                             renderInput={
                                 (params) => <TextField variant="outlined" {...params} label="Select Price Range" />}
                         />
-                        <Button variant="contained" size="large" startIcon={<Search />} className={classes.button}>Search</Button>
+                        <Button variant="contained" size="large" startIcon={<Search />} onClick={handleSearch} className={classes.button}>Search</Button>
                     </div>
                 </div>
             </div>

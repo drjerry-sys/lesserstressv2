@@ -294,5 +294,14 @@ export default makeStyles(theme=>({
         backgroundColor: colour,
         color: theme.palette.common.white,
         margin: "0 auto"
+    },
+    displaybox: {
+        display: "flex",
+    },
+    displayBox: {
+        flex: 1
+    },
+    infoDetails: {
+        flex: 3
     }
-}))
+}));
