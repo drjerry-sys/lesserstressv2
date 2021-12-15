@@ -1,7 +1,7 @@
 import React from "react";
 import useStyles from "./style";
-import { Box, Container, Chip, Typography, Input, InputBase, Button } from "@material-ui/core";
-import { Pagination, Rating } from "@material-ui/lab";
+import { Box, Container, Chip, Typography, useMediaQuery, InputBase, Button, TextField } from "@material-ui/core";
+import { Autocomplete, Pagination, Rating } from "@material-ui/lab";
 import { CheckCircle, Search, ThumbUp } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import image from "../../../assets/images/bgpic2.jpeg";
@@ -9,7 +9,22 @@ import Footer from "../../Footer/Footer";
 
 const SearchResult = () => {
 
+    const isMobile = useMediaQuery('(max-width: 900px)');
     const classes = useStyles();
+
+    const ifeArea = [
+        {area: 'Lagere'},
+        {area: 'Asherifa'},
+        {area: 'Mayfair'},
+        {area: 'Damico'},
+    ];
+
+    const prices = [
+        {priceRanges: "#50,000 - #100,000"},
+        {priceRanges: "#100,000 - #150,000"},
+        {priceRanges: "#150,000 - #200,000"},
+        {priceRanges: "All"},
+    ];
 
     return(
         <div className={classes.search}>
@@ -23,28 +38,46 @@ const SearchResult = () => {
                     </Typography>
                 </div>
             </Box>
+            {isMobile && (
+                <div className={classes.search2}>
+                    <Autocomplete className={classes.autocomplete}
+                        id="free-solo-demo"
+                        options={ifeArea.map((area) => area.area)}
+                        renderInput={(params) => <TextField variant="outlined" {...params} label="Which Area Would You Prefer?" />}
+                    />
+                    <Autocomplete  className={classes.autocomplete}
+                        id="free-solo-demo"
+                        options={prices.map((price) => price.priceRanges)}
+                        renderInput={
+                            (params) => <TextField variant="outlined" {...params} label="Select Price Range" />}
+                    />
+                    <Button variant="contained" size="large" startIcon={<Search />} className={classes.button2}>Search</Button>
+                </div>            
+            )}
             <Container className={classes.section2}>
-                <div className={classes.left}>
-                    <div className={classes.resultSearch}>
-                        <Typography variant="h5">Search</Typography>
-                        <div className={classes.area}>
-                            <Typography variant="caption">Area</Typography>
-                            <InputBase placeholder="Asherifa" className={classes.input} />
+                {!isMobile && (
+                    <div className={classes.left}>
+                        <div className={classes.resultSearch}>
+                            <Typography variant="h5">Search</Typography>
+                            <div className={classes.area}>
+                                <Typography variant="caption">Area</Typography>
+                                <InputBase placeholder="Asherifa" className={classes.input} />
+                            </div>
+                            <div className={classes.area}>
+                                <Typography variant="caption">Price Range</Typography>
+                                <InputBase placeholder="Price" className={classes.input} />
+                            </div>
+                            <Button startIcon={<Search />} variant="contained" color="primary" className={classes.button}>search</Button>
                         </div>
-                        <div className={classes.area}>
-                            <Typography variant="caption">Price Range</Typography>
-                            <InputBase placeholder="Price" className={classes.input} />
-                        </div>
-                        <Button startIcon={<Search />} variant="contained" color="primary" className={classes.button}>search</Button>
-                    </div>
-                    <div className={classes.showOnMap}>
+                        <div className={classes.showOnMap}>
 
+                        </div>
                     </div>
-                </div>
+                )}
                 <div className={classes.right}>
                     <Box className={classes.displayBox}>
                         <div className={classes.displayImg}>
-                            <img src={image} alt="roomImg" style={{width: "100%", height: "100px"}} />
+                            <img src={image} alt="roomImg" style={{width: "100%"}}/>
                         </div>
                         <div className={classes.detailSection}>
                             <div className={classes.infoDetails}>
@@ -60,7 +93,7 @@ const SearchResult = () => {
                                         2.2km from campus, 20mins walk from campus
                                     </Typography>
                                 </div>
-                                <div>
+                                <div className={classes.goodreviews}>
                                     <Typography variant="body1">
                                         Good
                                     </Typography>
@@ -116,7 +149,7 @@ const SearchResult = () => {
                                         2.2km from campus, 20mins walk from campus
                                     </Typography>
                                 </div>
-                                <div>
+                                <div className={classes.goodreviews}>
                                     <Typography variant="body1">
                                         Good
                                     </Typography>
@@ -169,7 +202,7 @@ const SearchResult = () => {
                                         2.2km from campus, 20mins walk from campus
                                     </Typography>
                                 </div>
-                                <div>
+                                <div className={classes.goodreviews}>
                                     <Typography variant="body1">
                                         Good
                                     </Typography>
@@ -222,7 +255,7 @@ const SearchResult = () => {
                                         2.2km from campus, 20mins walk from campus
                                     </Typography>
                                 </div>
-                                <div>
+                                <div className={classes.goodreviews}>
                                     <Typography variant="body1">
                                         Good
                                     </Typography>
@@ -275,7 +308,7 @@ const SearchResult = () => {
                                         2.2km from campus, 20mins walk from campus
                                     </Typography>
                                 </div>
-                                <div>
+                                <div className={classes.goodreviews}>
                                     <Typography variant="body1">
                                         Good
                                     </Typography>
@@ -328,7 +361,7 @@ const SearchResult = () => {
                                         2.2km from campus, 20mins walk from campus
                                     </Typography>
                                 </div>
-                                <div>
+                                <div className={classes.goodreviews}>
                                     <Typography variant="body1">
                                         Good
                                     </Typography>
@@ -381,7 +414,7 @@ const SearchResult = () => {
                                         2.2km from campus, 20mins walk from campus
                                     </Typography>
                                 </div>
-                                <div>
+                                <div className={classes.goodreviews}>
                                     <Typography variant="body1">
                                         Good
                                     </Typography>
@@ -434,7 +467,7 @@ const SearchResult = () => {
                                         2.2km from campus, 20mins walk from campus
                                     </Typography>
                                 </div>
-                                <div>
+                                <div className={classes.goodreviews}>
                                     <Typography variant="body1">
                                         Good
                                     </Typography>

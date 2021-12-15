@@ -13,7 +13,7 @@ import asherifa from "../../../assets/images/for_rent_4.jfif"
 const Home = () => {
     
     const classes = useStyles();
-    const isAuthenticated = false;
+    const isAuthenticated = true;
     const navigate = useNavigate();
 
     const ifeArea = [

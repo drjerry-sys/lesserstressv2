@@ -80,6 +80,14 @@ export default makeStyles(theme=>({
         borderRadius: theme.shape.borderRadius,
         marginTop: theme.spacing(3),
         height: "fit-content",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+        }
+    },
+    goodreviews: {
+        [theme.breakpoints.down("sm")]: {
+            display: "none"
+        }
     },
     displayImg: {
         flex: 2,
@@ -94,6 +102,7 @@ export default makeStyles(theme=>({
     },
     rating: {
         marginRight: "20px",
+        fontSize: "15px"
     },
     chip: {
         backgroundColor: colour,
@@ -130,5 +139,39 @@ export default makeStyles(theme=>({
     priceFeatures: {
         display: "flex",
         justifyContent: "space-between",
-    }
+    },
+    search2: {
+        backgroundColor: theme.palette.common.white,
+        width: "70%",
+        marginTop: 20,
+        borderRadius: theme.shape.borderRadius,
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "row",
+        padding: 10,
+        [theme.breakpoints.down('md')]: {
+            width: "80%",
+            flexDirection: "column",
+            margin: "10px auto"
+        }
+    },
+    autocomplete: {
+        width: "38%",
+        outline: "none",
+        border: "none",
+        marginRight: "2%",
+        [theme.breakpoints.down("md")]: {
+            width: "100%",
+            marginRight: "none",
+            marginBottom: "10px"
+        }
+    },
+    button2: {
+        backgroundColor: colour,
+        color: theme.palette.common.white,
+        width: "20%",
+        [theme.breakpoints.down("md")]: {
+            width: "100%"
+        }
+    },
 }));

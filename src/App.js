@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Navbar, Blog, SignIn, SignOut, SignUp, SearchResult, ForgotPassword } from './components';
+import { Home, Navbar, Blog, SignIn, SignOut, SignUp, SearchResult, ForgotPassword, Settings } from './components';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
       <Route path="/blog" element={<Blog />} />
       <Route path="/sign_in" element={<SignIn />} />
       <Route path="/sign_up" element={<SignUp />} />
+      <Route path="/settings" element={<Settings />} />
       <Route path="/sign_out" element={<SignOut />} />
       <Route path="/forgot_password" element={<ForgotPassword />} />
       <Route path="/search_result" element={<SearchResult />} />

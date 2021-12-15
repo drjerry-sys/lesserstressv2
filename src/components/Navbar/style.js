@@ -57,5 +57,25 @@ export default makeStyles(theme=> ({
     },
     badge: {
         marginRight: 20,
+    },
+    profileAvatar: {
+        width: "30px",
+        height: "30px",
+        cursor: "pointer",
+        "&:hover": {
+            backgroundColor: "grey"
+        }
+    },
+    userMenu: {
+        backgroundColor: theme.palette.common.white,
+        position: "absolute",
+        top: theme.spacing(7),
+        right: theme.spacing(3),
+        boxShadow: theme.shadows[3],
+        borderRadius: theme.shape.borderRadius,
+        padding: "10px 20px",
+    },
+    acntSetting: {
+        textDecoration: "none",
     }
 }))

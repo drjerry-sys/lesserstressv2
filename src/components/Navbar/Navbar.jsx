@@ -1,7 +1,7 @@
-import { AppBar, Toolbar, Button, Badge, Avatar, useMediaQuery } from '@material-ui/core';
+import { AppBar, Toolbar, Button, Badge, Avatar, useMediaQuery, Box, Divider } from '@material-ui/core';
 import { Notifications, Bookmark } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useStyles from './style';
 import logo from '../../assets/images/void.png';
 
@@ -9,9 +9,10 @@ const Navbar = () => {
 
     const [scrolled, setScrolled] = useState(false);
     const [isAuthPage, setIsAuthPage] = useState(false);
+    const [manage, setManage] = useState(false);
     const { pathname: location } = useLocation();
 
-    const isAuthenticated = false;
+    const isAuthenticated = true;
     const classes = useStyles({ scrolled });
     const isMobile = useMediaQuery('(max-width: 900px)');
     
@@ -66,7 +67,14 @@ const Navbar = () => {
                         <Badge badgeContent={5} color="secondary" className={classes.badge}>
                             <Bookmark className={classes.icon} />
                         </Badge>
-                        <Avatar src="/broken-image.jpg" style={{ width: 30, height: 30 }} />
+                        <Avatar src="/broken-image.jpg"  onClick={() => setManage(!manage)} className={classes.profileAvatar} />
+                        {manage && (
+                            <Box className={classes.userMenu}>
+                                <Link to="/settings" className={classes.acntSetting}>Account setting</Link>
+                                <Divider style={{margin: "5px 0"}} />
+                                <Link to="/" className={classes.acntSetting}>log out</Link>
+                            </Box>
+                        )}
                     </>
                 )}
                 </div>
