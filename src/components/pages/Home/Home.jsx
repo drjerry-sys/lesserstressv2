@@ -33,6 +33,10 @@ const Home = () => {
     const handleSearch = () => {
         navigate("/search_result");
     };
+
+    const handleSpace = () => {
+        navigate("/list_property")
+    }
     
     return (
         <div className={classes.home}>
@@ -293,7 +297,7 @@ const Home = () => {
                     </div>
                     <div className={classes.findSubmmitSpace}>
                         <Button variant="contained" className={classes.find}>Find your Space</Button>
-                        <Button variant="Outlined" className={classes.submit}>Submit Space</Button>
+                        <Button variant="Outlined" className={classes.submit} onClick={handleSpace}>Submit Space</Button>
                     </div>
                 </Box>
                 <Box className={classes.stepsection}>

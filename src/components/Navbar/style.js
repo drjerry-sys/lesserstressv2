@@ -57,6 +57,7 @@ export default makeStyles(theme=> ({
     },
     badge: {
         marginRight: 20,
+        cursor: "pointer"
     },
     profileAvatar: {
         width: "30px",

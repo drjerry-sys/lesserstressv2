@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Typography } from '@material-ui/core';
+import { useNavigate } from "react-router-dom";
 import { LockOutlined, AssignmentOutlined, PaymentOutlined, NotificationsNoneOutlined, PersonAddOutlined, TuneOutlined, BookmarksOutlined } from "@material-ui/icons";
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -7,6 +8,17 @@ import useStyles from "./style";
 const Settings = () => {
 
     const classes = useStyles();
+    const navigate = useNavigate();
+
+    const handleOption = (val) => {
+        if (val === "person") {
+            navigate("/settings/myprofile")
+        } else if (val === "secure") {
+            navigate("/settings/security")
+        } else if (val === "bookmark") {
+            navigate("/settings/bookmark")
+        }
+    }
 
     return (
         <div className={classes.setting}>
@@ -16,7 +28,7 @@ const Settings = () => {
                 <Typography gutterBottom style={{padding: "5px 0"}} variant="body2">Manage your experience</Typography>
                 <Grid spacing={2} container>
                     <Grid item xs={12} sm={12} md={6} lg={6}>
-                        <Box className={classes.eachDiv}>
+                        <Box className={classes.eachDiv} onClick={()=>handleOption("person")}>
                             <div className={classes.iconDiv}><PersonAddOutlined /></div>
                             <div>
                                 <Typography variant="h5" className={classes.details}>Personal details</Typography>
@@ -24,7 +36,7 @@ const Settings = () => {
                                 <Link to="" className={classes.managePersonal}><Typography variant="caption">Manage personal details</Typography></Link>
                             </div>
                         </Box>
-                        <Box className={classes.eachDiv}>
+                        <Box className={classes.eachDiv} onClick={()=>handleOption("secure")}>
                             <div className={classes.iconDiv}><LockOutlined /></div>
                             <div>
                                 <Typography variant="h5" className={classes.details}>Security</Typography>
@@ -32,7 +44,7 @@ const Settings = () => {
                                 <Link to="" className={classes.managePersonal}><Typography variant="caption">Manage account security</Typography></Link>
                             </div>
                         </Box>
-                        <Box className={classes.eachDiv}>
+                        <Box className={classes.eachDiv} onClick={()=>handleOption("bookmark")}>
                             <div className={classes.iconDiv}><NotificationsNoneOutlined /></div>
                             <div>
                                 <Typography variant="h5" className={classes.details}>Email Notification</Typography>

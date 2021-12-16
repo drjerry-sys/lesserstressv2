@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Button, Badge, Avatar, useMediaQuery, Box, Divider } from '@material-ui/core';
 import { Notifications, Bookmark } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useStyles from './style';
 import logo from '../../assets/images/void.png';
 
@@ -11,10 +11,19 @@ const Navbar = () => {
     const [isAuthPage, setIsAuthPage] = useState(false);
     const [manage, setManage] = useState(false);
     const { pathname: location } = useLocation();
+    const navigate = useNavigate()
 
     const isAuthenticated = true;
     const classes = useStyles({ scrolled });
     const isMobile = useMediaQuery('(max-width: 900px)');
+
+    const handleMenu = (val) => {
+        if (val==="notify") {
+            navigate("/")
+        } else if (val === "bookmark") {
+            navigate("/settings/bookmark")
+        }
+    }
     
     useEffect(()=>{
         if (location === "/sign_up" || location === "/sign_in" || location === "/forgot_password") {
@@ -61,15 +70,23 @@ const Navbar = () => {
                 )}
                 {!isAuthPage && isAuthenticated && (
                     <>
-                        <Badge variant="dot" color="secondary" className={classes.badge}>
+                        <Badge variant="dot" color="secondary" className={classes.badge} onClick={()=>handleMenu("notify")}>
                             <Notifications className={classes.icon} />
                         </Badge>
-                        <Badge badgeContent={5} color="secondary" className={classes.badge}>
+                        <Badge badgeContent={5} color="secondary" className={classes.badge} onClick={()=>handleMenu("bookmark")}>
                             <Bookmark className={classes.icon} />
                         </Badge>
                         <Avatar src="/broken-image.jpg"  onClick={() => setManage(!manage)} className={classes.profileAvatar} />
                         {manage && (
                             <Box className={classes.userMenu}>
+                                {isMobile && (
+                                    <>
+                                        <Link to="/" className={classes.acntSetting}>Home</Link><br />
+                                        <Link to="/blog" className={classes.acntSetting}>Blog</Link><br />
+                                        <Link to="/community" className={classes.acntSetting}>Community</Link>
+                                        <Divider style={{margin: "5px 0"}} />
+                                    </>
+                                )}
                                 <Link to="/settings" className={classes.acntSetting}>Account setting</Link>
                                 <Divider style={{margin: "5px 0"}} />
                                 <Link to="/" className={classes.acntSetting}>log out</Link>

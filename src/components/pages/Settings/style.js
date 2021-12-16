@@ -27,7 +27,8 @@ export default makeStyles(theme=> ({
         padding: theme.spacing(2),
         border: "1px solid #D0D0D0",
         borderRadius: theme.shape.borderRadius,
-        marginTop: theme.spacing(2)
+        marginTop: theme.spacing(2),
+        cursor: "pointer"
     },
     details: {
         fontWeight: 500
