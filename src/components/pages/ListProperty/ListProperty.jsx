@@ -1,0 +1,124 @@
+import { Box, Button, Container, Step, useMediaQuery, StepButton, Stepper, Typography, CssBaseline } from '@material-ui/core';
+import React, { useState } from 'react';
+import useStyles from "./style";
+import StepOne from './StepOne/StepOne';
+import StepTwo from './StepTwo/StepTwo';
+import StepThree from './StepThree/StepThree';
+import StepFour from './StepFour/StepFour';
+
+const ListProperty = () => {
+
+    const classes = useStyles();
+    const steps = ['Name and Location', 'Property setup', 'House Rules', 'Photos', 'Pricing and calendar', 'Legal Info'];
+    const [activeStep, setActiveStep] = useState(0);
+    const [completed, setCompleted] = useState({});
+    const isMobile = useMediaQuery("(max-width:900px)");
+    const display = {
+        0: <StepOne />,
+        1: <StepTwo />,
+        2: <StepThree />,
+        3: <StepFour />,
+    };
+    
+    const totalSteps = () => {
+        return steps.length;
+    };
+
+    const isLastStep = () => {
+        return activeStep === totalSteps() - 1;
+      };
+
+    const completedSteps = () => {
+        return Object.keys(completed).length;
+    };
+    
+    const allStepsCompleted = () => {
+        return completedSteps() === totalSteps();
+    };
+
+    const handleNext = () => {
+        const newActiveStep =
+          isLastStep() && !allStepsCompleted()
+            ? steps.findIndex((step, i) => !(i in completed))
+            : activeStep + 1;
+        setActiveStep(newActiveStep);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    const handleStep = (step) => () => {
+    setActiveStep(step);
+    };
+
+    const handleReset = () => {
+        setActiveStep(0);
+        setCompleted({});
+      };
+
+    return (
+        <div className={classes.listProperty}>
+            <CssBaseline />
+            <div className={classes.heading} />
+            <Container style={{paddingTop: "10px"}}>
+                <Box sx={{ width: '100%' }}>
+                    <Stepper nonLinear activeStep={activeStep}>
+                        {steps.map((label, index) => (
+                            <Step key={label} completed={completed[index]}>
+                                <StepButton color="inherit" onClick={handleStep(index)}>
+                                {!isMobile ? label : ""}
+                                </StepButton>
+                            </Step>
+                        ))}
+                    </Stepper>
+                    <div>
+                        {allStepsCompleted() ? (
+                        <React.Fragment>
+                            <Typography sx={{ mt: 2, mb: 1 }}>
+                            All steps completed - you&apos;re finished
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                <Button onClick={handleReset}>Reset</Button>
+                            </Box>
+                        </React.Fragment>
+                        ) : (
+                        <React.Fragment>
+                            {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
+                            {display[activeStep]}
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, paddingBottom: "50px" }}>
+                                <CssBaseline />
+                                <Button
+                                    onClick={handleBack}
+                                    sx={{ mr: 1 }}
+                                    color={activeStep !== 0 ? "secondary" : "inherit"}
+                                    variant="contained"
+                                    disabled={activeStep === 0}
+                                >
+                                    Back
+                                </Button>
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                <Button onClick={handleNext} sx={{ mr: 1 }}
+                                variant="contained"
+                                 color={completedSteps() !== totalSteps() ? "primary" : "inherit"}>
+                                    Next
+                                </Button>
+                                {activeStep !== steps.length &&
+                                    (completed[activeStep] ? (
+                                    <Typography variant="caption" sx={{ display: 'inline-block' }}>
+                                        Step {activeStep + 1} already completed
+                                    </Typography>
+                                    ) : ""
+                                )}
+                            </Box>
+                        </React.Fragment>
+                        )}
+                    </div>
+                </Box>                
+            </Container>
+        </div>
+    )
+}
+
+export default ListProperty
