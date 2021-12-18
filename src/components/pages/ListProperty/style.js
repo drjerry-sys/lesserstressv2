@@ -8,6 +8,7 @@ export default makeStyles(theme=> ({
         paddingTop: theme.spacing(8)
     },
     listProperty: {
+        minHeight: "100vh",
         backgroundColor: "rgb(240, 240, 240)",
     },
     stepper: {

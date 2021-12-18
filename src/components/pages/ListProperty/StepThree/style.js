@@ -20,6 +20,7 @@ export default makeStyles(theme=> ({
     },
     specifyothers: {
         display: "flex",
+        width: "100%",
         flexDirection: "column",
         paddingLeft: theme.spacing(6)
     }

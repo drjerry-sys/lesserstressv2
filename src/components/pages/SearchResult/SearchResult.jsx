@@ -126,7 +126,7 @@ const SearchResult = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <Typography variant="h5">#60,000</Typography>
+                                    <Typography variant="h5">₦60,000</Typography>
                                 </div>
                             </div>
                         </div>

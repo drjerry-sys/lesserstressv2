@@ -5,6 +5,8 @@ import StepOne from './StepOne/StepOne';
 import StepTwo from './StepTwo/StepTwo';
 import StepThree from './StepThree/StepThree';
 import StepFour from './StepFour/StepFour';
+import StepFive from './StepFive/StepFive';
+import StepSix from './StepSix/StepSix';
 
 const ListProperty = () => {
 
@@ -18,6 +20,8 @@ const ListProperty = () => {
         1: <StepTwo />,
         2: <StepThree />,
         3: <StepFour />,
+        4: <StepFive />,
+        5: <StepSix />,
     };
     
     const totalSteps = () => {
@@ -37,11 +41,15 @@ const ListProperty = () => {
     };
 
     const handleNext = () => {
-        const newActiveStep =
-          isLastStep() && !allStepsCompleted()
-            ? steps.findIndex((step, i) => !(i in completed))
-            : activeStep + 1;
-        setActiveStep(newActiveStep);
+        if (activeStep !== (steps.length-1)) {
+            const newActiveStep =
+              isLastStep() && !allStepsCompleted()
+                ? steps.findIndex((step, i) => !(i in completed))
+                : activeStep + 1;
+            setActiveStep(newActiveStep);
+        } else {
+            
+        }
     };
 
     const handleBack = () => {
@@ -85,7 +93,7 @@ const ListProperty = () => {
                         </React.Fragment>
                         ) : (
                         <React.Fragment>
-                            {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
+                            <CssBaseline />
                             {display[activeStep]}
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, paddingBottom: "50px" }}>
                                 <CssBaseline />
@@ -102,7 +110,7 @@ const ListProperty = () => {
                                 <Button onClick={handleNext} sx={{ mr: 1 }}
                                 variant="contained"
                                  color={completedSteps() !== totalSteps() ? "primary" : "inherit"}>
-                                    Next
+                                    {activeStep === (steps.length - 1) ? "Submit" : "Next" }
                                 </Button>
                                 {activeStep !== steps.length &&
                                     (completed[activeStep] ? (

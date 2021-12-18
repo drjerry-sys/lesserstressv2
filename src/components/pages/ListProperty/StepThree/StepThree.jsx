@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import useStyles from "./style";
 import TrapFocus from "@material-ui/core/Unstable_TrapFocus";
-import { Box, Switch, Paper, Typography, Divider, FormControl, RadioGroup, FormControlLabel, Radio, InputBase } from "@material-ui/core";
+import { Box, Switch, Paper, useMediaQuery, Typography, Divider, FormControl, RadioGroup, FormControlLabel, Radio, InputBase } from "@material-ui/core";
 
 const StepThree = () => {
 
     const classes = useStyles();
     const [checked, setChecked] = useState(true);
     const [checkout, setCheckout] = useState(false);
-
+    const isMobile = useMediaQuery("(max-width:900px)")
 
     const handleRadio = (event) => {
         let val = event.target.value
@@ -86,11 +86,11 @@ const StepThree = () => {
                     <Typography variant="body2" style={{textAlign: "left", }}>Extra Rules?</Typography>
                     <div style={{paddingLeft: "20px"}}>
                         <Typography variant="body2" style={{textAlign: "left", marginBottom: "10px", fontSize: "10px"}}>use <mark style={{padding: "0 5px"}}>windows + .</mark> for emoji</Typography>
-                        <textarea name="message" rows="10" cols="50" placeholder="write them here"></textarea>
+                        <textarea name="message" rows="10" cols={isMobile ? "30" : "50"} placeholder="write them here"></textarea>
                     </div>
                     <Typography variant="body2" style={{textAlign: "left", marginTop: "10px" }}>What can you say about the House as Agent?</Typography>
                     <div style={{paddingLeft: "20px"}}>
-                        <textarea name="message" rows="10" cols="50" style={{ marginBottom: "10px"}} placeholder="write them here"></textarea>
+                        <textarea name="message" rows="10" cols={isMobile ? "30" : "50"} style={{ marginBottom: "10px"}} placeholder="write them here"></textarea>
                     </div>
                 </div>
             </Paper>

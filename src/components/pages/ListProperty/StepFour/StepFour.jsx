@@ -1,6 +1,5 @@
+import React from "react";
 import { Box, InputBase, Paper, Typography } from '@material-ui/core';
-import { AddPhotoAlternate } from '@material-ui/icons';
-import React, { useState } from 'react';
 import useStyles from "./style";
 
 const StepFour = () => {
