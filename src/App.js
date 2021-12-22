@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Navbar, Blog, SignIn, SignOut, Room, SignUp, SearchResult, ForgotPassword, Settings, SettingsOptions, ListProperty } from './components';
+import { Home, Navbar, Blog, SignIn, PageNotFound, SignOut, Room, SignUp, SearchResult, ForgotPassword, Settings, SettingsOptions, ListProperty } from './components';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
       <Route path="/settings/security" element={<SettingsOptions />} />
       <Route path="/settings/payment" element={<SettingsOptions />} />
       <Route path="/settings/blog" element={<SettingsOptions />} />
-      <Route path="/settings/bookmark" element={<SettingsOptions />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   </div>
   );
