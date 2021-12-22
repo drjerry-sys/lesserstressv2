@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Button, Badge, Avatar, useMediaQuery, Box, Divider } from '@material-ui/core';
+import { AppBar, Toolbar, Button, Badge, Avatar, useMediaQuery, Box, Divider, ClickAwayListener } from '@material-ui/core';
 import { Notifications, Bookmark } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const Navbar = () => {
         } else if (val === "bookmark") {
             navigate("/settings/bookmark")
         }
-    }
+    };
     
     useEffect(()=>{
         if (location === "/sign_up" || location === "/sign_in" || location === "/forgot_password") {
@@ -78,19 +78,21 @@ const Navbar = () => {
                         </Badge>
                         <Avatar src="/broken-image.jpg"  onClick={() => setManage(!manage)} className={classes.profileAvatar} />
                         {manage && (
-                            <Box className={classes.userMenu}>
-                                {isMobile && (
-                                    <>
-                                        <Link to="/" className={classes.acntSetting}>Home</Link><br />
-                                        <Link to="/blog" className={classes.acntSetting}>Blog</Link><br />
-                                        <Link to="/community" className={classes.acntSetting}>Community</Link>
-                                        <Divider style={{margin: "5px 0"}} />
-                                    </>
-                                )}
-                                <Link to="/settings" className={classes.acntSetting}>Account setting</Link>
-                                <Divider style={{margin: "5px 0"}} />
-                                <Link to="/" className={classes.acntSetting}>log out</Link>
-                            </Box>
+                            <ClickAwayListener onClickAway={() => setManage(false)}>
+                                <Box className={classes.userMenu}>
+                                    {isMobile && (
+                                        <>
+                                            <Link to="/" className={classes.acntSetting}>Home</Link><br />
+                                            <Link to="/blog" className={classes.acntSetting}>Blog</Link><br />
+                                            <Link to="/community" className={classes.acntSetting}>Community</Link>
+                                            <Divider style={{margin: "5px 0"}} />
+                                        </>
+                                    )}
+                                    <Link to="/settings" onClick={()=>setManage(false)} className={classes.acntSetting}>Account setting</Link>
+                                    <Divider style={{margin: "5px 0"}} />
+                                    <Link to="/" onClick={()=>setManage(false)} className={classes.acntSetting}>log out</Link>
+                                </Box>
+                            </ClickAwayListener>
                         )}
                     </>
                 )}

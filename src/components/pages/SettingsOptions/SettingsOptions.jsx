@@ -6,6 +6,7 @@ import { AssignmentOutlined, BookmarksOutlined, LockOutlined, NotificationsNoneO
 import PersonalDetails from "./PersonalDetails";
 import Security from "./Security";
 import Bookmarks from "./Bookmarks";
+import Payment from './Payment';
 
 const SettingsOptions = () => {
 
@@ -16,6 +17,7 @@ const SettingsOptions = () => {
         "/settings/myprofile": <PersonalDetails />,
         "/settings/security": <Security />,
         "/settings/bookmark": <Bookmarks />,
+        "/settings/payment": <Payment />,
     };
     
     const handleClick = (val) => {
@@ -25,6 +27,8 @@ const SettingsOptions = () => {
             navigate("/settings/security")
         } else if (val === "bookmark") {
             navigate("/settings/bookmark")
+        } else if (val === "payment") {
+            navigate("/settings/payment")
         }
     }
 
@@ -47,7 +51,7 @@ const SettingsOptions = () => {
                             <Divider />
                             <Box className={classes.eachDiv} onClick={()=>handleClick("email")}>
                                 <div className={classes.iconDiv}><NotificationsNoneOutlined style={{fontSize: "15px"}} /></div>
-                                <Typography variant="caption" className={classes.details}>Email Notification</Typography>
+                                <Typography variant="caption" className={classes.details}>Notification</Typography>
                             </Box>
                             <Divider />
                             <Box className={classes.eachDiv} onClick={()=>handleClick("bookmark")}>

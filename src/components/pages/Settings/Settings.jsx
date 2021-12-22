@@ -47,7 +47,7 @@ const Settings = () => {
                         <Box className={classes.eachDiv} onClick={()=>handleOption("bookmark")}>
                             <div className={classes.iconDiv}><NotificationsNoneOutlined /></div>
                             <div>
-                                <Typography variant="h5" className={classes.details}>Email Notification</Typography>
+                                <Typography variant="h5" className={classes.details}>Notification</Typography>
                                 <Typography variant="body2" gutterBottom>Decide what you want to be notified about and unsubscribe from what you don't</Typography>
                                 <Link to="" className={classes.managePersonal}><Typography variant="caption">Manage notifications</Typography></Link>
                             </div>

@@ -16,22 +16,27 @@ const Home = () => {
     const isAuthenticated = true;
     const navigate = useNavigate();
 
-    const ifeArea = [
-        {area: 'Lagere'},
-        {area: 'Asherifa'},
-        {area: 'Mayfair'},
-        {area: 'Damico'},
+    const spaceType = [
+        {space: 'Flat'},
+        {space: 'Duplex'},
+        {space: 'Single Room'},
+        {space: 'Self-contained'},
+        {space: 'ohers'},
     ];
 
     const prices = [
-        {priceRanges: "#50,000 - #100,000"},
-        {priceRanges: "#100,000 - #150,000"},
-        {priceRanges: "#150,000 - #200,000"},
+        {priceRanges: "₦50,000 - ₦100,000"},
+        {priceRanges: "₦100,000 - ₦150,000"},
+        {priceRanges: "₦150,000 - ₦200,000"},
         {priceRanges: "All"},
     ];
 
     const handleSearch = () => {
         navigate("/search_result");
+    };
+
+    const handleRoom = () => {
+        navigate("/single_room");
     };
 
     const handleSpace = () => {
@@ -49,8 +54,8 @@ const Home = () => {
                     <div className={classes.search}>
                         <Autocomplete className={classes.autocomplete}
                             id="free-solo-demo"
-                            options={ifeArea.map((area) => area.area)}
-                            renderInput={(params) => <TextField variant="outlined" {...params} label="Which Area Would You Prefer?" />}
+                            options={spaceType.map((space) => space.space)}
+                            renderInput={(params) => <TextField variant="outlined" {...params} label="Which space type Would You Prefer?" />}
                         />
                         <Autocomplete  className={classes.autocomplete}
                             id="free-solo-demo"
@@ -163,7 +168,7 @@ const Home = () => {
                                 <Card>
                                     <CardMedia component="img" image={asherifa} className={classes.contentMedia} />
                                     <CardContent>
-                                        <div>
+                                        <div onClick={handleRoom} style={{cursor: "pointer"}}>
                                             <Typography gutterBottom variant="subtitle1">Single Room</Typography>
                                             <div className={classes.ratingdiv}>
                                                 <Rating name="read-only" className={classes.rating} value={3} readOnly />
@@ -184,7 +189,7 @@ const Home = () => {
                                             <Box className={classes.bottomContent}>
                                                 <Box>
                                                     <Typography variant="body1" className={classes.period}>yearly</Typography>
-                                                    <Typography variant="h2" className={classes.price}>#100,000</Typography>
+                                                    <Typography variant="h2" className={classes.price}>₦100,000</Typography>
                                                 </Box>
                                                 <Box>
                                                     <Typography variant="body1" className={classes.period}>people</Typography>
@@ -224,7 +229,7 @@ const Home = () => {
                                             <div className={classes.bottomContent}>
                                                 <div>
                                                     <Typography variant="body1" className={classes.period}>yearly</Typography>
-                                                    <Typography variant="h2" className={classes.price}>#100,000</Typography>
+                                                    <Typography variant="h2" className={classes.price}>₦100,000</Typography>
                                                 </div>
                                                 <div>
                                                     <Typography variant="body1" className={classes.period}>people</Typography>
@@ -264,7 +269,7 @@ const Home = () => {
                                             <div className={classes.bottomContent}>
                                                 <div>
                                                     <Typography variant="body1" className={classes.period}>yearly</Typography>
-                                                    <Typography variant="h2" className={classes.price}>#100,000</Typography>
+                                                    <Typography variant="h2" className={classes.price}>₦100,000</Typography>
                                                 </div>
                                                 <div>
                                                     <Typography variant="body1" className={classes.period}>people</Typography>

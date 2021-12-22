@@ -35,8 +35,9 @@ const StepFour = () => {
                 )}
                 <Divider className={classes.divider} />
                 <Typography variant="h5" style={{ fontSize: "15px", fontWeight: "500", }}>How much do you want to charge for inspection?</Typography>
-                <InputBase placeholder="price here" type="number" style={{border: "1px solid #D0D0D0", marginTop: "10px"}} fullWidth/>
                 <Typography variant="body2" style={{ fontSize: "13px", fontWeight: "500", marginTop: "5px"}}>In Naira (₦)</Typography>
+                <InputBase placeholder="price here" type="number" style={{border: "1px solid #D0D0D0", marginTop: "10px"}} fullWidth/>
+                <Typography variant="body2" style={{ fontSize: "13px", fontWeight: "500", marginTop: "5px"}}>Note that Void takes 20% of inspection fee</Typography>
             </Paper>
         </Box>
     )

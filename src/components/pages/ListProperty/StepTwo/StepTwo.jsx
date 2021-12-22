@@ -14,7 +14,8 @@ const StepTwo = () => {
                 <FormGroup style={{padding: "6px 20px"}}>
                     <FormControlLabel control={<Checkbox defaultChecked size="small" />} label="Electricity" />
                     <FormControlLabel control={<Checkbox size="small" />} label="Generator" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Water" />
+                    <FormControlLabel control={<Checkbox size="small" />} label="Bore-hole water" />
+                    <FormControlLabel control={<Checkbox size="small" />} label="Well water" />
                     <FormControlLabel control={<Checkbox size="small" />} label="Garage" />
                     <FormControlLabel control={<Checkbox size="small" />} label="Air Conditioning" />
                 </FormGroup>

@@ -2,6 +2,7 @@ export { default as Navbar } from './Navbar/Navbar';
 export { default as Home } from './pages/Home/Home';
 export { default as Blog } from './pages/Blog/Blog';
 export { default as Settings } from './pages/Settings/Settings';
+export { default as Room } from './pages/Room/Room';
 export { default as SettingsOptions } from './pages/SettingsOptions/SettingsOptions';
 export { default as SearchResult } from './pages/SearchResult/SearchResult';
 export { default as ListProperty } from './pages/ListProperty/ListProperty';

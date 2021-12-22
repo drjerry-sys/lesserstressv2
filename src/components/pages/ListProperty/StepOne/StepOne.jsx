@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import useStyles from "./style";
 import TrapFocus from "@material-ui/core/Unstable_TrapFocus";
-import { Box, RadioGroup, Radio, FormControl, Paper, Typography, FormControlLabel, InputBase, MenuItem, Select, InputLabel } from '@material-ui/core';
+import { Box, RadioGroup, Radio, FormControl, Paper, Typography, FormControlLabel, InputBase, MenuItem, Select, InputLabel, TextField } from '@material-ui/core';
 
 const StepOne = () => {
 
     const classes = useStyles();
     const [others, setOthers] = useState(false);
     const [window, setWindow] = useState();
+    const [compound, setCompound] = useState();
 
     const handleRadio = (event) => {
         let others = event.target.value;
@@ -19,6 +20,30 @@ const StepOne = () => {
         <Box className={classes.propertyDetails}>
             <Typography variant="h4" style={{ fontSize: "25px", fontWeight: "500"}}>Property Details</Typography>
             <Paper variant="outlined" square elevation={16} className={classes.paper}>
+                <Typography variant="body1">Do you have a room in this compound already?</Typography>
+                <FormControl component="fieldset">
+                <RadioGroup row aria-label="gender" name="row-radio-buttons-group" onChange={(e)=>setCompound(e.target.value)}>
+                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                </FormControl>
+                {compound === "yes" ? (
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Select compound</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={"compound1"}
+                            style={{marginBottom: "15px"}}
+                        >
+                            <MenuItem value={"compound1"}>My compound 1</MenuItem>
+                            <MenuItem value={"compound2"}>My compound 2</MenuItem>
+                            <MenuItem value={"compound3"}>My compound 3</MenuItem>
+                        </Select>
+                    </FormControl>
+                ) : compound === "no" ? (
+                    <TextField style={{marginBottom: "10px"}} id="outlined-basic" fullWidth label="Name of compound" variant="outlined" />
+                ) : ""}
                 <Typography variant="body1">What type of room is it?</Typography>
                 <FormControl component="fieldset" style={{padding: "6px 20px"}}>
                     <RadioGroup
@@ -42,6 +67,19 @@ const StepOne = () => {
                         </Box>
                     </TrapFocus>
                 )}
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Select Area</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={"compound1"}
+                        style={{marginBottom: "15px"}}
+                    >
+                        <MenuItem value={"compound1"}>Asherifa</MenuItem>
+                        <MenuItem value={"compound2"}>Damico</MenuItem>
+                        <MenuItem value={"compound3"}>Lagere</MenuItem>
+                    </Select>
+                </FormControl>
             </Paper>
             <Paper variant="outlined" square elevation={16} className={classes.paper}>
                 <Typography variant="body1">How many tenant per room is permitted?</Typography>
@@ -84,6 +122,9 @@ const StepOne = () => {
                         <InputBase type="number" placeholder=" Specify Area " style={{border: "1px solid #D0D0D0"}}/>
                     </label>
                 </Box>
+            </Paper>
+            <Paper variant="outlined" square elevation={16} className={classes.paper}>
+                <Typography variant="body1">Select location on map</Typography>
             </Paper>
         </Box>
     )

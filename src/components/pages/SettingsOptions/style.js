@@ -48,5 +48,16 @@ export default makeStyles(theme=>({
     },
     table: {
         
+    },
+    // payment: {
+    //     display: "flex",
+    //     justifyContent: "space-between",
+    //     alignItems: "center",
+    //     padding: theme.spacing(2, 0, 0)
+    // },
+    inputBase: {
+        border: "1px solid #E0E0E0",
+        width: "100%",
+        marginBottom: theme.spacing(2)
     }
 }))

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Navbar, Blog, SignIn, SignOut, SignUp, SearchResult, ForgotPassword, Settings, SettingsOptions, ListProperty } from './components';
+import { Home, Navbar, Blog, SignIn, SignOut, Room, SignUp, SearchResult, ForgotPassword, Settings, SettingsOptions, ListProperty } from './components';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -15,9 +15,11 @@ function App() {
       <Route path="/sign_out" element={<SignOut />} />
       <Route path="/forgot_password" element={<ForgotPassword />} />
       <Route path="/list_property" element={<ListProperty />} />
+      <Route path="/single_room" element={<Room />} />
       <Route path="/settings" exact element={<Settings />} />
       <Route path="/settings/myprofile" element={<SettingsOptions />} />
       <Route path="/settings/security" element={<SettingsOptions />} />
+      <Route path="/settings/payment" element={<SettingsOptions />} />
       <Route path="/settings/blog" element={<SettingsOptions />} />
       <Route path="/settings/bookmark" element={<SettingsOptions />} />
     </Routes>
