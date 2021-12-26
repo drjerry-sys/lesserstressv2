@@ -1,4 +1,3 @@
-
 import { Box, Container, Grid, Typography } from '@material-ui/core';
 import { Highlight, Bathtub, Opacity, Wc } from "@material-ui/icons";
 import React from 'react';
@@ -43,12 +42,12 @@ const Room = () => {
                             </div>
                             <div className={classes.terms}>
                                 <Typography variant="subtitle1" gutterBottom><b>Terms and Condition about {"Baba Lasis Compound"}</b></Typography>
-                                <Typography variant="body2">check in:       {"4:00pm"}</Typography>
-                                <Typography variant="body2">check out:       {"4:00pm"}</Typography>
-                                <Typography variant="body2">Animals:       {"4:00pm"}</Typography>
-                                <Typography variant="body2">Children:       {"4:00pm"}</Typography>
-                                <Typography variant="body2">Smoking:       {"4:00pm"}</Typography>
-                                <Typography variant="body2">Party:       {"4:00pm"}</Typography>
+                                <Typography variant="body2">check in: {"4:00pm"}</Typography>
+                                <Typography variant="body2">check out: {"4:00pm"}</Typography>
+                                <Typography variant="body2">Animals: not allowed</Typography>
+                                <Typography variant="body2">Children: allowed</Typography>
+                                <Typography variant="body2">Smoking: not allowed</Typography>
+                                <Typography variant="body2">Party: not allowed</Typography>
                                 <Typography variant="subtitle1" gutterBottom style={{paddingTop: "20px"}}><b>About</b></Typography>
                                 <Typography variant="subtitle1" gutterBottom>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, culpa? Pariatur suscipit vero accusantium facilis? Nisi velit, eum nobis vero nihil quod, praesentium unde culpa, architecto ea adipisci quo excepturi.

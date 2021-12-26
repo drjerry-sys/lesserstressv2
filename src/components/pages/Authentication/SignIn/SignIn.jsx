@@ -1,7 +1,7 @@
 import { Box, Button, Divider, InputBase, Typography } from '@material-ui/core';
 import { Facebook } from '@material-ui/icons';
 import { Link } from "react-router-dom";
-import React from 'react'
+import React from 'react';
 import useStyles from "./style";
 
 const SignIn = () => {
