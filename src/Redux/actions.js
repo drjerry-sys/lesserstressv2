@@ -1,44 +1,48 @@
 import axios from "axios";
 import * as types from "./actionTypes";
+import history from "./history";
+
 
 // actions for dispatch
-const registerUser = (info) => ({
-    type: types.CREATE_USER,
-    payload: info
-});
 
-const getTrendingSpaces = () => ({
-    type: types.GET_SPACES
+const signupSuccess = () => ({
+    type: types.SIGNUP_SUCCESS,
 })
 
-// requests to endpoints
+const signupFailed = (data) => ({
+    type: types.SIGNUP_FAILED,
+    payload: data
+})
+
+
+// request instance to endpoints
 
 const baseUrl = "http://localhost:8000"
-
-const userCreated = () => ({
-    type: types.UsER_CREATED
-})
-
 const axiosInstance = axios.create({
         baseURL: `${baseUrl}`,
         timeout: 5000,
+        responseType: "json",
+        validateStatus: status=> {
+            return status < 500
+        },
         headers: {
             Authorization: localStorage.getItem("access_token") ? `JWT ${localStorage.getItem("access_token")}` : null,
             "Content-Type": "application/json",
             accept: "application/json"
         }
     })
-
+    
 export const createUser = (my_info) => {
-    return (dispatch) => {
-        axiosInstance.post("/auth/register/", my_info)
-        .then((res)=> {
-            // dispatch(userCreated(res.data))
-            console.log('went well')
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    return async function(dispatch) {
+        // you can also use .then().catch()
+        const res = await axiosInstance.post("/auth/register/", my_info);
+        if (res.status === 400) {
+            dispatch(signupFailed(res.data));
+        } else {
+            dispatch(signupSuccess());
+            history.push("/sign_in");
+            window.location.reload();
+        }
     };
 };
 

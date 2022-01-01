@@ -13,7 +13,7 @@ const Navbar = () => {
     const { pathname: location } = useLocation();
     const navigate = useNavigate()
 
-    const isAuthenticated = true;
+    const isAuthenticated = false;
     const classes = useStyles({ scrolled });
     const isMobile = useMediaQuery('(max-width: 900px)');
 

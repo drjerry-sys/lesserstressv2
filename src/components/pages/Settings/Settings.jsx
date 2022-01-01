@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Typography } from '@material-ui/core';
 import { useNavigate } from "react-router-dom";
-import { LockOutlined, AssignmentOutlined, PaymentOutlined, NotificationsNoneOutlined, PersonAddOutlined, TuneOutlined, BookmarksOutlined } from "@material-ui/icons";
+import { LockOutlined, AssignmentOutlined, PaymentOutlined, NotificationsNoneOutlined, PersonAddOutlined, BookmarksOutlined } from "@material-ui/icons";
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useStyles from "./style";

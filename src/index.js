@@ -8,9 +8,10 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 import App from './App';
+import history from "./Redux/history";
 
 ReactDOM.render(
-    <Router>
+    <Router history={history}>
         <Provider store={store}>
             <App />
         </Provider>

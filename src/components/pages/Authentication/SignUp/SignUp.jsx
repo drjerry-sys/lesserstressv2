@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from "./style";
 import { Box, Divider, Button, InputBase, Typography } from "@material-ui/core";
 import {Facebook} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { createUser } from "../../../../Redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
+    const signup_failed_message = useSelector(state => state.data.signup_failed_message);
+    const { password, user_name, first_name, last_name, email } = signup_failed_message;
 
     const initialFormData = {
         first_name: "",
+        last_name: "",
         password: "",
         user_name: "",
         email: "",
@@ -30,7 +33,6 @@ const SignUp = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(createUser(formData));
-        console.log(formData);
     };
 
     return (
@@ -49,11 +51,15 @@ const SignUp = () => {
             <Box className={classes.auth}>
                 <form method="POST" onChange={handleChange} onSubmit={handleSubmit}>
                     <InputBase name="user_name" placeholder="username" className={classes.input} />
+                    <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{user_name[0]}</Typography>
                     <InputBase name="email" placeholder="Email Address" className={classes.input} />
-                    <InputBase name="password" placeholder="Password" className={classes.input} />
-                    <InputBase placeholder="Confirm password" className={classes.input} />
+                    <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{email[0]}</Typography>
+                    <InputBase name="password" placeholder="Password" type="password" className={classes.input} />
+                    <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{password[0]}</Typography>
                     <InputBase name="first_name" placeholder="First Name" className={classes.input} />
+                    <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{first_name[0]}</Typography>
                     <InputBase name="last_name" placeholder="Last Name" className={classes.input} />
+                    <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{last_name[0]}</Typography>
                     <Button variant="contained" type="submit" className={classes.register}>Register Now</Button>
                 </form>
             </Box>
