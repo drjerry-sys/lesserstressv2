@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useStyles from "./style";
 import { Box, Divider, Button, InputBase, Typography } from "@material-ui/core";
 import {Facebook} from "@material-ui/icons";
@@ -22,6 +22,7 @@ const SignUp = () => {
     };
 
     const [formData, setFormData] = useState(initialFormData);
+    const [passwordMatch, setPasswordMatch] = useState(true);
 
     const handleChange = (event) => {
         setFormData({
@@ -32,6 +33,7 @@ const SignUp = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (formData.password !== formData.confirm_password) return setPasswordMatch(false)
         dispatch(createUser(formData));
     };
 
@@ -56,6 +58,8 @@ const SignUp = () => {
                     <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{email[0]}</Typography>
                     <InputBase name="password" placeholder="Password" type="password" className={classes.input} />
                     <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{password[0]}</Typography>
+                    <InputBase name="confirm_password" placeholder="Confirm Password" type="password" className={classes.input} />
+                    <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{ !passwordMatch && "Password doesn't match"}</Typography>
                     <InputBase name="first_name" placeholder="First Name" className={classes.input} />
                     <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{first_name[0]}</Typography>
                     <InputBase name="last_name" placeholder="Last Name" className={classes.input} />

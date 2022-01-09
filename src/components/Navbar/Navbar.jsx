@@ -2,18 +2,22 @@ import { AppBar, Toolbar, Button, Badge, Avatar, useMediaQuery, Box, Divider, Cl
 import { Notifications, Bookmark } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { signOut } from "../../Redux/actions";
+import { useDispatch } from "react-redux";
 import useStyles from './style';
 import logo from '../../assets/images/void.png';
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn: isAuthenticated }) => {
 
     const [scrolled, setScrolled] = useState(false);
     const [isAuthPage, setIsAuthPage] = useState(false);
     const [manage, setManage] = useState(false);
+    const dispatch = useDispatch();
     const { pathname: location } = useLocation();
     const navigate = useNavigate()
 
-    const isAuthenticated = false;
+console.log(isAuthenticated);
+
     const classes = useStyles({ scrolled });
     const isMobile = useMediaQuery('(max-width: 900px)');
 
@@ -42,6 +46,11 @@ const Navbar = () => {
         }
         return () => window.onscroll = null;
     };
+
+    const handleLogout = () => {
+        setManage(false)
+        dispatch(signOut())
+    }
 
 
     return (
@@ -90,7 +99,7 @@ const Navbar = () => {
                                     )}
                                     <Link to="/settings" onClick={()=>setManage(false)} className={classes.acntSetting}>Account setting</Link>
                                     <Divider style={{margin: "5px 0"}} />
-                                    <Link to="/" onClick={()=>setManage(false)} className={classes.acntSetting}>log out</Link>
+                                    <Link to="/" onClick={handleLogout} className={classes.acntSetting}>log out</Link>
                                 </Box>
                             </ClickAwayListener>
                         )}

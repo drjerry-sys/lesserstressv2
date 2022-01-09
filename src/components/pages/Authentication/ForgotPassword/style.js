@@ -33,5 +33,16 @@ export default makeStyles(theme=>({
     img: {
         width: "100px",
         margin: "0 auto"
+    },
+    input: {
+        backgroundColor: "#f2f2f2",
+        width: "100%",
+        padding: "8px 15px",
+        marginTop: "5px",
+        borderRadius: theme.shape.borderRadius,
+        border: `2px solid ${alpha(colour, 0.1)}`,
+        "&:hover": {
+            border: `1px solid ${colour}`
+        }
     }
 }));

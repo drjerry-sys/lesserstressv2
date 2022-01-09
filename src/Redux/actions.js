@@ -14,6 +14,18 @@ const signupFailed = (data) => ({
     payload: data
 })
 
+const signinSuccess = () => ({
+    type: types.SIGNIN_SUCCESS
+});
+
+const signinFailed = (data) => ({
+    type: types.SIGNIN_FAILED,
+    payload: data
+});
+
+const signOutSuccess = () => ({
+    type: types.SIGN_OUT
+})
 
 // request instance to endpoints
 
@@ -47,7 +59,52 @@ export const createUser = (my_info) => {
 };
 
 export const signIn = (credentials) => {
-    return () => {
-        axios.post(`${baseUrl}/auth/token`)
+    return dispatch => {
+        axiosInstance.post(`/auth/api/token/`, credentials)
+        .then(res=> {
+            if (res.status === 400) {
+                dispatch(signinFailed(res.data));
+            } else {
+                localStorage.setItem("access_token", res.data.access);
+                localStorage.setItem("refresh_token", res.data.refresh);
+                axiosInstance.defaults.headers["Authorization"] = `JWT ${localStorage.getItem("access_token")}`;
+                dispatch(signinSuccess);
+                setTimeout(()=>{
+                    history.push("/");
+                    window.location.reload();
+                }, 1000)
+            }
+        })
+        .catch(err=> {
+            console.log(err);
+        });
+    };
+}
+
+export const signOut = () => {
+    return dispatch => {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        dispatch(signOutSuccess());
+        setTimeout(()=>{
+            history.push("/");
+            window.location.reload();
+        }, 1000)
+    }
+}
+
+export const sendResetCodeToMail = (email) => {
+    return dispatch => {
+        axiosInstance.get(`auth/get_password_reset_code/${email}`)
+        .then(res=> {
+            if (res.status === 404) {
+                console.log('this is error',res)
+            } else {
+                console.log(res)
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 }

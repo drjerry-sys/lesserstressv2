@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import priceImage from "../../../assets/illustrations/best_prices.png";
 import searchHouse from "../../../assets/illustrations/search_house.png";
 import roommate from "../../../assets/illustrations/roommate.png";
-import asherifa from "../../../assets/images/for_rent_4.jfif"
+import asherifa from "../../../assets/images/for_rent_4.jfif";
 
 const Home = () => {
     

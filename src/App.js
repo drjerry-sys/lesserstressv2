@@ -1,11 +1,15 @@
 import React from 'react';
 import { Home, Navbar, Blog, SignIn, PageNotFound, SignOut, Room, SignUp, SearchResult, ForgotPassword, Settings, SettingsOptions, ListProperty } from './components';
 import { Route, Routes } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 function App() {
+
+  const { isLoggedIn } = useSelector(state=> state.data);
+
   return ( 
   <div>
-    <Navbar />
+    <Navbar isLoggedIn={isLoggedIn} />
     <Routes>
       <Route exact path="/" element={<Home />} />
       <Route path="/blog" element={<Blog />} />
