@@ -10,10 +10,9 @@ import searchHouse from "../../../assets/illustrations/search_house.png";
 import roommate from "../../../assets/illustrations/roommate.png";
 import asherifa from "../../../assets/images/for_rent_4.jfif";
 
-const Home = () => {
+const Home = ({ isLoggedIn: isAuthenticated }) => {
     
     const classes = useStyles();
-    const isAuthenticated = true;
     const navigate = useNavigate();
 
     const spaceType = [

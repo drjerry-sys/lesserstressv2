@@ -99,7 +99,9 @@ console.log(isAuthenticated);
                                     )}
                                     <Link to="/settings" onClick={()=>setManage(false)} className={classes.acntSetting}>Account setting</Link>
                                     <Divider style={{margin: "5px 0"}} />
-                                    <Link to="/" onClick={handleLogout} className={classes.acntSetting}>log out</Link>
+                                    <Link to="/" onClick={handleLogout} className={classes.acntSetting}>Log out</Link>
+                                    <Divider style={{margin: "5px 0"}} />
+                                    <Button variant="contained" size="small" href="/list_property">List Property</Button>
                                 </Box>
                             </ClickAwayListener>
                         )}

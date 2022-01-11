@@ -11,7 +11,7 @@ function App() {
   <div>
     <Navbar isLoggedIn={isLoggedIn} />
     <Routes>
-      <Route exact path="/" element={<Home />} />
+      <Route exact path="/" element={<Home isLoggedIn={isLoggedIn}  />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/search_result" element={<SearchResult />} />
       <Route path="/sign_in" element={<SignIn />} />

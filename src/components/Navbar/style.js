@@ -75,6 +75,8 @@ export default makeStyles(theme=> ({
         boxShadow: theme.shadows[3],
         borderRadius: theme.shape.borderRadius,
         padding: "10px 20px",
+        display: "flex",
+        flexDirection: "column"
     },
     acntSetting: {
         textDecoration: "none",

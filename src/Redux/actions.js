@@ -30,7 +30,7 @@ const signOutSuccess = () => ({
 // request instance to endpoints
 
 const baseUrl = "http://localhost:8000"
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
         baseURL: `${baseUrl}`,
         timeout: 5000,
         responseType: "json",
@@ -86,25 +86,5 @@ export const signOut = () => {
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
         dispatch(signOutSuccess());
-        setTimeout(()=>{
-            history.push("/");
-            window.location.reload();
-        }, 1000)
-    }
-}
-
-export const sendResetCodeToMail = (email) => {
-    return dispatch => {
-        axiosInstance.get(`auth/get_password_reset_code/${email}`)
-        .then(res=> {
-            if (res.status === 404) {
-                console.log('this is error',res)
-            } else {
-                console.log(res)
-            }
-        })
-        .catch(err=>{
-            console.log(err)
-        })
     }
 }
