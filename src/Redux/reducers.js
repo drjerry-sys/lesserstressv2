@@ -5,7 +5,7 @@ const user = localStorage.getItem("access_token") ? true : false;
 const initialState = {
     trendingSpaces: {},
     signup_failed_message: {password: [""], user_name: [""], first_name: [""], last_name: [""], email: [""]},
-    signin_failed_message: {password: [""], email: [""]},
+    signin_failed_message: { detail: ''},
     isLoggedIn: user,
 };
 

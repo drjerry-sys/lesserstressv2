@@ -10,7 +10,7 @@ const SignIn = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
-    const { password, email } = useSelector(state => state.data.signin_failed_message);
+    const { detail } = useSelector(state => state.data.signin_failed_message);
 
     const [credentials, setCredentials] = useState({
         email: "",
@@ -26,7 +26,7 @@ const SignIn = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(signIn(credentials));
+        dispatch(signIn(credentials));       
     };
 
     return (
@@ -44,14 +44,11 @@ const SignIn = () => {
             <Divider />
             <Box className={classes.auth}>
                 <form method='POST' onChange={handleChange} onSubmit={handleSubmit}>
+                    <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>
+                        {detail}
+                    </Typography>
                     <InputBase placeholder="Email" className={classes.input} name="email" />
-                    <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>
-                        {email[0]}
-                    </Typography>
                     <InputBase placeholder="password" type="password" className={classes.input} name="password" />
-                    <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>
-                        {password[0]}
-                    </Typography>
                     <Button variant="contained" type="submit" className={classes.register}>Sign In</Button>
                 </form>
             </Box>
@@ -63,4 +60,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default SignIn;

@@ -62,11 +62,12 @@ export const signIn = (credentials) => {
     return dispatch => {
         axiosInstance.post(`/auth/api/token/`, credentials)
         .then(res=> {
-            if (res.status === 400) {
+            if (res.status === 401) {
                 dispatch(signinFailed(res.data));
-            } else {
+            } else if (res.status === 200) {
                 localStorage.setItem("access_token", res.data.access);
                 localStorage.setItem("refresh_token", res.data.refresh);
+                console.log({status: res.status, access: res.data.access, refresh: res.data.refresh})
                 axiosInstance.defaults.headers["Authorization"] = `JWT ${localStorage.getItem("access_token")}`;
                 dispatch(signinSuccess);
                 setTimeout(()=>{
