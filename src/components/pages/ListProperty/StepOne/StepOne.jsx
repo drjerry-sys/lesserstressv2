@@ -15,12 +15,13 @@ const StepOne = () => {
         gender: '',
         compoundId: compound === 'yes' ? 0: 0.1,     //o.1 is the id for new compound
         roomType: 'single room',
-        selectedArea: 'Damico',
+        areaLocated: 'Damico',
         noOfWindows: 0,
-        noOfTenant: 1,
-        noOfRoomBath: 1,
-        noOfRoomToilet: 1,
-        compoundName: '',
+        noOfTenantPermitted: 1,
+        noOfRoomsPerBath: 1,
+        noOfRoomsPerToilet: 1,
+        comp_name: '',
+        comp_type: 'Storey building',
         roomAreaUnit: 'sqr meter',
         roomArea: 0,
         latitude: 0,
@@ -28,26 +29,26 @@ const StepOne = () => {
     });
 
     const handleDecrement = (status) => {
-        let tenant = formData.noOfTenant, bath = formData.noOfRoomBath, toilet = formData.noOfRoomToilet;
+        let tenant = formData.noOfTenantPermitted, bath = formData.noOfRoomsPerBath, toilet = formData.noOfRoomsPerToilet;
         let windows = formData.noOfWindows
-        if (status === 'noOfTenant') {
-            setFormData({ ...formData, noOfTenant: tenant === 1 ? 1 : tenant - 1})
+        if (status === 'noOfTenantPermitted') {
+            setFormData({ ...formData, noOfTenantPermitted: tenant === 1 ? 1 : tenant - 1})
         } else if (status === 'bath') {
-            setFormData({ ...formData, noOfRoomBath: bath === 1 ? 1 : bath - 1})
+            setFormData({ ...formData, noOfRoomsPerBath: bath === 1 ? 1 : bath - 1})
         } else if (status === 'toilet') {
-            setFormData({ ...formData, noOfRoomToilet: toilet === 1 ? 1 : toilet - 1})
+            setFormData({ ...formData, noOfRoomsPerToilet: toilet === 1 ? 1 : toilet - 1})
         } else if (status === 'windows') {
             setFormData({ ...formData, noOfWindows: !windows ? 0 : windows - 1})
         };
     };
 
     const handleIncrement = (status) => {
-        if (status === 'noOfTenant') {
-            setFormData({ ...formData, noOfTenant: formData.noOfTenant + 1})
+        if (status === 'noOfTenantPermitted') {
+            setFormData({ ...formData, noOfTenantPermitted: formData.noOfTenantPermitted + 1})
         } else if (status === 'bath') {
-            setFormData({ ...formData, noOfRoomBath: formData.noOfRoomBath + 1})
+            setFormData({ ...formData, noOfRoomsPerBath: formData.noOfRoomsPerBath + 1})
         } else if (status === 'toilet') {
-            setFormData({ ...formData, noOfRoomToilet: formData.noOfRoomToilet + 1})
+            setFormData({ ...formData, noOfRoomsPerToilet: formData.noOfRoomsPerToilet + 1})
         } else if (status === 'windows') {
             setFormData({ ...formData, noOfWindows: formData.noOfWindows + 1})
         };
@@ -56,11 +57,11 @@ const StepOne = () => {
     const handleChange = (event, status) => {
         let val = event.target.value;
         if (status === 'area') {
-            setFormData({...formData, selectedArea: val})
+            setFormData({...formData, areaLocated: val})
         } else if (status === 'compound') {
             setFormData({...formData, compoundId: val})
         } else if (status === 'compname') {
-            setFormData({...formData, compoundName: val})
+            setFormData({...formData, comp_name: val})
         } else if (status === 'others') {
             setFormData({...formData, roomType: val})
         } else if (status === 'unit') {
@@ -70,7 +71,7 @@ const StepOne = () => {
         }
     }
 
-    const handleRadio = (event) => {
+    const handleRoomRadio = (event) => {
         let val = event.target.value;
         if (val === "others") {
             setOthers(true)
@@ -78,6 +79,10 @@ const StepOne = () => {
             setFormData({...formData, roomType: val})
             setOthers(false)
         };
+    };
+
+    const handleCompRadio = (event) => {
+        setFormData({...formData, comp_type: event.target.value})
     };
 
 
@@ -110,17 +115,32 @@ const StepOne = () => {
                 ) : compound === "no" ? (
                     <TextField style={{marginBottom: "10px"}} id="outlined-basic" onChange={(e)=>handleChange(e, 'compname')} fullWidth label="Name of compound" variant="outlined" />
                 ) : ""}
+                <Typography variant="body1">What type of Compound is it?</Typography>
+                <FormControl component="fieldset" style={{padding: "6px 20px"}}>
+                    <RadioGroup
+                        aria-label="gender"
+                        defaultValue={formData.comp_type}
+                        name="radio-buttons-group"
+                        onChange={handleCompRadio}
+                    >
+                        <FormControlLabel value="Duplex" control={<Radio />} label="Duplex" />
+                        <FormControlLabel value="Tenement" control={<Radio />} label="Tenement(Face-to-face)" />
+                        <FormControlLabel value="Flat" control={<Radio />} label="Flat" />
+                        <FormControlLabel value="Storey building" control={<Radio />} label="Storey building" />
+                        <FormControlLabel value="Bungalow" control={<Radio />} label="Bungalow" />
+                        <FormControlLabel value="Detached" control={<Radio />} label="Detached" />
+                    </RadioGroup>
+                </FormControl>
                 <Typography variant="body1">What type of room is it?</Typography>
                 <FormControl component="fieldset" style={{padding: "6px 20px"}}>
                     <RadioGroup
                         aria-label="gender"
                         defaultValue={formData.roomType}
                         name="radio-buttons-group"
-                        onChange={handleRadio}
+                        onChange={handleRoomRadio}
                     >
                         <FormControlLabel value="single room" control={<Radio />} label="Single Room" />
                         <FormControlLabel value="self-contained" control={<Radio />} label="Self-Contained" />
-                        <FormControlLabel value="flat" control={<Radio />} label="Flat" />
                         <FormControlLabel value="boys quarter" control={<Radio />} label="Boys quarter" />
                         <FormControlLabel value="others" control={<Radio />} label="Others" />
                     </RadioGroup>
@@ -139,7 +159,7 @@ const StepOne = () => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={formData.selectedArea}
+                        value={formData.areaLocated}
                         onChange={(e)=>handleChange(e, 'area')}
                         style={{marginBottom: "15px"}}
                     >
@@ -152,44 +172,30 @@ const StepOne = () => {
             <Paper variant="outlined" square elevation={16} className={classes.paper}>
                 <Typography variant="body1">How many tenant per room is permitted?</Typography>
                 <Box className={classes.sign}>
-                    <div className={classes.add} style={{marginRight: "10px", cursor: 'pointer'}} onClick={()=>handleDecrement('noOfTenant')}>-</div>
-                    {formData.noOfTenant}
-                    <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('noOfTenant')}>+</div>
+                    <div className={classes.add} style={{marginRight: "10px", cursor: 'pointer'}} onClick={()=>handleDecrement('noOfTenantPermitted')}>-</div>
+                    {formData.noOfTenantPermitted}
+                    <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('noOfTenantPermitted')}>+</div>
                 </Box>
                 <Typography variant="body1" style={{marginTop: "20px"}}>Number of rooms per Bathroom</Typography>
                 <Box className={classes.sign}>
                     <div className={classes.add} style={{marginRight: "10px", cursor: 'pointer'}} onClick={()=>handleDecrement('bath')}>-</div>
-                    {formData.noOfRoomBath}
+                    {formData.noOfRoomsPerBath}
                     <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('bath')}>+</div>
                 </Box>
                 <Typography variant="body1" style={{marginTop: "20px"}}>Number of rooms per Toilet</Typography>
                 <Box className={classes.sign}>
                     <div className={classes.add} style={{marginRight: "10px", cursor: 'pointer'}} onClick={()=>handleDecrement('toilet')}>-</div>
-                    {formData.noOfRoomToilet}
+                    {formData.noOfRoomsPerToilet}
                     <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('toilet')}>+</div>
                 </Box>
-                <Typography variant="body1" style={{marginTop: "20px"}}>No of windows </Typography>
-                <Box className={classes.sign}>
+            </Paper>
+            <Paper variant="outlined" square elevation={16} className={classes.paper}>
+                <Typography variant="body1" style={{marginTop: "5px"}}>No of windows </Typography>
+                <Box className={classes.sign} mb={3}>
                     <div className={classes.add} style={{marginRight: "10px", cursor: 'pointer'}} onClick={()=>handleDecrement('windows')}>-</div>
                     {formData.noOfWindows}
                     <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('windows')}>+</div>
                 </Box>
-                {/* <FormControl style={{width: "150px", marginTop: "10px"}}>
-                    <InputLabel id="demo-simple-select-label"></InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={window}
-                            label="window"
-                            onChange={(e)=>setWindow(e.target.value)}
-                        >   
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                        </Select>
-                </FormControl> */}
-            </Paper>
-            <Paper variant="outlined" square elevation={16} className={classes.paper}>
                 <Typography variant="body1">How big is this room? (optional)</Typography>
                 <FormControl component="fieldset" style={{padding: "6px 20px"}}>
                     <RadioGroup row aria-label="gender" onChange={(e)=>handleChange(e, 'unit')} value={formData.roomAreaUnit} name="row-radio-buttons-group">
