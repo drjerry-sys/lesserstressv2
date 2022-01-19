@@ -1,4 +1,5 @@
 import * as types from "./actionTypes";
+import initFormData from '../components/pages/ListProperty/ListProperty';
 
 const user = localStorage.getItem("access_token") ? true : false;
 
@@ -28,5 +29,17 @@ export const authReducers = (state=initialState, action) => {
             return state;
         default:
             return state;
+    }
+};
+
+const initSpace = {
+    initFormData: {...initFormData}
+};
+
+export const spaceReducers = (state=initSpace, action) => {
+    switch (action.type) {
+        case types.SPACE_SUBMITTED:
+        default:
+            return state
     }
 }

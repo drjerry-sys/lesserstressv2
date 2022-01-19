@@ -2,9 +2,15 @@ import { Box, Checkbox, Divider, FormControlLabel, FormGroup, Paper, Typography 
 import React from 'react';
 import useStyles from "./style";
 
-const StepTwo = () => {
+const StepTwo = ({ formData, setFormData }) => {
 
     const classes = useStyles();
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData, [e.target.name]: e.target.checked
+        })
+    }
 
     return (
         <Box>
@@ -12,26 +18,26 @@ const StepTwo = () => {
             <Paper variant="outlined" square elevation={16} className={classes.paper}>
                 <Typography variant="h5" style={{ fontSize: "20px"}}>General</Typography>
                 <FormGroup style={{padding: "6px 20px"}}>
-                    <FormControlLabel control={<Checkbox defaultChecked size="small" />} label="Electricity" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Generator" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Bore-hole water" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Well water" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Garage" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Air Conditioning" />
+                    <FormControlLabel control={<Checkbox checked={formData.powerSupply} name="powerSupply" onChange={handleChange} size="small" />} label="Electricity" />
+                    <FormControlLabel control={<Checkbox size="small" />} checked={formData.generator} name='generator' onChange={handleChange} label="Generator" />
+                    <FormControlLabel control={<Checkbox size="small" />} checked={formData.borehole} name="borehole" onChange={handleChange} label="Bore-hole water" />
+                    <FormControlLabel control={<Checkbox size="small" />} checked={formData.wellWater} name="wellWater" onChange={handleChange} label="Well water" />
+                    <FormControlLabel control={<Checkbox size="small" />} checked={formData.garage} name="garage" onChange={handleChange} label="Garage" />
+                    <FormControlLabel control={<Checkbox size="small" />} checked={formData.airCondition} name="airCondition" onChange={handleChange} label="Air Conditioning" />
                 </FormGroup>
                 <Divider className={classes.divider} />
                 <Typography variant="h5" style={{ fontSize: "20px"}}>Cooking and Cleaning</Typography>
                 <FormGroup style={{padding: "6px 20px"}}>
-                    <FormControlLabel control={<Checkbox defaultChecked size="small" />} label="Kitchen" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Washing Machine" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Cleaner" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Bath Tube" />
+                    <FormControlLabel control={<Checkbox defaultChecked size="small" />} checked={formData.kitchen} name='kitchen' onChange={handleChange} label="Kitchen" />
+                    <FormControlLabel control={<Checkbox size="small" />} checked={formData.washingMachine} name='washingMachine' onChange={handleChange} label="Washing Machine" />
+                    <FormControlLabel control={<Checkbox size="small" />} checked={formData.cleaner} name='cleaner' onChange={handleChange} label="Cleaner" />
+                    <FormControlLabel control={<Checkbox size="small" />} checked={formData.bathtube} name='bathtube' onChange={handleChange} label="Bath Tube" />
                 </FormGroup>
                 <Divider className={classes.divider} />
                 <Typography variant="h5" style={{ fontSize: "20px"}}>Entertainment</Typography>
                 <FormGroup style={{padding: "6px 20px"}}>
-                    <FormControlLabel control={<Checkbox defaultChecked size="small" />} label="Flat Screen TV" />
-                    <FormControlLabel control={<Checkbox size="small" />} label="Swimming Pool" />
+                    <FormControlLabel control={<Checkbox defaultChecked size="small" />} checked={formData.flatscreenTV} name='flatscreenTV' onChange={handleChange} label="Flat Screen TV" />
+                    <FormControlLabel control={<Checkbox size="small" />} checked={formData.swimmingPool} name='swimmingPool' onChange={handleChange} label="Swimming Pool" />
                 </FormGroup>
             </Paper>
         </Box>

@@ -8,3 +8,4 @@ export const SIGN_OUT = "SIGN_OUT";
 
 // Accommodation action types
 export const GET_SPACES = "GET_SPACES";
+export const SPACE_SUBMITTED = "SPACE_SUBMITTED";

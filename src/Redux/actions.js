@@ -2,7 +2,6 @@ import axios from "axios";
 import * as types from "./actionTypes";
 import history from "./history";
 
-
 // actions for dispatch
 
 const signupSuccess = () => ({
@@ -87,5 +86,98 @@ export const signOut = () => {
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
         dispatch(signOutSuccess());
+    }
+};
+
+const groupData = (formData, value) => {
+    let {
+        gender, compoundId, roomType, areaLocated, noOfWindows, noOfTenantPermitted, noOfRoomsPerBath,
+        noOfRoomsPerToilet, comp_name, comp_type, roomAreaUnit, roomArea, latitude, longitude, room_image,
+        comp_image, room_yearlyPrice, discount, inspection_price, smoking, animals, children, partying,
+        check_in, check_out, agentComment, extraRules, airCondition, garage, wellWater, borehole, generator,
+        powerSupply, kitchen, washingMachine, cleaner, bathtube, wardrobe, flatscreenTV, swimmingPool, ownerType
+    } = formData;
+
+    let compoundData = { 
+        comp_name, comp_type, noOfRoomsPerBath, noOfRoomsPerToilet, areaLocated, powerSupply,
+        generator, garage, washingMachine, swimmingPool, borehole, wellWater, smoking, animals, children, partying,
+        check_in, check_out, extraRules, ownerType, agentComment, latitude, longitude
+    }
+
+    let roomData = {
+        roomType, noOfTenantPermitted, noOfWindows, roomArea, roomAreaUnit, airCondition, kitchen, flatscreenTV,
+        room_yearlyPrice, discount, inspection_price, wardrobe, cleaner, bathtube, compoundId
+    }
+
+    if (value === "comp") {
+        return { compoundData, compoundId }
+    } else if (value === "room") {
+        return roomData
+    } else if (value === "roomimg") {
+        return room_image
+    } else if (value === "compimg") {
+        return comp_image
+    }
+}
+
+
+// spaces actions
+
+const spaceCreated = () =>({
+    type: types.SPACE_SUBMITTED
+})
+
+export const submitSpace = (formData) => {
+    return dispatch => {
+
+        console.log('formdata in actions', formData)
+
+        const {compoundId, compoundData} = groupData(formData, 'comp');
+        //compound
+        if (compoundId !== 0.1) {
+            axiosInstance.post('/spaces/compound/', compoundData)
+            .then(res=>{
+                if (res.status === 201) {
+                    dispatch(spaceCreated)
+                    console.log(res.data)
+                } else {
+                    console.log(res.data)
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        };
+        //compound image
+        const config = {header: {'Content-Type': 'multipart/form-data'}};
+
+        let formtToPost = new FormData();
+        formtToPost.append('comp_image', groupData(formData, 'compimg'))
+
+        axiosInstance.post('/spaces/compound/images/', formtToPost, config)
+        .then(res=>{
+            if (res.status === 200) {
+                console.log(res.data)
+            } else {
+                console.log(res.data)
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        //compound image
+        axiosInstance.post('')
+        //room image
+        let roomimgToPost = new FormData();
+        roomimgToPost.append('room_image', groupData(roomimgToPost, 'roomimg'))
+        
+        axiosInstance.post('/spaces/room/images/', roomimgToPost, config)
+        .then(res=>{
+            if (res.status === 200) {
+                console.log(res.data)
+            } else {
+                 console.log(res.data)
+            }
+        })
     }
 }

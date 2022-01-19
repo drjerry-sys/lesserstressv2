@@ -2,9 +2,15 @@ import { Box, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import useStyles from "./style";
 
-const StepSix = () => {
+const StepSix = ({ formData, setFormData }) => {
 
     const classes = useStyles();
+
+    const handleSelect = (e)=> {
+        setFormData({
+            ...formData, ownerType: e.target.value
+        })
+    }
 
     return (
         <Box className={classes.stepsix}>
@@ -15,10 +21,10 @@ const StepSix = () => {
                 </Typography>
                 <Typography variant="subtitle2" style={{paddingTop: "10px"}}>
                 Is the accommodation owned by an individual or business entity?
-                <select name="business" defaultValue="none" style={{color: "#A0A0A0", width: "100%", padding: "5px"}}>
-                    <option value="none">select an option</option>
-                    <option value="none">I'm an Individual running a business</option>
-                    <option value="none">I represent a business entity</option>
+                <select onChange={handleSelect} value={formData.ownerType} style={{color: "#A0A0A0", width: "100%", padding: "5px"}}>
+                    {/* <option value="none">select an option</option> */}
+                    <option value="individual">Individual running a business</option>
+                    <option value="business">a business entity</option>
                 </select>
                 </Typography>
             </Paper>

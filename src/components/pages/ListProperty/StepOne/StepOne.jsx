@@ -3,30 +3,13 @@ import useStyles from "./style";
 import TrapFocus from "@material-ui/core/Unstable_TrapFocus";
 import { Box, RadioGroup, Radio, FormControl, Paper, Typography, FormControlLabel, InputBase, MenuItem, Select, InputLabel, TextField } from '@material-ui/core';
 
-const StepOne = () => {
+const StepOne = ({ formData, setFormData, setCompound, compound}) => {
 
     const areas = [{area: 'Damico', id: 0}, {area: 'Lagere', id: 1}, {area: 'Asherifa', id: 2}, {area: 'Mayfair', id: 3}, {area: 'Parakin', id: 30}, ]
-    const myCompounds = [{comp: 'Baba Lasisi Compound', id: 0}, {comp: 'God\'s Favour Compound', id: 1}, {comp: 'His Mercy, Dugbe', id: 2}]
+    const myCompounds = [{comp: 'select compound', id: 0.1}, {comp: 'Baba Lasisi Compound', id: 0}, {comp: 'God\'s Favour Compound', id: 1}, {comp: 'His Mercy, Dugbe', id: 2}]
 
     const classes = useStyles();
     const [others, setOthers] = useState(false);
-    const [compound, setCompound] = useState('yes');
-    const [formData, setFormData] = useState({
-        gender: '',
-        compoundId: compound === 'yes' ? 0: 0.1,     //o.1 is the id for new compound
-        roomType: 'single room',
-        areaLocated: 'Damico',
-        noOfWindows: 0,
-        noOfTenantPermitted: 1,
-        noOfRoomsPerBath: 1,
-        noOfRoomsPerToilet: 1,
-        comp_name: '',
-        comp_type: 'Storey building',
-        roomAreaUnit: 'sqr meter',
-        roomArea: 0,
-        latitude: 0,
-        longitude: 0,
-    });
 
     const handleDecrement = (status) => {
         let tenant = formData.noOfTenantPermitted, bath = formData.noOfRoomsPerBath, toilet = formData.noOfRoomsPerToilet;
@@ -108,12 +91,12 @@ const StepOne = () => {
                             onChange={(e)=>handleChange(e, 'compound')}
                         >
                             {myCompounds.map((comp)=> (
-                                <MenuItem value={comp.id}>{comp.comp}</MenuItem>
+                                <MenuItem key={comp.id} value={comp.id}>{comp.comp}</MenuItem>
                             ))};
                         </Select>
                     </FormControl>
                 ) : compound === "no" ? (
-                    <TextField style={{marginBottom: "10px"}} id="outlined-basic" onChange={(e)=>handleChange(e, 'compname')} fullWidth label="Name of compound" variant="outlined" />
+                    <TextField style={{marginBottom: "10px"}} id="outlined-basic" value={formData.comp_name} onChange={(e)=>handleChange(e, 'compname')} fullWidth label="Name of compound" variant="outlined" />
                 ) : ""}
                 <Typography variant="body1">What type of Compound is it?</Typography>
                 <FormControl component="fieldset" style={{padding: "6px 20px"}}>

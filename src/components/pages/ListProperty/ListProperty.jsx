@@ -7,21 +7,28 @@ import StepThree from './StepThree/StepThree';
 import StepFour from './StepFour/StepFour';
 import StepFive from './StepFive/StepFive';
 import StepSix from './StepSix/StepSix';
+import initFormData from './formData';
+import { useDispatch } from "react-redux";
+import { submitSpace } from "../../../Redux/actions"
 
 const ListProperty = () => {
 
     const classes = useStyles();
+    const dispatch = useDispatch()
     const steps = ['Name and Location', 'Property setup', 'House Rules', 'Photos', 'Pricing and calendar', 'Legal Info'];
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState({});
     const isMobile = useMediaQuery("(max-width:900px)");
+    const [compound, setCompound] = useState('yes');
+    const [formData, setFormData] = useState(initFormData);
+    
     const display = {
-        0: <StepOne />,
-        1: <StepTwo />,
-        2: <StepThree />,
-        3: <StepFour />,
-        4: <StepFive />,
-        5: <StepSix />,
+        0: <StepOne formData={formData} setFormData={setFormData} compound={compound} setCompound={setCompound} />,
+        1: <StepTwo formData={formData} setFormData={setFormData} />,
+        2: <StepThree formData={formData} setFormData={setFormData} />,
+        3: <StepFour formData={formData} setFormData={setFormData} />,
+         4: <StepFive formData={formData} setFormData={setFormData} />,
+        5: <StepSix formData={formData} setFormData={setFormData} />,
     };
     
     const totalSteps = () => {
@@ -48,7 +55,8 @@ const ListProperty = () => {
                 : activeStep + 1;
             setActiveStep(newActiveStep);
         } else {
-            
+            alert()
+            dispatch(submitSpace(formData))
         }
     };
 
