@@ -1,4 +1,4 @@
-import { Box, Button, Container, Step, useMediaQuery, StepButton, Stepper, Typography, CssBaseline } from '@material-ui/core';
+import { Box, Button, Container, Step, useMediaQuery, StepButton, Stepper, Typography, CssBaseline, Paper, InputBase, InputLabel } from '@material-ui/core';
 import React, { useState } from 'react';
 import useStyles from "./style";
 import StepOne from './StepOne/StepOne';
@@ -26,7 +26,7 @@ const ListProperty = () => {
         0: <StepOne formData={formData} setFormData={setFormData} compound={compound} setCompound={setCompound} />,
         1: <StepTwo formData={formData} setFormData={setFormData} />,
         2: <StepThree formData={formData} setFormData={setFormData} />,
-        3: <StepFour formData={formData} setFormData={setFormData} />,
+        3: <StepFour formData={formData} setFormData={setFormData} page_no={3} />,
          4: <StepFive formData={formData} setFormData={setFormData} />,
         5: <StepSix formData={formData} setFormData={setFormData} />,
     };
