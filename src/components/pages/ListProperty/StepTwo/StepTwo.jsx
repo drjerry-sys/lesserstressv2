@@ -34,6 +34,11 @@ const StepTwo = ({ formData, setFormData }) => {
                     <FormControlLabel control={<Checkbox size="small" />} checked={formData.bathtube} name='bathtube' onChange={handleChange} label="Bath Tube" />
                 </FormGroup>
                 <Divider className={classes.divider} />
+                <Typography variant="h5" style={{ fontSize: "20px"}}>Room Qualities</Typography>
+                <FormGroup style={{padding: "6px 20px"}}>
+                    <FormControlLabel control={<Checkbox defaultChecked size="small" />} checked={formData.wardrobe} name='wardrobe' onChange={handleChange} label="Wardrobe" />
+                </FormGroup>
+                <Divider className={classes.divider} />
                 <Typography variant="h5" style={{ fontSize: "20px"}}>Entertainment</Typography>
                 <FormGroup style={{padding: "6px 20px"}}>
                     <FormControlLabel control={<Checkbox defaultChecked size="small" />} checked={formData.flatscreenTV} name='flatscreenTV' onChange={handleChange} label="Flat Screen TV" />

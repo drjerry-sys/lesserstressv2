@@ -54,8 +54,6 @@ const ForgotPassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { email, password, code, confirmNewPassword } = detailss;
-        alert(password)
-        alert(confirmNewPassword)
         if ((password === confirmNewPassword) && (password !== '')) {
             axiosInstance.post("auth/reset_password/reset", { email, password, code: Number(code) })
             .then(res=>{

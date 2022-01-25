@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from "./style";
+import { useSelector } from 'react-redux';
 import TrapFocus from "@material-ui/core/Unstable_TrapFocus";
 import { Box, RadioGroup, Radio, FormControl, Paper, Typography, FormControlLabel, InputBase, MenuItem, Select, InputLabel, TextField } from '@material-ui/core';
 
@@ -10,6 +11,16 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
 
     const classes = useStyles();
     const [others, setOthers] = useState(false);
+    const { errMessage } = useSelector(state=>state.space);
+    const { comp_name: compNameErr } = errMessage;
+    
+    // useEffect(()=>{
+
+    // }, [])
+
+    useEffect(()=>{
+        if (compound === 'no') setFormData({...formData, compoundId: 0.1})
+    }, [compound])
 
     const handleDecrement = (status) => {
         let tenant = formData.noOfTenantPermitted, bath = formData.noOfRoomsPerBath, toilet = formData.noOfRoomsPerToilet;
@@ -96,8 +107,11 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
                         </Select>
                     </FormControl>
                 ) : compound === "no" ? (
-                    <TextField style={{marginBottom: "10px"}} id="outlined-basic" value={formData.comp_name} onChange={(e)=>handleChange(e, 'compname')} fullWidth label="Name of compound" variant="outlined" />
-                ) : ""}
+                    <>
+                        <TextField style={{marginBottom: "10px"}} id="outlined-basic" value={formData.comp_name} onChange={(e)=>handleChange(e, 'compname')} fullWidth label="Name of compound" variant="outlined" />
+                        <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{compNameErr[0]}</Typography>
+                    </>
+                ) : null}
                 <Typography variant="body1">What type of Compound is it?</Typography>
                 <FormControl component="fieldset" style={{padding: "6px 20px"}}>
                     <RadioGroup

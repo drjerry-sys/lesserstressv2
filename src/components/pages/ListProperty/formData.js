@@ -11,12 +11,13 @@ const initFormData = {
     comp_type: 'Storey building',
     roomAreaUnit: 'sqr meter',
     roomArea: 0,
-    latitude: 0,
-    longitude: 0,
+    latitude: 120.00,
+    longitude: 1230.76,
     room_image: null,
     comp_image: null,
     room_yearlyPrice: 0,
     discount: 0,
+    wardrobe: false,
     inspection_price: 0,
     smoking: false,
     animals: false,
@@ -26,6 +27,9 @@ const initFormData = {
     check_out: null,
     agentComment: '',
     extraRules: '',
+    distanceToSchoolGate: 50.23,
+    agent: 1,
+    timeOfTreckToGate: 43,
     airCondition: false,
     garage: false,
     wellWater: false,
@@ -38,7 +42,10 @@ const initFormData = {
     bathtube: false,
     flatscreenTV: false,
     swimmingPool: false,
-    ownerType: 'individual'
+    ownerType: 'individual',
+    //not used in backend
+    radio: 'no',
+    discountradio: 'false'
 };
 
 export default initFormData;

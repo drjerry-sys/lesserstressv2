@@ -6,12 +6,11 @@ import { Box, Switch, Paper, useMediaQuery, Typography, Divider, FormControl, Ra
 const StepThree = ({ formData, setFormData }) => {
 
     const classes = useStyles();
-    const [radio, setRadio] = useState('no');
     const isMobile = useMediaQuery("(max-width:900px)")
 
     const handleChange = (e) => {
         setFormData({
-            ...formData, [e.target.name]: e.target.value
+            ...formData, [e.target.name]: e.target.value.trim()
         })
     };
 
@@ -72,19 +71,19 @@ const StepThree = ({ formData, setFormData }) => {
                     <FormControl component="fieldset" style={{padding: "6px 20px"}}>
                         <RadioGroup
                             aria-label="gender"
-                            value={radio}
-                            name="radio-buttons-group"
-                            onChange={(e)=>setRadio(e.target.value)}
+                            value={formData.radio}
+                            name="radio"
+                            onChange={handleChange}
                         >
                             <FormControlLabel value="yes" control={<Radio size="small" />} label="Yes" />
-                            {radio === 'yes' && (
+                            {formData.radio === 'yes' && (
                                 <TrapFocus checkout getDoc>
                                     <Box tabIndex={-1} className={classes.specifyothers}>
                                         <label>
                                             <Typography variant="body2" style={{textAlign: "left",}}>Evening:</Typography>
-                                            <InputBase placeholder="check-in time" type="time" name="check_in" style={{border: "1px solid #D0D0D0"}} onChange={handleChange} />
+                                            <InputBase placeholder="check-in time" value={formData.check_in} type="time" name="check_in" style={{border: "1px solid #D0D0D0"}} onChange={handleChange} />
                                             <Typography variant="body2" style={{textAlign: "left", marginTop: "5px"}}>Morning:</Typography>
-                                            <InputBase placeholder="check-out time" type="time" name="check_out" style={{border: "1px solid #D0D0D0"}} onChange={handleChange} />
+                                            <InputBase placeholder="check-out time" type="time" value={formData.check_out} name="check_out" style={{border: "1px solid #D0D0D0"}} onChange={handleChange} />
                                         </label>
                                     </Box>
                                 </TrapFocus>
@@ -96,11 +95,11 @@ const StepThree = ({ formData, setFormData }) => {
                     <Typography variant="body2" style={{textAlign: "left", }}>Extra Rules?</Typography>
                     <div style={{paddingLeft: "20px"}}>
                         <Typography variant="body2" style={{textAlign: "left", marginBottom: "10px", fontSize: "10px"}}>use <mark style={{padding: "0 5px"}}>windows + .</mark> for emoji</Typography>
-                        <textarea name="extraRules" rows="10" cols={isMobile ? "30" : "50"} placeholder="write them here"></textarea>
+                        <textarea name="extraRules" value={formData.extraRules} onChange={handleChange} rows="10" cols={isMobile ? "30" : "50"} placeholder="write them here"></textarea>
                     </div>
                     <Typography variant="body2" style={{textAlign: "left", marginTop: "10px" }}>What can you say about the House as Agent?</Typography>
                     <div style={{paddingLeft: "20px"}}>
-                        <textarea name="agentComment" rows="10" cols={isMobile ? "30" : "50"} style={{ marginBottom: "10px"}} placeholder="write them here"></textarea>
+                        <textarea name="agentComment" value={formData.agentComment} onChange={handleChange} rows="10" cols={isMobile ? "30" : "50"} style={{ marginBottom: "10px"}} placeholder="write them here"></textarea>
                     </div>
                 </div>
             </Paper>

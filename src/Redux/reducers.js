@@ -33,12 +33,20 @@ export const authReducers = (state=initialState, action) => {
 };
 
 const initSpace = {
-    initFormData: {...initFormData}
+    initFormData: {...initFormData},
+    errMessage: {
+        comp_name: [''], comp_type: [''], noOfRoomsPerBath: [''],
+        noOfRoomsPerToilet: [''], extraRules: [''], agentComment: ['']
+    }
 };
 
 export const spaceReducers = (state=initSpace, action) => {
     switch (action.type) {
-        case types.SPACE_SUBMITTED:
+        case types.COMPOUND_SUCCESS:
+            return state
+        case types.COMPOUND_FAILED:
+            state = {...state, errMessage: {...state.errMessage, ...action.payload}}
+            return state;
         default:
             return state
     }

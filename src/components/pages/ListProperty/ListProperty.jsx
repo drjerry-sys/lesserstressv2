@@ -26,7 +26,7 @@ const ListProperty = () => {
         0: <StepOne formData={formData} setFormData={setFormData} compound={compound} setCompound={setCompound} />,
         1: <StepTwo formData={formData} setFormData={setFormData} />,
         2: <StepThree formData={formData} setFormData={setFormData} />,
-        3: <StepFour formData={formData} setFormData={setFormData} page_no={3} />,
+        3: <StepFour formData={formData} setFormData={setFormData} />,
          4: <StepFive formData={formData} setFormData={setFormData} />,
         5: <StepSix formData={formData} setFormData={setFormData} />,
     };
@@ -55,7 +55,6 @@ const ListProperty = () => {
                 : activeStep + 1;
             setActiveStep(newActiveStep);
         } else {
-            alert()
             dispatch(submitSpace(formData))
         }
     };
