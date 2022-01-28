@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 function App() {
 
   const { isLoggedIn } = useSelector(state=> state.data);
+  const { formFailed } = useSelector(state=> state.space)
 
   return ( 
   <div>
@@ -18,7 +19,7 @@ function App() {
       <Route path="/sign_up" element={<SignUp />} />
       <Route path="/sign_out" element={<SignOut />} />
       <Route path="/forgot_password" element={<ForgotPassword />} />
-      <Route path="/list_property" element={<ListProperty />} />
+      <Route path="/list_property" element={<ListProperty formFailed={formFailed} />} />
       <Route path="/single_room" element={<Room />} />
       <Route path="/settings" exact element={<Settings />} />
       <Route path="/settings/myprofile" element={<SettingsOptions />} />

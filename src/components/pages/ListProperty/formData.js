@@ -18,7 +18,7 @@ const initFormData = {
     room_yearlyPrice: 0,
     discount: 0,
     wardrobe: false,
-    inspection_price: 0,
+    inspection_price: null,
     smoking: false,
     animals: false,
     children: false,

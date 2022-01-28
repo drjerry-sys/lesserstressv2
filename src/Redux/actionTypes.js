@@ -10,3 +10,5 @@ export const SIGN_OUT = "SIGN_OUT";
 export const GET_SPACES = "GET_SPACES";
 export const COMPOUND_SUCCESS = "COMPOUND_SUCCESS";
 export const COMPOUND_FAILED = "COMPOUND_FAILED";
+export const ROOM_SUCCESS = "ROOM_SUCCESS";
+export const ROOM_FAILED = "ROOM_FAILED";

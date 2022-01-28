@@ -1,5 +1,7 @@
 import { Box, Button, Container, Step, useMediaQuery, StepButton, Stepper, Typography, CssBaseline, Paper, InputBase, InputLabel } from '@material-ui/core';
 import React, { useState } from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 import useStyles from "./style";
 import StepOne from './StepOne/StepOne';
 import StepTwo from './StepTwo/StepTwo';
@@ -11,7 +13,7 @@ import initFormData from './formData';
 import { useDispatch } from "react-redux";
 import { submitSpace } from "../../../Redux/actions"
 
-const ListProperty = () => {
+const ListProperty = ({ formFailed }) => {
 
     const classes = useStyles();
     const dispatch = useDispatch()
@@ -21,6 +23,7 @@ const ListProperty = () => {
     const isMobile = useMediaQuery("(max-width:900px)");
     const [compound, setCompound] = useState('yes');
     const [formData, setFormData] = useState(initFormData);
+    const [open, setOpen] = useState(formFailed);
     
     const display = {
         0: <StepOne formData={formData} setFormData={setFormData} compound={compound} setCompound={setCompound} />,
@@ -126,6 +129,11 @@ const ListProperty = () => {
                                     </Typography>
                                     ) : ""
                                 )}
+                                <Snackbar open={open} autoHideDuration={6000} onClose={()=>setOpen(false)}>
+                                    <Alert onClose={()=>setOpen(false)} severity="error" style={{width: '100%'}}>
+                                        Error in submission, re-check forms
+                                    </Alert>
+                                </Snackbar>
                             </Box>
                         </React.Fragment>
                         )}
@@ -136,4 +144,4 @@ const ListProperty = () => {
     )
 }
 
-export default ListProperty
+export default ListProperty;

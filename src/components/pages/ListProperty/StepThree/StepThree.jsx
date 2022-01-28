@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useStyles from "./style";
+import { useSelector } from 'react-redux';
 import TrapFocus from "@material-ui/core/Unstable_TrapFocus";
 import { Box, Switch, Paper, useMediaQuery, Typography, Divider, FormControl, RadioGroup, FormControlLabel, Radio, InputBase } from "@material-ui/core";
 
@@ -7,6 +8,7 @@ const StepThree = ({ formData, setFormData }) => {
 
     const classes = useStyles();
     const isMobile = useMediaQuery("(max-width:900px)")
+    const {agentComment: agentCommentsErr, extraRules: extraRulesErr} = useSelector(state=>state.space.errMessage)
 
     const handleChange = (e) => {
         setFormData({
@@ -95,11 +97,13 @@ const StepThree = ({ formData, setFormData }) => {
                     <Typography variant="body2" style={{textAlign: "left", }}>Extra Rules?</Typography>
                     <div style={{paddingLeft: "20px"}}>
                         <Typography variant="body2" style={{textAlign: "left", marginBottom: "10px", fontSize: "10px"}}>use <mark style={{padding: "0 5px"}}>windows + .</mark> for emoji</Typography>
-                        <textarea name="extraRules" value={formData.extraRules} onChange={handleChange} rows="10" cols={isMobile ? "30" : "50"} placeholder="write them here"></textarea>
+                        <textarea name="extraRules" value={formData.extraRules} onChange={handleChange} rows="10" cols={isMobile ? "30" : "50"} placeholder="write them here"></textarea><br />
+                        <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{extraRulesErr[0]}</Typography>
                     </div>
                     <Typography variant="body2" style={{textAlign: "left", marginTop: "10px" }}>What can you say about the House as Agent?</Typography>
                     <div style={{paddingLeft: "20px"}}>
                         <textarea name="agentComment" value={formData.agentComment} onChange={handleChange} rows="10" cols={isMobile ? "30" : "50"} style={{ marginBottom: "10px"}} placeholder="write them here"></textarea>
+                        <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{agentCommentsErr[0]}</Typography>
                     </div>
                 </div>
             </Paper>

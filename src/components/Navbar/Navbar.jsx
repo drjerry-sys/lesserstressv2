@@ -98,7 +98,7 @@ console.log(isAuthenticated);
                         )}
                         {location.slice(0,14) === '/list_property' && (
                             <>
-                                <Button variant="outlined" style={{color: 'white', border: '1px solid #a0a0a0', marginRight: '10px'}} href="">create space</Button>
+                                <Button variant="outlined" size="small" style={{color: 'white', border: '1px solid #a0a0a0', marginRight: '10px'}} href="">create space</Button>
                                 <Badge badgeContent={5} color="secondary" className={classes.badge} onClick={()=>handleMenu("request")}>
                                     <MoveToInbox className={classes.icon} />
                                 </Badge>

@@ -36,16 +36,22 @@ const initSpace = {
     initFormData: {...initFormData},
     errMessage: {
         comp_name: [''], comp_type: [''], noOfRoomsPerBath: [''],
-        noOfRoomsPerToilet: [''], extraRules: [''], agentComment: ['']
-    }
+        noOfRoomsPerToilet: [''], extraRules: [''], agentComment: [''],
+    },
+    formFailed: false
 };
 
 export const spaceReducers = (state=initSpace, action) => {
     switch (action.type) {
         case types.COMPOUND_SUCCESS:
-            return state
+            return state;
         case types.COMPOUND_FAILED:
-            state = {...state, errMessage: {...state.errMessage, ...action.payload}}
+            state = {...state, errMessage: {...state.errMessage, ...action.payload }}
+            return state;
+        case types.ROOM_SUCCESS:
+            return state;
+        case types.ROOM_FAILED:
+            state = {...state, errMessage: {...state.errMessage, ...action.payload }, formFailed: true}
             return state;
         default:
             return state

@@ -2,7 +2,19 @@ import React, { useState, useEffect } from 'react';
 import useStyles from "./style";
 import { useSelector } from 'react-redux';
 import TrapFocus from "@material-ui/core/Unstable_TrapFocus";
-import { Box, RadioGroup, Radio, FormControl, Paper, Typography, FormControlLabel, InputBase, MenuItem, Select, InputLabel, TextField } from '@material-ui/core';
+import { 
+    Box, 
+    RadioGroup, 
+    Radio, 
+    FormControl, 
+    Paper, 
+    Typography, 
+    FormControlLabel, 
+    InputBase, 
+    MenuItem, 
+    Select, 
+    InputLabel, 
+    TextField } from '@material-ui/core';
 
 const StepOne = ({ formData, setFormData, setCompound, compound}) => {
 
@@ -19,7 +31,11 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
     // }, [])
 
     useEffect(()=>{
-        if (compound === 'no') setFormData({...formData, compoundId: 0.1})
+        if (compound === 'no') {
+            setFormData({...formData, compoundId: 0.1})
+        } else {
+            setFormData({...formData, comp_name: 'selected'})
+        };
     }, [compound])
 
     const handleDecrement = (status) => {
@@ -61,7 +77,7 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
         } else if (status === 'unit') {
             setFormData({ ...formData, roomAreaUnit: val})
         } else if (status === 'areavalue') {
-            setFormData({ ...formData, roomArea: val})
+            setFormData({ ...formData, roomArea: parseFloat(val)})
         }
     }
 
@@ -160,8 +176,8 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
                         onChange={(e)=>handleChange(e, 'area')}
                         style={{marginBottom: "15px"}}
                     >
-                        {areas.map((area)=>(
-                            <MenuItem value={area.area}>{area.area}</MenuItem>
+                        {areas.map((area, ind)=>(
+                            <MenuItem key={ind} value={area.area}>{area.area}</MenuItem>
                         ))}
                     </Select>
                 </FormControl>
@@ -202,7 +218,7 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
                 </FormControl>
                 <Box tabIndex={-1} className={classes.specifyothers}>
                     <label>
-                        <InputBase type="number" placeholder=" Specify Area " onChange={(e)=>handleChange(e, 'areavalue')} style={{border: "1px solid #D0D0D0"}}/>
+                        <InputBase type="number" value={formData.roomArea} placeholder=" Specify Area " onChange={(e)=>handleChange(e, 'areavalue')} style={{border: "1px solid #D0D0D0"}}/>
                     </label>
                 </Box>
             </Paper>

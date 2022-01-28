@@ -31,7 +31,7 @@ const signOutSuccess = () => ({
 const baseUrl = "http://localhost:8000"
 export const axiosInstance = axios.create({
         baseURL: `${baseUrl}`,
-        timeout: 5000,
+        timeout: 10000,
         responseType: "json",
         validateStatus: status=> {
             return status < 500
@@ -101,7 +101,16 @@ const compoundCreated = () =>({
 const compoundFailed = (data) => ({
     type: types.COMPOUND_FAILED,
     payload: data
-})
+});
+
+const roomCreated = () => ({
+    type: types.ROOM_SUCCESS,
+});
+
+const roomFailed = (data) => ({
+    type: types.ROOM_FAILED,
+    payload: data
+});
 
 export const submitSpace = (formData) => {
 
@@ -120,17 +129,17 @@ export const submitSpace = (formData) => {
     }
     
     let roomData = {
-        roomType, noOfTenantPermitted, noOfWindows, roomArea, roomAreaUnit, airCondition, kitchen, flatscreenTV,
-        room_yearlyPrice, discount, inspection_price, wardrobe, cleaner, bathtube, compoundId
-    }
+        roomType, noOfTenantPermitted, noOfWindows, roomArea: parseFloat(roomArea), roomAreaUnit, airCondition, kitchen, flatscreenTV,
+        room_yearlyPrice, discount, inspection_price, wardrobe, cleaner, bathtube, compoundId, agent
+    };
 
     return dispatch => {
 
-        console.log('formdata in actions', formData)
-        const url = 'http://localhost:8000/spaces/'
+        const url = 'http://localhost:8000/spaces/';
 
         //compound
         if (compoundId === 0.1) {
+            console.log(compoundData)
             axiosInstance.post(`${url}compound/`, compoundData)
             .then(res=>{
                 if (res.status === 201) {
@@ -143,6 +152,20 @@ export const submitSpace = (formData) => {
                 console.log(err)
             })
         };
+        
+        //room
+        axiosInstance.post('/spaces/room/', roomData)
+        .then(res=>{
+            if (res.status === 201) {
+                dispatch(roomCreated())
+            } else if (res.status === 400) {
+                dispatch(roomFailed(res.data))
+                console.log(res.data)
+            };
+        })
+        .catch(err=>{
+            console.log(err)
+        })
         //compound image
         // const config = {header: {'Content-Type': 'multipart/form-data'}};
 
@@ -156,14 +179,6 @@ export const submitSpace = (formData) => {
         //     } else {
         //         console.log(res.data)
         //     }
-        // })
-        // .catch(err=>{
-        //     console.log(err)
-        // })
-        //room
-        // axiosInstance.post('/spaces/room/', roomData)
-        // .then(res=>{
-        //     console.log(res.data, res.status)
         // })
         // .catch(err=>{
         //     console.log(err)
@@ -182,4 +197,4 @@ export const submitSpace = (formData) => {
         //     }
         // })
     }
-}
+}   
