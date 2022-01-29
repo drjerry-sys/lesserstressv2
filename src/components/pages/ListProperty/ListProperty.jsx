@@ -21,12 +21,11 @@ const ListProperty = ({ formFailed }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState({});
     const isMobile = useMediaQuery("(max-width:900px)");
-    const [compound, setCompound] = useState('yes');
     const [formData, setFormData] = useState(initFormData);
-    const [open, setOpen] = useState(formFailed);
+    const [open, setOpen] = useState(false)
     
     const display = {
-        0: <StepOne formData={formData} setFormData={setFormData} compound={compound} setCompound={setCompound} />,
+        0: <StepOne formData={formData} setFormData={setFormData} />,
         1: <StepTwo formData={formData} setFormData={setFormData} />,
         2: <StepThree formData={formData} setFormData={setFormData} />,
         3: <StepFour formData={formData} setFormData={setFormData} />,
@@ -58,7 +57,23 @@ const ListProperty = ({ formFailed }) => {
                 : activeStep + 1;
             setActiveStep(newActiveStep);
         } else {
-            dispatch(submitSpace(formData))
+            let compresult = [];
+            if (formData.radio === 'no') {
+                compresult = Object.keys(formData.comp_image).filter(img=>formData.comp_image[img].name.length > 99)
+            } else {
+                compresult = []
+            }
+            const roomresult = Object.keys(formData.room_image).filter(img=>formData.room_image[img].name.length > 99)
+            let { radio, comp_name, agentComment, extraRules, compoundId } = formData;
+            if (
+                    (radio === 'no' && comp_name === '') || (agentComment === '' && radio==='no') || (extraRules === '' && radio==='no') ||
+                    (radio === 'yes' && compoundId === 0.1) || roomresult.length > 0 || compresult.length > 0
+                ) {
+                    setOpen(true)
+                    setFormData({...formData, open:true})
+                } else {
+                    dispatch(submitSpace(formData))
+            }
         }
     };
 
@@ -130,7 +145,7 @@ const ListProperty = ({ formFailed }) => {
                                     ) : ""
                                 )}
                                 <Snackbar open={open} autoHideDuration={6000} onClose={()=>setOpen(false)}>
-                                    <Alert onClose={()=>setOpen(false)} severity="error" style={{width: '100%'}}>
+                                    <Alert onClose={()=>setOpen(false)} severity='error' style={{width: '100%'}}>
                                         Error in submission, re-check forms
                                     </Alert>
                                 </Snackbar>

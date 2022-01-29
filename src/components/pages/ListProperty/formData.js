@@ -45,7 +45,8 @@ const initFormData = {
     ownerType: 'individual',
     //not used in backend
     radio: 'no',
-    discountradio: 'false'
+    discountradio: 'false',
+    open: false
 };
 
 export default initFormData;

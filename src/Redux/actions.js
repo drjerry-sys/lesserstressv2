@@ -1,6 +1,7 @@
-import axios from "axios";
 import * as types from "./actionTypes";
 import history from "./history";
+import _ from 'lodash';
+import axiosInstance from './axioscall'
 
 // actions for dispatch
 
@@ -27,21 +28,6 @@ const signOutSuccess = () => ({
 })
 
 // request instance to endpoints
-
-const baseUrl = "http://localhost:8000"
-export const axiosInstance = axios.create({
-        baseURL: `${baseUrl}`,
-        timeout: 10000,
-        responseType: "json",
-        validateStatus: status=> {
-            return status < 500
-        },
-        headers: {
-            Authorization: localStorage.getItem("access_token") ? `JWT ${localStorage.getItem("access_token")}` : null,
-            "Content-Type": "application/json",
-            accept: "application/json"
-        }
-    })
     
 export const createUser = (my_info) => {
     return async function(dispatch) {
@@ -135,12 +121,10 @@ export const submitSpace = (formData) => {
 
     return dispatch => {
 
-        const url = 'http://localhost:8000/spaces/';
-
         //compound
         if (compoundId === 0.1) {
             console.log(compoundData)
-            axiosInstance.post(`${url}compound/`, compoundData)
+            axiosInstance.post(`/spaces/compound/`, compoundData)
             .then(res=>{
                 if (res.status === 201) {
                     dispatch(compoundCreated)
@@ -167,34 +151,43 @@ export const submitSpace = (formData) => {
             console.log(err)
         })
         //compound image
-        // const config = {header: {'Content-Type': 'multipart/form-data'}};
+        const config = {header: {'Content-Type': 'multipart/form-data'}};
 
-        // let formtToPost = new FormData();
-        // formtToPost.append('comp_image', comp_image)
-        // formtToPost.append('compoundId', compoundId)
-        // axios.post(`${url}compound/images/`, formtToPost, config)
-        // .then(res=>{
-        //     if (res.status === 200) {
-        //         console.log(res.data)
-        //     } else {
-        //         console.log(res.data)
-        //     }
-        // })
-        // .catch(err=>{
-        //     console.log(err)
-        // })
+        if (compoundId === 0.1) {
+            // we need this if and only if we're creating a new compound!
+
+            let compImgs = new FormData();
+            _.forEach(comp_image, file=>{
+                compImgs.append('comp_image', file)
+            });
+            compImgs.append('compoundId', compoundId)
+            compImgs.append('agent', agent)
+            axiosInstance.post(`/spaces/compound/images/`, compImgs, config)
+            .then(res=>{
+                if (res.status === 200) {
+                    console.log(res.data)
+                } else {
+                    console.log('compound images error message', res.data)
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        }
         //room image
-        // let roomimgToPost = new FormData();
-        // roomimgToPost.append('room_image', room_image)
-        // console.log({roomimgToPost})
-        console.log({room_image})
-        // axios.post('/spaces/room/images/', room_image, config)
-        // .then(res=>{
-        //     if (res.status === 200) {
-        //         console.log(res.data)
-        //     } else {
-        //          console.log(res.data)
-        //     }
-        // })
-    }
-}   
+        let roomImgs = new FormData();
+        _.forEach(room_image, file=>{
+            roomImgs.append('room_image', file)
+        });
+        roomImgs.append('agent', agent)
+        roomImgs.append('compoundId', compoundId)
+        axiosInstance.post(`/spaces/room/images/`, roomImgs, config)
+        .then(res=>{
+            if (res.status === 200) {
+                console.log(res.data)
+            } else {
+                 console.log(res.data)
+            }
+        });
+    };
+};

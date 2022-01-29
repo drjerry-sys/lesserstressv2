@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from "./style";
+import axiosInstance from '../../../../Redux/axioscall';
 import { useSelector } from 'react-redux';
 import TrapFocus from "@material-ui/core/Unstable_TrapFocus";
 import { 
@@ -16,27 +17,25 @@ import {
     InputLabel, 
     TextField } from '@material-ui/core';
 
-const StepOne = ({ formData, setFormData, setCompound, compound}) => {
+const StepOne = ({ formData, setFormData }) => {
 
     const areas = [{area: 'Damico', id: 0}, {area: 'Lagere', id: 1}, {area: 'Asherifa', id: 2}, {area: 'Mayfair', id: 3}, {area: 'Parakin', id: 30}, ]
-    const myCompounds = [{comp: 'select compound', id: 0.1}, {comp: 'Baba Lasisi Compound', id: 0}, {comp: 'God\'s Favour Compound', id: 1}, {comp: 'His Mercy, Dugbe', id: 2}]
+    const myCompounds = [{comp: 'select compound', id: 0.1}, {comp: 'Baba Lasisi Compound', id: 3}, {comp: 'God\'s Favour Compound', id: 1}, {comp: 'His Mercy, Dugbe', id: 2}]
 
     const classes = useStyles();
     const [others, setOthers] = useState(false);
-    const { errMessage } = useSelector(state=>state.space);
-    const { comp_name: compNameErr } = errMessage;
     
-    // useEffect(()=>{
-
-    // }, [])
+    useEffect(()=>{
+        axiosInstance.post()
+        .then()
+        .catch()
+    }, [])
 
     useEffect(()=>{
-        if (compound === 'no') {
+        if (formData.radio === 'no') {
             setFormData({...formData, compoundId: 0.1})
-        } else {
-            setFormData({...formData, comp_name: 'selected'})
-        };
-    }, [compound])
+        }
+    }, [formData.radio])
 
     const handleDecrement = (status) => {
         let tenant = formData.noOfTenantPermitted, bath = formData.noOfRoomsPerBath, toilet = formData.noOfRoomsPerToilet;
@@ -102,12 +101,12 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
             <Paper variant="outlined" square elevation={16} className={classes.paper}>
                 <Typography variant="body1">Do you have a room in this compound already?</Typography>
                 <FormControl component="fieldset">
-                    <RadioGroup row aria-label="gender" defaultValue={'yes'} name="row-radio-buttons-group" onChange={(e)=>setCompound(e.target.value)}>
+                    <RadioGroup row aria-label="gender" value={formData.radio} name="row-radio-buttons-group" onChange={(e)=>setFormData({...formData, radio: e.target.value})}>
                         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                         <FormControlLabel value="no" control={<Radio />} label="No" />
                     </RadioGroup>
                 </FormControl>
-                {compound === "yes" ? (
+                {formData.radio === "yes" ? (
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Select compound</InputLabel>
                         <Select
@@ -122,28 +121,32 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
                             ))};
                         </Select>
                     </FormControl>
-                ) : compound === "no" ? (
+                ) : formData.radio === "no" ? (
                     <>
                         <TextField style={{marginBottom: "10px"}} id="outlined-basic" value={formData.comp_name} onChange={(e)=>handleChange(e, 'compname')} fullWidth label="Name of compound" variant="outlined" />
-                        <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{compNameErr[0]}</Typography>
+                        <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{formData.open ? 'Ensure this field is filled' : ''}</Typography>
                     </>
                 ) : null}
-                <Typography variant="body1">What type of Compound is it?</Typography>
-                <FormControl component="fieldset" style={{padding: "6px 20px"}}>
-                    <RadioGroup
-                        aria-label="gender"
-                        defaultValue={formData.comp_type}
-                        name="radio-buttons-group"
-                        onChange={handleCompRadio}
-                    >
-                        <FormControlLabel value="Duplex" control={<Radio />} label="Duplex" />
-                        <FormControlLabel value="Tenement" control={<Radio />} label="Tenement(Face-to-face)" />
-                        <FormControlLabel value="Flat" control={<Radio />} label="Flat" />
-                        <FormControlLabel value="Storey building" control={<Radio />} label="Storey building" />
-                        <FormControlLabel value="Bungalow" control={<Radio />} label="Bungalow" />
-                        <FormControlLabel value="Detached" control={<Radio />} label="Detached" />
-                    </RadioGroup>
-                </FormControl>
+                {formData.radio === 'no' && (
+                    <>
+                        <Typography variant="body1">What type of Compound is it?</Typography>
+                        <FormControl component="fieldset" style={{padding: "6px 20px"}}>
+                            <RadioGroup
+                                aria-label="gender"
+                                defaultValue={formData.comp_type}
+                                name="radio-buttons-group"
+                                onChange={handleCompRadio}
+                            >
+                                <FormControlLabel value="Duplex" control={<Radio />} label="Duplex" />
+                                <FormControlLabel value="Tenement" control={<Radio />} label="Tenement(Face-to-face)" />
+                                <FormControlLabel value="Flat" control={<Radio />} label="Flat" />
+                                <FormControlLabel value="Storey building" control={<Radio />} label="Storey building" />
+                                <FormControlLabel value="Bungalow" control={<Radio />} label="Bungalow" />
+                                <FormControlLabel value="Detached" control={<Radio />} label="Detached" />
+                            </RadioGroup>
+                        </FormControl>
+                    </>
+                )}
                 <Typography variant="body1">What type of room is it?</Typography>
                 <FormControl component="fieldset" style={{padding: "6px 20px"}}>
                     <RadioGroup
@@ -167,20 +170,22 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
                         </Box>
                     </TrapFocus>
                 )}
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Select Area</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={formData.areaLocated}
-                        onChange={(e)=>handleChange(e, 'area')}
-                        style={{marginBottom: "15px"}}
-                    >
-                        {areas.map((area, ind)=>(
-                            <MenuItem key={ind} value={area.area}>{area.area}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+                {formData.radio === 'no' && (
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Select Area</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={formData.areaLocated}
+                            onChange={(e)=>handleChange(e, 'area')}
+                            style={{marginBottom: "15px"}}
+                        >
+                            {areas.map((area, ind)=>(
+                                <MenuItem key={ind} value={area.area}>{area.area}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                )}
             </Paper>
             <Paper variant="outlined" square elevation={16} className={classes.paper}>
                 <Typography variant="body1">How many tenant per room is permitted?</Typography>
@@ -189,18 +194,22 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
                     {formData.noOfTenantPermitted}
                     <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('noOfTenantPermitted')}>+</div>
                 </Box>
-                <Typography variant="body1" style={{marginTop: "20px"}}>Number of rooms per Bathroom</Typography>
-                <Box className={classes.sign}>
-                    <div className={classes.add} style={{marginRight: "10px", cursor: 'pointer'}} onClick={()=>handleDecrement('bath')}>-</div>
-                    {formData.noOfRoomsPerBath}
-                    <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('bath')}>+</div>
-                </Box>
-                <Typography variant="body1" style={{marginTop: "20px"}}>Number of rooms per Toilet</Typography>
-                <Box className={classes.sign}>
-                    <div className={classes.add} style={{marginRight: "10px", cursor: 'pointer'}} onClick={()=>handleDecrement('toilet')}>-</div>
-                    {formData.noOfRoomsPerToilet}
-                    <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('toilet')}>+</div>
-                </Box>
+                {formData.radio === 'no' && (
+                    <>
+                        <Typography variant="body1" style={{marginTop: "20px"}}>Number of rooms per Bathroom</Typography>
+                        <Box className={classes.sign}>
+                            <div className={classes.add} style={{marginRight: "10px", cursor: 'pointer'}} onClick={()=>handleDecrement('bath')}>-</div>
+                            {formData.noOfRoomsPerBath}
+                            <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('bath')}>+</div>
+                        </Box>
+                        <Typography variant="body1" style={{marginTop: "20px"}}>Number of rooms per Toilet</Typography>
+                        <Box className={classes.sign}>
+                            <div className={classes.add} style={{marginRight: "10px", cursor: 'pointer'}} onClick={()=>handleDecrement('toilet')}>-</div>
+                            {formData.noOfRoomsPerToilet}
+                            <div className={classes.add} style={{marginLeft: "10px", cursor: 'pointer'}} onClick={()=>handleIncrement('toilet')}>+</div>
+                        </Box>
+                    </>
+                )}
             </Paper>
             <Paper variant="outlined" square elevation={16} className={classes.paper}>
                 <Typography variant="body1" style={{marginTop: "5px"}}>No of windows </Typography>
@@ -222,9 +231,11 @@ const StepOne = ({ formData, setFormData, setCompound, compound}) => {
                     </label>
                 </Box>
             </Paper>
-            <Paper variant="outlined" square elevation={16} className={classes.paper}>
-                <Typography variant="body1">Select location on map</Typography>
-            </Paper>
+            {formData.radio === 'no' && (
+                <Paper variant="outlined" square elevation={16} className={classes.paper}>
+                    <Typography variant="body1">Select location on map</Typography>
+                </Paper>
+            )}
         </Box>
     )
 }

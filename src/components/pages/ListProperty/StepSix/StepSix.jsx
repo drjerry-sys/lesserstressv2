@@ -2,7 +2,7 @@ import { Box, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import useStyles from "./style";
 
-const StepSix = ({ formData, setFormData }) => {
+const StepSix = ({ formData, setFormData, open }) => {
 
     const classes = useStyles();
 

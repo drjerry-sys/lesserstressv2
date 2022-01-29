@@ -1,7 +1,7 @@
 import { InputBase, Button, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
-import { axiosInstance } from "../../../../Redux/actions";
+import axiosInstance from "../../../../Redux/axioscall";
 import messageSent from "../../../../assets/illustrations/mail.png";
 import useStyles from "./style";
 
