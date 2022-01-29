@@ -69,9 +69,16 @@ export const signIn = (credentials) => {
 
 export const signOut = () => {
     return dispatch => {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        dispatch(signOutSuccess());
+        axiosInstance.post('/auth/logout/', { refresh_token: localStorage.getItem('refresh_token') })
+        .then(res=>{
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            axiosInstance.defaults.headers['Authorization'] = null;
+            dispatch(signOutSuccess());
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 };
 
