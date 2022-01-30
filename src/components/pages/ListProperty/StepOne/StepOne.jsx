@@ -31,7 +31,7 @@ const StepOne = ({ formData, setFormData, uniqueWithId }) => {
             setFormData({...formData, myCompounds: [{comp_name: 'select compound', id: 0.1}, ...res.data]});
         })
         .catch(err=>{
-            console.log(err)
+            // console.log(err)
         })
     }, [])
 
@@ -72,7 +72,7 @@ const StepOne = ({ formData, setFormData, uniqueWithId }) => {
         if (status === 'area') {
             setFormData({...formData, areaLocated: val})
         } else if (status === 'compound') {
-            console.log({val})
+            // console.log({val})
             setFormData({...formData, compoundId: val})
         } else if (status === 'compname') {
             setFormData({...formData, comp_name: val})

@@ -37,6 +37,7 @@ const initSpace = {
     errMessage: {
         comp_name: [''], comp_type: [''], noOfRoomsPerBath: [''],
         noOfRoomsPerToilet: [''], extraRules: [''], agentComment: [''],
+        homeRooms: [],
     },
     formFailed: false
 };
@@ -52,6 +53,9 @@ export const spaceReducers = (state=initSpace, action) => {
             return state;
         case types.ROOM_FAILED:
             state = {...state, errMessage: {...state.errMessage, ...action.payload }, formFailed: true}
+            return state;
+        case types.HOME_ROOMS:
+            state = { ...state, homeRooms: action.payload}
             return state;
         default:
             return state

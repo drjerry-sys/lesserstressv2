@@ -16,7 +16,7 @@ const Navbar = ({ isLoggedIn: isAuthenticated }) => {
     const { pathname: location } = useLocation();
     const navigate = useNavigate()
 
-console.log(isAuthenticated);
+// console.log(isAuthenticated);
 
     const classes = useStyles({ scrolled });
     const isMobile = useMediaQuery('(max-width: 900px)');

@@ -18,7 +18,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
     response => {
         const originalRequest = response.config;
-        console.log({response})
+        // console.log({response})
         if (response.status ===  401 && originalRequest.url === baseUrl + '/auth/token/refresh/') {
             window.location.href = '/sign_in';
         }
@@ -28,7 +28,7 @@ axiosInstance.interceptors.response.use(
                 const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
                 // exp date in token is expressed in seconds, while now() returns milliseconds
                 const now = Math.ceil(Date.now() / 1000);
-                console.log(tokenParts.exp);
+                // console.log(tokenParts.exp);
 
                 if (tokenParts.exp > now) {
                     return axiosInstance.post('/auth/token/refresh/', { refresh: refreshToken })
@@ -41,14 +41,14 @@ axiosInstance.interceptors.response.use(
                         return axiosInstance(originalRequest);
                     })
                     .catch(err=>{
-                        console.log(err)
+                        // console.log(err)
                     });
                 } else {
-                    console.log('Refresh token is expired', tokenParts.exp, now)
+                    // console.log('Refresh token is expired', tokenParts.exp, now)
                     window.location.href = '/sign_in';
                 }
             } else {
-                console.log('Refresh token not available. ')
+                // console.log('Refresh token not available. ')
                 window.location.href = '/sign_in';
             }
         }
@@ -58,10 +58,10 @@ axiosInstance.interceptors.response.use(
     },
     async function(error) {
         
-        // console.log({originalRequest})
-        console.log('this is axios interceptor')
+        // // console.log({originalRequest})
+        // console.log('this is axios interceptor')
         if (typeof(error.response) === 'undefined') {
-            alert('A server error occurred. Looks like CORS might be the problem. We\' get this solved ASAP')
+            alert('A server error occurred. Please refresh page')
             return Promise.reject(error);
         }
         

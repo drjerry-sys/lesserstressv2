@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useStyles from './style';
-import { Typography, TextField, Button, Grid, Card, CardContent, CardMedia, Chip, Box } from "@material-ui/core";
-import { Autocomplete, Rating } from "@material-ui/lab";
-import { CheckCircle, Search, PersonPinCircle, Schedule, Home as HomeIcon } from "@material-ui/icons";
 import Footer from "../../Footer/Footer";
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { getHomeRooms } from '../../../Redux/actions';
+import { Autocomplete, Rating } from "@material-ui/lab";
+import asherifa from "../../../assets/images/for_rent_4.jfif";
+import roommate from "../../../assets/illustrations/roommate.png";
 import priceImage from "../../../assets/illustrations/best_prices.png";
 import searchHouse from "../../../assets/illustrations/search_house.png";
-import roommate from "../../../assets/illustrations/roommate.png";
-import asherifa from "../../../assets/images/for_rent_4.jfif";
+import { CheckCircle, Search, PersonPinCircle, Schedule, Home as HomeIcon } from "@material-ui/icons";
+import { Typography, TextField, Button, Grid, Card, CardContent, CardMedia, Chip, Box } from "@material-ui/core";
 
-const Home = ({ isLoggedIn: isAuthenticated }) => {
+const Home = ({ isLoggedIn: isAuthenticated, rooms }) => {
     
     const classes = useStyles();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const spaceType = [
         {space: 'Flat'},
         {space: 'Duplex'},
         {space: 'Single Room'},
         {space: 'Self-contained'},
-        {space: 'ohers'},
+        {space: 'others'},
     ];
 
     const prices = [
@@ -30,9 +33,17 @@ const Home = ({ isLoggedIn: isAuthenticated }) => {
         {priceRanges: "All"},
     ];
 
+    useEffect(()=>{
+        dispatch(getHomeRooms())
+    }, [])
+
     const handleSearch = () => {
         navigate("/search_result");
     };
+
+    const handleAreas = (e, area) => {
+        navigate('')
+    }
 
     const handleRoom = () => {
         navigate("/single_room");
@@ -139,23 +150,31 @@ const Home = ({ isLoggedIn: isAuthenticated }) => {
                         <Typography gutterBottom variant="h4" className={classes.areaText}>Student Areas</Typography>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12} md={6} lg={3}>
-                                <div className={classes.areaImg}>
-                                    <Typography variant="body1" className={classes.areaName}>Asherifa</Typography>
+                                <div className={classes.asherifaCard} onClick={(e)=>handleAreas(e, 'aherifa')}>
+                                    <div className={classes.areaImg}>
+                                        <Typography variant="body1" className={classes.areaName}>Asherifa</Typography>
+                                    </div>
                                 </div>
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} lg={3}>
-                                <div className={classes.areaImg}>
-                                    <Typography variant="body1" className={classes.areaName}>Mayfair</Typography>
+                                <div className={classes.mayfairCard} onClick={(e)=>handleAreas(e, 'mayfair')}>
+                                    <div className={classes.areaImg}>
+                                        <Typography variant="body1" className={classes.areaName}>Mayfair</Typography>
+                                    </div>
                                 </div>
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} lg={3}>
-                                <div className={classes.areaImg}>
-                                    <Typography variant="body1" className={classes.areaName}>Lagere</Typography>
+                                <div className={classes.lagereCard} onClick={(e)=>handleAreas(e, 'lagere')}>
+                                    <div className={classes.areaImg}>
+                                        <Typography variant="body1" className={classes.areaName}>Lagere</Typography>
+                                    </div>
                                 </div>
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} lg={3}>
-                                <div className={classes.areaImg}>
-                                    <Typography variant="body1" className={classes.areaName}>Damico</Typography>
+                                <div className={classes.damicoCard} onClick={(e)=>handleAreas(e, 'damico')}>
+                                    <div className={classes.areaImg}>
+                                        <Typography variant="body1" className={classes.areaName}>Damico</Typography>
+                                    </div>
                                 </div>
                             </Grid>
                         </Grid>

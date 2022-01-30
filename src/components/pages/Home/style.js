@@ -1,5 +1,8 @@
 import { makeStyles, alpha } from '@material-ui/core';
 import image from "../../../assets/images/bgpic2.jpeg";
+import mayfair from "../../../assets/images/mayfair.jpg";
+import lagere from "../../../assets/images/lagere.jpg";
+import damico from "../../../assets/images/damico.jfif";
 
 const colour = '#040459';
 
@@ -124,11 +127,15 @@ export default makeStyles(theme=>({
     },
     areaImg: {
         height: 300,
-        backgroundColor: alpha(colour, 0.9),
+        backgroundColor: alpha(colour, 0.6),
         width: "inherit",
         borderRadius: theme.shape.borderRadius,
         margin: "auto auto",
+        cursor: 'pointer',
         color: theme.palette.common.white,
+        '&:hover': {
+            backgroundColor: alpha(colour, 0.5),
+        }
     },
     areaName: {
         textAlign: "center",
@@ -303,5 +310,33 @@ export default makeStyles(theme=>({
     },
     infoDetails: {
         flex: 3
-    }
+    },
+    asherifaCard: {
+        // height: "100%",
+        background: `url(${image})`,
+        // opacity: 0.8,
+        width: "100%",
+        objectFit: "100%"
+    },
+    lagereCard: {
+        // height: "100%",
+        background: `url(${lagere})`,
+        // opacity: 0.8,
+        width: "100%",
+        objectFit: "100%"
+    },
+    damicoCard: {
+        // height: "100%",
+        background: `url(${damico})`,
+        // opacity: 0.8,
+        width: "100%",
+        objectFit: "50%"
+    },
+    mayfairCard: {
+        // height: "100%",
+        background: `url(${mayfair})`,
+        // opacity: 0.8,
+        width: "100%",
+        objectFit: "100%"
+    },
 }));

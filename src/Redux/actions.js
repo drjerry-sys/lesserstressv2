@@ -52,7 +52,7 @@ export const signIn = (credentials) => {
             } else if (res.status === 200) {
                 localStorage.setItem("access_token", res.data.access);
                 localStorage.setItem("refresh_token", res.data.refresh);
-                console.log({status: res.status, access: res.data.access, refresh: res.data.refresh})
+                // console.log({status: res.status, access: res.data.access, refresh: res.data.refresh})
                 axiosInstance.defaults.headers["Authorization"] = `JWT ${localStorage.getItem("access_token")}`;
                 dispatch(signinSuccess);
                 setTimeout(()=>{
@@ -62,7 +62,7 @@ export const signIn = (credentials) => {
             }
         })
         .catch(err=> {
-            console.log(err);
+            // console.log(err);
         });
     };
 }
@@ -82,14 +82,16 @@ export const signOut = () => {
     }
 };
 
-
-
-
 // spaces actions
 
 const compoundCreated = () =>({
     type: types.COMPOUND_SUCCESS
 });
+
+const homeRooms = (homes) => ({
+    type: types.HOME_ROOMS,
+    payload: homes
+})
 
 const compoundFailed = (data) => ({
     type: types.COMPOUND_FAILED,
@@ -104,6 +106,18 @@ const roomFailed = (data) => ({
     type: types.ROOM_FAILED,
     payload: data
 });
+
+export const getHomeRooms = () => {
+    return dispatch => {
+        axiosInstance.get('/spaces/home-rooms/')
+        .then(res=>{
+            dispatch(homeRooms(res.data))
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+}
 
 export const submitSpace = (formData) => {
 
@@ -130,7 +144,7 @@ export const submitSpace = (formData) => {
 
         //compound
         if (compoundId === 0.1) {
-            console.log(compoundData)
+            // console.log(compoundData)
             axiosInstance.post(`/spaces/compound/`, compoundData)
             .then(res=>{
                 if (res.status === 201) {
@@ -140,7 +154,7 @@ export const submitSpace = (formData) => {
                 }
             })
             .catch(err=>{
-                console.log(err)
+                // console.log(err)
             })
         };
         
@@ -151,11 +165,11 @@ export const submitSpace = (formData) => {
                 dispatch(roomCreated())
             } else if (res.status === 400) {
                 dispatch(roomFailed(res.data))
-                console.log(res.data)
+                // console.log(res.data)
             };
         })
         .catch(err=>{
-            console.log(err)
+            // console.log(err)
         })
         //compound image
         const config = {header: {'Content-Type': 'multipart/form-data'}};
@@ -172,13 +186,13 @@ export const submitSpace = (formData) => {
             axiosInstance.post(`/spaces/compound/images/`, compImgs, config)
             .then(res=>{
                 if (res.status === 200) {
-                    console.log(res.data)
+                    // console.log(res.data)
                 } else {
-                    console.log('compound images error message', res.data)
+                    // console.log('compound images error message', res.data)
                 }
             })
             .catch(err=>{
-                console.log(err)
+                // console.log(err)
             })
         }
         //room image
@@ -191,9 +205,9 @@ export const submitSpace = (formData) => {
         axiosInstance.post(`/spaces/room/images/`, roomImgs, config)
         .then(res=>{
             if (res.status === 200) {
-                console.log(res.data)
+                // console.log(res.data)
             } else {
-                 console.log(res.data)
+                 // console.log(res.data)
             }
         });
     };

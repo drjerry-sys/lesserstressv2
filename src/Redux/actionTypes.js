@@ -12,3 +12,4 @@ export const COMPOUND_SUCCESS = "COMPOUND_SUCCESS";
 export const COMPOUND_FAILED = "COMPOUND_FAILED";
 export const ROOM_SUCCESS = "ROOM_SUCCESS";
 export const ROOM_FAILED = "ROOM_FAILED";
+export const HOME_ROOMS = "HOME_ROOMS";

@@ -36,7 +36,7 @@ const ForgotPassword = () => {
                 }
             })
             .catch(err=>{
-                console.log(err);
+                // console.log(err);
                 setErrorMsg({...errormsg, wrongEmail: 'server error, try again!'});
             })
         } else {
@@ -64,7 +64,7 @@ const ForgotPassword = () => {
                 )
             })
             .catch(err=>{
-                console.log(err)
+                // console.log(err)
             })
         } else {
             setErrorMsg({...errormsg, passwordMatch: 'password don\'t match'});
