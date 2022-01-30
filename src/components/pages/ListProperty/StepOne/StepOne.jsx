@@ -17,18 +17,22 @@ import {
     InputLabel, 
     TextField } from '@material-ui/core';
 
-const StepOne = ({ formData, setFormData }) => {
+const StepOne = ({ formData, setFormData, uniqueWithId }) => {
 
     const areas = [{area: 'Damico', id: 0}, {area: 'Lagere', id: 1}, {area: 'Asherifa', id: 2}, {area: 'Mayfair', id: 3}, {area: 'Parakin', id: 30}, ]
-    const myCompounds = [{comp: 'select compound', id: 0.1}, {comp: 'Baba Lasisi Compound', id: 3}, {comp: 'God\'s Favour Compound', id: 1}, {comp: 'His Mercy, Dugbe', id: 2}]
 
     const classes = useStyles();
     const [others, setOthers] = useState(false);
+    const { myCompounds } = formData;
     
     useEffect(()=>{
-        axiosInstance.post()
-        .then()
-        .catch()
+        axiosInstance.get('/spaces/compound/')
+        .then(res=>{
+            setFormData({...formData, myCompounds: [{comp_name: 'select compound', id: 0.1}, ...res.data]});
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }, [])
 
     useEffect(()=>{
@@ -68,6 +72,7 @@ const StepOne = ({ formData, setFormData }) => {
         if (status === 'area') {
             setFormData({...formData, areaLocated: val})
         } else if (status === 'compound') {
+            console.log({val})
             setFormData({...formData, compoundId: val})
         } else if (status === 'compname') {
             setFormData({...formData, comp_name: val})
@@ -116,15 +121,15 @@ const StepOne = ({ formData, setFormData }) => {
                             style={{marginBottom: "15px"}}
                             onChange={(e)=>handleChange(e, 'compound')}
                         >
-                            {myCompounds.map((comp)=> (
-                                <MenuItem key={comp.id} value={comp.id}>{comp.comp}</MenuItem>
+                            {myCompounds?.map((comp)=> (
+                                <MenuItem key={comp.id} value={comp.id}>{comp.comp_name}</MenuItem>
                             ))};
                         </Select>
                     </FormControl>
                 ) : formData.radio === "no" ? (
                     <>
                         <TextField style={{marginBottom: "10px"}} id="outlined-basic" value={formData.comp_name} onChange={(e)=>handleChange(e, 'compname')} fullWidth label="Name of compound" variant="outlined" />
-                        <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{formData.open ? 'Ensure this field is filled' : ''}</Typography>
+                        <Typography variant="caption" color="secondary" style={{textAlign: "center"}}>{formData.open ? 'Ensure the name entered doesn\'t exist already' : ''}</Typography><br />
                     </>
                 ) : null}
                 {formData.radio === 'no' && (

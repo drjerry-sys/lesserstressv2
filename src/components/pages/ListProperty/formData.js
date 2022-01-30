@@ -43,6 +43,7 @@ const initFormData = {
     flatscreenTV: false,
     swimmingPool: false,
     ownerType: 'individual',
+    myCompounds: [],
     //not used in backend
     radio: 'no',
     discountradio: 'false',

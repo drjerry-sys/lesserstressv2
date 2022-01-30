@@ -13,7 +13,7 @@ import initFormData from './formData';
 import { useDispatch } from "react-redux";
 import { submitSpace } from "../../../Redux/actions"
 
-const ListProperty = ({ formFailed }) => {
+const ListProperty = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch()
@@ -22,7 +22,8 @@ const ListProperty = ({ formFailed }) => {
     const [completed, setCompleted] = useState({});
     const isMobile = useMediaQuery("(max-width:900px)");
     const [formData, setFormData] = useState(initFormData);
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [done, setDone] = useState(false);
     
     const display = {
         0: <StepOne formData={formData} setFormData={setFormData} />,
@@ -58,21 +59,24 @@ const ListProperty = ({ formFailed }) => {
             setActiveStep(newActiveStep);
         } else {
             let compresult = [];
-            if (formData.radio === 'no') {
-                compresult = Object.keys(formData.comp_image).filter(img=>formData.comp_image[img].name.length > 99)
+            let { radio, comp_name, agentComment, extraRules, compoundId, myCompounds, comp_image, room_image } = formData;
+            if (radio === 'no') {
+                compresult = Object.keys(comp_image).filter(img=>comp_image[img].name.length > 99)
             } else {
                 compresult = []
             }
-            const roomresult = Object.keys(formData.room_image).filter(img=>formData.room_image[img].name.length > 99)
-            let { radio, comp_name, agentComment, extraRules, compoundId } = formData;
+            const roomresult = Object.keys(room_image).filter(img=>room_image[img].name.length > 99)
+            const unique = myCompounds.filter(comp=>comp.comp_name === comp_name)
             if (
                     (radio === 'no' && comp_name === '') || (agentComment === '' && radio==='no') || (extraRules === '' && radio==='no') ||
-                    (radio === 'yes' && compoundId === 0.1) || roomresult.length > 0 || compresult.length > 0
+                    (radio === 'yes' && compoundId === 0.1) || roomresult.length > 0 || compresult.length > 0 || unique.length > 0
                 ) {
-                    setOpen(true)
-                    setFormData({...formData, open:true})
+                    setFormData({...formData, open:true});
+                    setOpen(true);
                 } else {
-                    dispatch(submitSpace(formData))
+                    dispatch(submitSpace(formData));
+                    setFormData(initFormData);
+                    setDone(true);
             }
         }
     };
@@ -147,6 +151,11 @@ const ListProperty = ({ formFailed }) => {
                                 <Snackbar open={open} autoHideDuration={6000} onClose={()=>setOpen(false)}>
                                     <Alert onClose={()=>setOpen(false)} severity='error' style={{width: '100%'}}>
                                         Error in submission, re-check forms
+                                    </Alert>
+                                </Snackbar>
+                                <Snackbar open={done} autoHideDuration={6000} onClose={()=>setDone(false)}>
+                                    <Alert onClose={()=>setDone(false)} severity='success' style={{width: '100%'}}>
+                                        successfully registered!
                                     </Alert>
                                 </Snackbar>
                             </Box>
