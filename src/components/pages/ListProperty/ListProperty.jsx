@@ -10,7 +10,8 @@ import StepFour from './StepFour/StepFour';
 import StepFive from './StepFive/StepFive';
 import StepSix from './StepSix/StepSix';
 import initFormData from './formData';
-import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import { submitSpace } from "../../../Redux/actions"
 
 const ListProperty = () => {
@@ -24,6 +25,8 @@ const ListProperty = () => {
     const [formData, setFormData] = useState(initFormData);
     const [open, setOpen] = useState(false);
     const [done, setDone] = useState(false);
+    const navigate = useNavigate();
+    const { isLoggedIn } = useSelector(state=> state.data);
     
     const display = {
         0: <StepOne formData={formData} setFormData={setFormData} />,
@@ -93,6 +96,10 @@ const ListProperty = () => {
         setActiveStep(0);
         setCompleted({});
       };
+
+    if (!isLoggedIn) {
+        return navigate('/');
+    }
 
     return (
         <div className={classes.listProperty}>
