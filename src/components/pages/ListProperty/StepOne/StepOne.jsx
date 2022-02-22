@@ -162,7 +162,7 @@ const StepOne = ({ formData, setFormData, uniqueWithId }) => {
                     >
                         <FormControlLabel value="single room" control={<Radio />} label="Single Room" />
                         <FormControlLabel value="self-contained" control={<Radio />} label="Self-Contained" />
-                        <FormControlLabel value="boys quarter" control={<Radio />} label="Boys quarter" />
+                        <FormControlLabel value="boys quarter" control={<Radio />} label="Boys Quarter" />
                         <FormControlLabel value="others" control={<Radio />} label="Others" />
                     </RadioGroup>
                 </FormControl>

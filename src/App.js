@@ -6,13 +6,13 @@ import { useSelector } from "react-redux";
 function App() {
 
   const { isLoggedIn } = useSelector(state=> state.data);
-  const { formFailed } = useSelector(state=> state.space)
+  const { formFailed, homeData } = useSelector(state=> state.space)
 
   return ( 
   <div>
     <Navbar isLoggedIn={isLoggedIn} />
     <Routes>
-      <Route exact path="/" element={<Home isLoggedIn={isLoggedIn}  />} />
+      <Route exact path="/" element={<Home isLoggedIn={isLoggedIn} homeData={homeData} />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/search_result" element={<SearchResult />} />
       <Route path="/sign_in" element={<SignIn />} />

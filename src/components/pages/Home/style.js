@@ -143,7 +143,8 @@ export default makeStyles(theme=>({
     },
     contentMedia: {
         padding: "5px",
-        borderRadius: theme.shape.borderRadius
+        borderRadius: theme.shape.borderRadius,
+        height: 300
     },
     ratingdiv: {
         display: "flex",

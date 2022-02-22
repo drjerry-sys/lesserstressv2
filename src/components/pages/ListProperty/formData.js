@@ -1,7 +1,7 @@
 const initFormData = {
     gender: '',
     compoundId: 0.1,     //o.1 is the id for new compound
-    roomType: 'single room',
+    roomType: 'Single Room',
     areaLocated: 'Damico',
     noOfWindows: 0,
     noOfTenantPermitted: 1,

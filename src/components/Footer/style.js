@@ -4,7 +4,7 @@ const colour = '#040459';
 
 export default makeStyles(theme=>({
     footer: {
-        backgroundColor: colour,
+        backgroundColor: "#b3b3b3",
     },
     subscribeWrapper: {
         width: "100%",

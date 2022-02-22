@@ -61,7 +61,10 @@ axiosInstance.interceptors.response.use(
         // // console.log({originalRequest})
         // console.log('this is axios interceptor')
         if (typeof(error.response) === 'undefined') {
-            alert('A server error occurred. Please refresh page')
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            axiosInstance.defaults.headers['Authorization'] = null;
+            window.location.href = '/';
             return Promise.reject(error);
         }
         

@@ -88,7 +88,7 @@ const compoundCreated = () =>({
     type: types.COMPOUND_SUCCESS
 });
 
-const homeRooms = (homes) => ({
+const homeData = (homes) => ({
     type: types.HOME_ROOMS,
     payload: homes
 })
@@ -111,7 +111,7 @@ export const getHomeRooms = () => {
     return dispatch => {
         axiosInstance.get('/spaces/home-rooms/')
         .then(res=>{
-            dispatch(homeRooms(res.data))
+            dispatch(homeData(res.data))
         })
         .catch(err=>{
             console.log(err)
