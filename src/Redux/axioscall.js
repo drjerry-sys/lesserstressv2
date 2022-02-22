@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:8000';
+const baseUrl = 'https://mrjerrypro.pythonanywhere.com';
 const axiosInstance = axios.create({
         baseURL: `${baseUrl}`,
         timeout: 10000,
