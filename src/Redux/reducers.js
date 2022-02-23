@@ -57,6 +57,9 @@ export const spaceReducers = (state=initSpace, action) => {
         case types.HOME_ROOMS:
             state = { ...state, homeData: action.payload}
             return state;
+        case types.SEARCH_RESULTS:
+            state = {...state, search_results: action.payload}
+            return state;
         default:
             return state
     }

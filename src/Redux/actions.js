@@ -25,7 +25,12 @@ const signinFailed = (data) => ({
 
 const signOutSuccess = () => ({
     type: types.SIGN_OUT
-})
+});
+
+const searchsResults = (data) =>({
+    type: types.SEARCH_RESULTS,
+    payload: data
+});
 
 // request instance to endpoints
     
@@ -212,3 +217,20 @@ export const submitSpace = (formData) => {
         });
     };
 };
+// n=b
+
+export const getStreamedSpaces = (area, price_range) => {
+    return dispatch => {
+        axiosInstance.get(`/spaces/all-searches/${area}/${price_range}/`)
+        .then(res=>{
+            if (res.status === 200) {
+                dispatch(searchsResults(res.data))
+            } else {
+                console.log(res.data)
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+}

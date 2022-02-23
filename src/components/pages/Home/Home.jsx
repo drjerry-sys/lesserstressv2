@@ -1,5 +1,5 @@
 import useStyles from './style';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from "../../Footer/Footer";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
@@ -10,13 +10,14 @@ import roommate from "../../../assets/illustrations/roommate.png";
 import priceImage from "../../../assets/illustrations/best_prices.png";
 import searchHouse from "../../../assets/illustrations/search_house.png";
 import { CheckCircle, Search, PersonPinCircle, Schedule, Home as HomeIcon } from "@material-ui/icons";
-import { Typography, CircularProgress, TextField, Button, Grid, Card, CardContent, CardMedia, Chip, Box } from "@material-ui/core";
+import { Typography, TextField, Button, Grid, Card, CardContent, CardMedia, Chip, Box } from "@material-ui/core";
 
 const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
     
     const classes = useStyles();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [searchInpt, setsearchInpt] = useState({area: "", price_range: ""});
 
     const spaceType = [
         {space: 'Flat'},
@@ -32,15 +33,15 @@ const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
         {priceRanges: "₦150,000 - ₦200,000"},
         {priceRanges: "All"},
     ];
-
-    console.log({homeData})
     
     useEffect(()=>{
         dispatch(getHomeRooms())
-    }, [])
+    }, []);
 
     const handleSearch = () => {
-        navigate("/search_result");
+        const {area, price_range} = searchInpt;
+        navigate(`/search_result/${area}/${price_range}`);
+        alert(area, price_range);
     };
 
     const handleAreas = (e, area) => {
@@ -67,11 +68,13 @@ const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
                         <Autocomplete className={classes.autocomplete}
                             id="free-solo-demo"
                             options={spaceType.map((space) => space.space)}
+                            onChange={(e, v)=>setsearchInpt({...searchInpt, area: v})}
                             renderInput={(params) => <TextField variant="outlined" {...params} label="Which space type Would You Prefer?" />}
                         />
                         <Autocomplete  className={classes.autocomplete}
                             id="free-solo-demo"
                             options={prices.map((price) => price.priceRanges)}
+                            onChange={(e, v)=>setsearchInpt({...searchInpt, price_range: v})}
                             renderInput={
                                 (params) => <TextField variant="outlined" {...params} label="Select Price Range" />}
                         />
@@ -184,7 +187,7 @@ const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
                     <div className={classes.trending}>
                     <Typography gutterBottom style={{ marginTop: 60 }} variant="h4" className={classes.areaText}>Trending Spaces</Typography>
                     <Grid container spacing={3}>
-                    {homeData?.spaces.map(({data, images})=>(
+                    {homeData?.spaces?.map(({data, images})=>(
                         <Grid item xs={12} sm={12} md={4} lg={4}>
                             <Card>
                                 <CardMedia component="img" image={images.length?images[0].image_url:asherifa} className={classes.contentMedia} />

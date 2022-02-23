@@ -13,3 +13,6 @@ export const COMPOUND_FAILED = "COMPOUND_FAILED";
 export const ROOM_SUCCESS = "ROOM_SUCCESS";
 export const ROOM_FAILED = "ROOM_FAILED";
 export const HOME_ROOMS = "HOME_ROOMS";
+
+// Searches
+export const SEARCH_RESULTS = "SEARCH_RESULTS";

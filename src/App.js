@@ -1,7 +1,7 @@
 import React from 'react';
-import { Home, Navbar, Blog, SignIn, PageNotFound, SignOut, Room, SignUp, SearchResult, ForgotPassword, Settings, SettingsOptions, ListProperty } from './components';
-import { Route, Routes } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { Route, Routes } from 'react-router-dom';
+import { Home, Navbar, Blog, SignIn, PageNotFound, SignOut, Room, SignUp, SearchResult, ForgotPassword, Settings, SettingsOptions, ListProperty } from './components';
 
 function App() {
 
@@ -14,7 +14,7 @@ function App() {
     <Routes>
       <Route exact path="/" element={<Home isLoggedIn={isLoggedIn} homeData={homeData} />} />
       <Route path="/blog" element={<Blog />} />
-      <Route path="/search_result" element={<SearchResult />} />
+      <Route path="/search_result/:area/:price_range" element={<SearchResult />} />
       <Route path="/sign_in" element={<SignIn />} />
       <Route path="/sign_up" element={<SignUp />} />
       <Route path="/sign_out" element={<SignOut />} />

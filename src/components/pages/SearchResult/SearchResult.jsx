@@ -1,16 +1,20 @@
-import React from "react";
 import useStyles from "./style";
-import { Box, Container, Chip, Typography, useMediaQuery, InputBase, Button, TextField } from "@material-ui/core";
-import { Autocomplete, Pagination, Rating } from "@material-ui/lab";
-import { CheckCircle, Search, ThumbUp } from "@material-ui/icons";
-import { Link } from "react-router-dom";
-import image from "../../../assets/images/bgpic2.jpeg";
 import Footer from "../../Footer/Footer";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import image from "../../../assets/images/bgpic2.jpeg";
+import { CheckCircle, Search, ThumbUp } from "@material-ui/icons";
+import { Autocomplete, Pagination, Rating } from "@material-ui/lab";
+import { getStreamedSpaces } from "../../../Redux/actions";
+import { Box, Container, Chip, Typography, useMediaQuery, InputBase, Button, TextField } from "@material-ui/core";
 
 const SearchResult = () => {
 
-    const isMobile = useMediaQuery('(max-width: 900px)');
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const {area, price_range} = useParams();
+    const isMobile = useMediaQuery('(max-width: 900px)');
 
     const ifeArea = [
         {area: 'Lagere'},
@@ -20,18 +24,24 @@ const SearchResult = () => {
     ];
 
     const prices = [
+        {priceRanges: "#10,000 - #50,000"},
         {priceRanges: "#50,000 - #100,000"},
         {priceRanges: "#100,000 - #150,000"},
         {priceRanges: "#150,000 - #200,000"},
+        {priceRanges: "#200,000 - #400,000"},
         {priceRanges: "All"},
     ];
+
+    useEffect(()=>{
+        dispatch(getStreamedSpaces(area, price_range))
+    },[])
 
     return(
         <div className={classes.search}>
             <Box className={classes.section1}>
                 <div className={classes.yourSearch}>
                     <Typography variant="" gutterBottom className={classes.heading}>
-                        Your Search results
+                        your search results
                     </Typography>
                     <Typography variant="subtitle1">
                         143 properties found in Asherifa
