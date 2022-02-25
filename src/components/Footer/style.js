@@ -4,7 +4,7 @@ const colour = '#040459';
 
 export default makeStyles(theme=>({
     footer: {
-        backgroundColor: "#b3b3b3",
+        backgroundColor: "#deeaee",
     },
     subscribeWrapper: {
         width: "100%",
@@ -16,15 +16,16 @@ export default makeStyles(theme=>({
     saveTypo: {
         fontSize: "20px",
         textAlign: "center",
-        color: alpha(theme.palette.common.white, 0.7)
+        // color: alpha(theme.palette.common.white, 0.7)
     },
     subscribeTypo: {
         fontSize: "15px",
         textAlign: "center",
-        color: alpha(theme.palette.common.white, 0.5)
+        // color: alpha(theme.palette.common.white, 0.5)
     },
     emailbox: {
         backgroundColor: theme.palette.common.white,
+        boxShadow: theme.shadows[3],
         borderRadius: theme.shape.borderRadius,
         height: "50px",
         padding: "0 20px",
@@ -54,13 +55,14 @@ export default makeStyles(theme=>({
         marginBottom: "20px"
     },
     copyright: {
-        fontSize: "15px",
+        fontSize: "12px",
+        // fontStyle: "italics",
         textAlign: "center",
-        color: alpha(theme.palette.common.white, 0.8),
+        // color: alpha(theme.palette.common.white, 0.8),
         padding: "20px 0"
     },
     footerUl: {
-        color: theme.palette.common.white,
+        // color: theme.palette.common.white,
         listStyle: "none",
         textDecoration: "none",
         lineHeight: "25px",
@@ -75,6 +77,6 @@ export default makeStyles(theme=>({
     },
     link: {
         textDecoration: "none",
-        color: alpha(theme.palette.common.white, 0.6),
+        // color: alpha(theme.palette.common.white, 0.6),
     }
 }))

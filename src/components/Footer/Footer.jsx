@@ -50,7 +50,7 @@ const Footer = () => {
                             </ul>
                         )}
                     </div>
-                    <Typography variant="h1" className={classes.copyright}>Copyright © Void { new Date().getFullYear() }. All rights reserved.</Typography>
+                    <Typography variant="h1" className={classes.copyright}><em>copyright © Void { new Date().getFullYear() }. All rights reserved.</em></Typography>
                 </div>
             </Container>
         </Box>
