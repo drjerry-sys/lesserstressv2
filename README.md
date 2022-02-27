@@ -27,3 +27,8 @@ Rewriting the whole lesserStress code in material-ui and fresh interface.
 
 ## multi-level form
 ![Screenshot (3)](https://user-images.githubusercontent.com/64374109/155900424-8b88badd-36be-4a66-ad8d-63854c4fda8c.png)
+
+
+## account settings
+
+![Screenshot (4)](https://user-images.githubusercontent.com/64374109/155900499-72169cfb-b2c9-4452-b15a-1da95d4aa8b5.png)
