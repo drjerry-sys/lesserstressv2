@@ -7,6 +7,7 @@ import image from "../../../assets/images/bgpic2.jpeg";
 import { CheckCircle, Search, ThumbUp } from "@material-ui/icons";
 import { Autocomplete, Pagination, Rating } from "@material-ui/lab";
 import { getStreamedSpaces } from "../../../Redux/actions";
+import { useSelector } from 'react-redux';
 import { Box, Container, Chip, Typography, useMediaQuery, InputBase, Button, TextField } from "@material-ui/core";
 
 const SearchResult = () => {
@@ -15,6 +16,7 @@ const SearchResult = () => {
     const dispatch = useDispatch();
     const {area, price_range} = useParams();
     const isMobile = useMediaQuery('(max-width: 900px)');
+    const { search_results } = useSelector(state=>state.space)
 
     const ifeArea = [
         {area: 'Lagere'},
@@ -85,434 +87,70 @@ const SearchResult = () => {
                     </div>
                 )}
                 <div className={classes.right}>
-                    <Box className={classes.displayBox}>
-                        <div className={classes.displayImg}>
-                            <img src={image} alt="roomImg" style={{width: "100%"}}/>
-                        </div>
-                        <div className={classes.detailSection}>
-                            <div className={classes.infoDetails}>
-                                <div className={classes.title}>
-                                    <Typography variant="h5">
-                                        Radisson Lagos IkejaOpens in new window
-                                    </Typography>
-                                    <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                    <ThumbUp />
-                                    <Typography variant="subtitle2">
-                                        <Link to="">Ikeja</Link> . 
-                                        <Link to="">show on map</Link> . 
-                                        2.2km from campus, 20mins walk from campus
-                                    </Typography>
-                                </div>
-                                <div className={classes.goodreviews}>
-                                    <Typography variant="body1">
-                                        Good
-                                    </Typography>
-                                    <Typography variant="caption">
-                                        360 reviews
-                                    </Typography><br />
-                                    <Typography variant="caption">
-                                        scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
-                                    </Typography>
-                                </div>
+                    {search_results?.map((result)=>(
+                        <Box className={classes.displayBox}>
+                            <div className={classes.displayImg}>
+                                <img src={image} alt="roomImg" style={{width: "100%"}}/>
                             </div>
-                            <div className={classes.priceFeatures}>
-                                <div>
-                                    <Typography gutterBottom className={classes.features} variant="subtitle1">
-                                        <em>Features</em>
-                                    </Typography>
-                                    <div className={classes.roomFeatures}>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Single Room</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Water</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Light</Typography>
-                                        </div>
+                            <div className={classes.detailSection}>
+                                <div className={classes.infoDetails}>
+                                    <div className={classes.title}>
+                                        <Typography variant="h5">
+                                            {/* {result} */}
+                                        </Typography>
+                                        <Rating name="read-only" className={classes.rating} value={3} readOnly />
+                                        <ThumbUp />
+                                        <Typography variant="subtitle2">
+                                            <Link to="">Ikeja</Link> . 
+                                            <Link to="">show on map</Link> . 
+                                            2.2km from campus, 20mins walk from campus
+                                        </Typography>
+                                    </div>
+                                    <div className={classes.goodreviews}>
+                                        <Typography variant="body1">
+                                            Good
+                                        </Typography>
+                                        <Typography variant="caption">
+                                            360 reviews
+                                        </Typography><br />
+                                        <Typography variant="caption">
+                                            scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
+                                        </Typography>
                                     </div>
                                 </div>
-                                <div>
-                                    <Typography variant="h5">₦60,000</Typography>
-                                </div>
-                            </div>
-                        </div>
-                    </Box>
-                    <Box className={classes.displayBox}>
-                        <div className={classes.displayImg}>
-                            <img src={image} alt="roomImg" style={{width: "100%", height: "100px"}} />
-                        </div>
-                        <div className={classes.detailSection}>
-                            <div className={classes.infoDetails}>
-                                <div className={classes.title}>
-                                    <Typography variant="h5">
-                                        Radisson Lagos IkejaOpens in new window
-                                    </Typography>
-                                    <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                    <ThumbUp />
-                                    <Typography variant="subtitle2">
-                                        <Link to="">Ikeja</Link> . 
-                                        <Link to="">show on map</Link> . 
-                                        2.2km from campus, 20mins walk from campus
-                                    </Typography>
-                                </div>
-                                <div className={classes.goodreviews}>
-                                    <Typography variant="body1">
-                                        Good
-                                    </Typography>
-                                    <Typography variant="caption">
-                                        360 reviews
-                                    </Typography><br />
-                                    <Typography variant="caption">
-                                        scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
-                                    </Typography>
-                                </div>
-                            </div>
-                            <div className={classes.priceFeatures}>
-                                <div>
-                                    <Typography gutterBottom className={classes.features} variant="subtitle1">
-                                        <em>Features</em>
-                                    </Typography>
-                                    <div className={classes.roomFeatures}>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Single Room</Typography>
+                                <div className={classes.priceFeatures}>
+                                    <div>
+                                        <Typography gutterBottom className={classes.features} variant="subtitle1">
+                                            <em>Features</em>
+                                        </Typography>
+                                        <div className={classes.roomFeatures}>
+                                            <div className={classes.properties}>
+                                                <CheckCircle className={classes.icon} />
+                                                <Typography variant="caption">Single Room</Typography>
+                                            </div>
+                                            <div className={classes.properties}>
+                                                <CheckCircle className={classes.icon} />
+                                                <Typography variant="caption">Water</Typography>
+                                            </div>
+                                            <div className={classes.properties}>
+                                                <CheckCircle className={classes.icon} />
+                                                <Typography variant="caption">Light</Typography>
+                                            </div>
                                         </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Water</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Light</Typography>
-                                        </div>
+                                    </div>
+                                    <div>
+                                        <Typography variant="h5">₦60,000</Typography>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </Box>
-                    <Box className={classes.displayBox}>
-                        <div className={classes.displayImg}>
-                            <img src={image} alt="roomImg" style={{width: "100%", height: "100px"}} />
-                        </div>
-                        <div className={classes.detailSection}>
-                            <div className={classes.infoDetails}>
-                                <div className={classes.title}>
-                                    <Typography variant="h5">
-                                        Radisson Lagos IkejaOpens in new window
-                                    </Typography>
-                                    <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                    <ThumbUp />
-                                    <Typography variant="subtitle2">
-                                        <Link to="">Ikeja</Link> . 
-                                        <Link to="">show on map</Link> . 
-                                        2.2km from campus, 20mins walk from campus
-                                    </Typography>
-                                </div>
-                                <div className={classes.goodreviews}>
-                                    <Typography variant="body1">
-                                        Good
-                                    </Typography>
-                                    <Typography variant="caption">
-                                        360 reviews
-                                    </Typography><br />
-                                    <Typography variant="caption">
-                                        scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
-                                    </Typography>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <Typography gutterBottom className={classes.features} variant="subtitle1">
-                                        <em>Features</em>
-                                    </Typography>
-                                    <div className={classes.roomFeatures}>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Single Room</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Water</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Light</Typography>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Box>
-                    <Box className={classes.displayBox}>
-                        <div className={classes.displayImg}>
-                            <img src={image} alt="roomImg" style={{width: "100%", height: "100px"}} />
-                        </div>
-                        <div className={classes.detailSection}>
-                            <div className={classes.infoDetails}>
-                                <div className={classes.title}>
-                                    <Typography variant="h5">
-                                        Radisson Lagos IkejaOpens in new window
-                                    </Typography>
-                                    <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                    <ThumbUp />
-                                    <Typography variant="subtitle2">
-                                        <Link to="">Ikeja</Link> . 
-                                        <Link to="">show on map</Link> . 
-                                        2.2km from campus, 20mins walk from campus
-                                    </Typography>
-                                </div>
-                                <div className={classes.goodreviews}>
-                                    <Typography variant="body1">
-                                        Good
-                                    </Typography>
-                                    <Typography variant="caption">
-                                        360 reviews
-                                    </Typography><br />
-                                    <Typography variant="caption">
-                                        scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
-                                    </Typography>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <Typography gutterBottom className={classes.features} variant="subtitle1">
-                                        <em>Features</em>
-                                    </Typography>
-                                    <div className={classes.roomFeatures}>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Single Room</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Water</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Light</Typography>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Box>
-                    <Box className={classes.displayBox}>
-                        <div className={classes.displayImg}>
-                            <img src={image} alt="roomImg" style={{width: "100%", height: "100px"}} />
-                        </div>
-                        <div className={classes.detailSection}>
-                            <div className={classes.infoDetails}>
-                                <div className={classes.title}>
-                                    <Typography variant="h5">
-                                        Radisson Lagos IkejaOpens in new window
-                                    </Typography>
-                                    <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                    <ThumbUp />
-                                    <Typography variant="subtitle2">
-                                        <Link to="">Ikeja</Link> . 
-                                        <Link to="">show on map</Link> . 
-                                        2.2km from campus, 20mins walk from campus
-                                    </Typography>
-                                </div>
-                                <div className={classes.goodreviews}>
-                                    <Typography variant="body1">
-                                        Good
-                                    </Typography>
-                                    <Typography variant="caption">
-                                        360 reviews
-                                    </Typography><br />
-                                    <Typography variant="caption">
-                                        scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
-                                    </Typography>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <Typography gutterBottom className={classes.features} variant="subtitle1">
-                                        <em>Features</em>
-                                    </Typography>
-                                    <div className={classes.roomFeatures}>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Single Room</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Water</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Light</Typography>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Box>
-                    <Box className={classes.displayBox}>
-                        <div className={classes.displayImg}>
-                            <img src={image} alt="roomImg" style={{width: "100%", height: "100px"}} />
-                        </div>
-                        <div className={classes.detailSection}>
-                            <div className={classes.infoDetails}>
-                                <div className={classes.title}>
-                                    <Typography variant="h5">
-                                        Radisson Lagos IkejaOpens in new window
-                                    </Typography>
-                                    <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                    <ThumbUp />
-                                    <Typography variant="subtitle2">
-                                        <Link to="">Ikeja</Link> . 
-                                        <Link to="">show on map</Link> . 
-                                        2.2km from campus, 20mins walk from campus
-                                    </Typography>
-                                </div>
-                                <div className={classes.goodreviews}>
-                                    <Typography variant="body1">
-                                        Good
-                                    </Typography>
-                                    <Typography variant="caption">
-                                        360 reviews
-                                    </Typography><br />
-                                    <Typography variant="caption">
-                                        scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
-                                    </Typography>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <Typography gutterBottom className={classes.features} variant="subtitle1">
-                                        <em>Features</em>
-                                    </Typography>
-                                    <div className={classes.roomFeatures}>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Single Room</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Water</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Light</Typography>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Box>
-                    <Box className={classes.displayBox}>
-                        <div className={classes.displayImg}>
-                            <img src={image} alt="roomImg" style={{width: "100%", height: "100px"}} />
-                        </div>
-                        <div className={classes.detailSection}>
-                            <div className={classes.infoDetails}>
-                                <div className={classes.title}>
-                                    <Typography variant="h5">
-                                        Radisson Lagos IkejaOpens in new window
-                                    </Typography>
-                                    <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                    <ThumbUp />
-                                    <Typography variant="subtitle2">
-                                        <Link to="">Ikeja</Link> . 
-                                        <Link to="">show on map</Link> . 
-                                        2.2km from campus, 20mins walk from campus
-                                    </Typography>
-                                </div>
-                                <div className={classes.goodreviews}>
-                                    <Typography variant="body1">
-                                        Good
-                                    </Typography>
-                                    <Typography variant="caption">
-                                        360 reviews
-                                    </Typography><br />
-                                    <Typography variant="caption">
-                                        scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
-                                    </Typography>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <Typography gutterBottom className={classes.features} variant="subtitle1">
-                                        <em>Features</em>
-                                    </Typography>
-                                    <div className={classes.roomFeatures}>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Single Room</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Water</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Light</Typography>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Box>
-                    <Box className={classes.displayBox}>
-                        <div className={classes.displayImg}>
-                            <img src={image} alt="roomImg" style={{width: "100%", height: "100px"}} />
-                        </div>
-                        <div className={classes.detailSection}>
-                            <div className={classes.infoDetails}>
-                                <div className={classes.title}>
-                                    <Typography variant="h5">
-                                        Radisson Lagos IkejaOpens in new window
-                                    </Typography>
-                                    <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                    <ThumbUp />
-                                    <Typography variant="subtitle2">
-                                        <Link to="">Ikeja</Link> . 
-                                        <Link to="">show on map</Link> . 
-                                        2.2km from campus, 20mins walk from campus
-                                    </Typography>
-                                </div>
-                                <div className={classes.goodreviews}>
-                                    <Typography variant="body1">
-                                        Good
-                                    </Typography>
-                                    <Typography variant="caption">
-                                        360 reviews
-                                    </Typography><br />
-                                    <Typography variant="caption">
-                                        scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
-                                    </Typography>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <Typography gutterBottom className={classes.features} variant="subtitle1">
-                                        <em>Features</em>
-                                    </Typography>
-                                    <div className={classes.roomFeatures}>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Single Room</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Water</Typography>
-                                        </div>
-                                        <div className={classes.properties}>
-                                            <CheckCircle className={classes.icon} />
-                                            <Typography variant="caption">Light</Typography>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Box>
-                <Pagination className={classes.pagination} count={10} />
+                        </Box>
+                    ))}
+                    {!search_results.length && (
+                        <h1>No Space Found</h1>
+                    )}
+                {(search_results.length/10) && (
+                    <Pagination className={classes.pagination} count={search_results.length/10} />
+                )}
                 </div>
             </Container>
             <Footer />

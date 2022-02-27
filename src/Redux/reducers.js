@@ -39,7 +39,8 @@ const initSpace = {
         noOfRoomsPerToilet: [''], extraRules: [''], agentComment: [''],
         homeData: [],
     },
-    formFailed: false
+    formFailed: false,
+    search_results: [],
 };
 
 export const spaceReducers = (state=initSpace, action) => {
