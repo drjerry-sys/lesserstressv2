@@ -8,7 +8,7 @@ export default makeStyles(theme=>({
     },
     section1: {
         backgroundColor: colour,
-        height: "40vh",
+        height: "30vh",
         color: alpha(theme.palette.common.white, 0.8),        
         display: "flex",
         alignItems: "center",
@@ -17,6 +17,10 @@ export default makeStyles(theme=>({
         [theme.breakpoints.down("sm")]: {
             height: "30vh",
         }
+    },
+    heading: {
+        fontSize: 30,
+        fontWeight: 400
     },
     yourSearch: {
         width: "80%",

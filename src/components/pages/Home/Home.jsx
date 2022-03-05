@@ -31,11 +31,13 @@ const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
         {priceRanges: "₦50,000 - ₦100,000"},
         {priceRanges: "₦100,000 - ₦150,000"},
         {priceRanges: "₦150,000 - ₦200,000"},
-        {priceRanges: "All"},
+        {priceRanges: "₦200,000 - ₦400,000"},
+        {priceRanges: "above 400,000"},
     ];
     
     useEffect(()=>{
         dispatch(getHomeRooms())
+        console.log("Rerending gethomes")
     }, []);
 
     const handleSearch = () => {
@@ -67,15 +69,20 @@ const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
                         <Autocomplete className={classes.autocomplete}
                             id="free-solo-demo"
                             options={spaceType.map((space) => space.space)}
-                            onChange={(e, v)=>setsearchInpt({...searchInpt, area: v})}
-                            renderInput={(params) => <TextField variant="outlined" {...params} label="Which space type Would You Prefer?" />}
+                            
+                            freeSolo={true}
+                            renderInput={(params) => <TextField 
+                                variant="outlined" 
+                                onChange={(e, v)=>setsearchInpt({...searchInpt, area: e.target.value})} 
+                                // onChange={(e, v)=>alert(e.target.value)} 
+                                required {...params} label="Try 'Lagere' or 'self contained'" />}
                         />
                         <Autocomplete  className={classes.autocomplete}
                             id="free-solo-demo"
                             options={prices.map((price) => price.priceRanges)}
                             onChange={(e, v)=>setsearchInpt({...searchInpt, price_range: v})}
                             renderInput={
-                                (params) => <TextField variant="outlined" {...params} label="Select Price Range" />}
+                                (params) => <TextField variant="outlined" required {...params} label="Select Price Range" />}
                         />
                         <Button variant="contained" size="large" startIcon={<Search />} onClick={handleSearch} className={classes.button}>Search</Button>
                     </div>

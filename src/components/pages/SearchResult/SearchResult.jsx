@@ -1,6 +1,6 @@
 import useStyles from "./style";
 import Footer from "../../Footer/Footer";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import image from "../../../assets/images/bgpic2.jpeg";
@@ -8,7 +8,7 @@ import { CheckCircle, Search, ThumbUp } from "@material-ui/icons";
 import { Autocomplete, Pagination, Rating } from "@material-ui/lab";
 import { getStreamedSpaces } from "../../../Redux/actions";
 import { useSelector } from 'react-redux';
-import { Box, Container, Chip, Typography, useMediaQuery, InputBase, Button, TextField } from "@material-ui/core";
+import { Box, CircularProgress, Container, Chip, Typography, useMediaQuery, InputBase, Button, TextField } from "@material-ui/core";
 
 const SearchResult = () => {
 
@@ -16,7 +16,8 @@ const SearchResult = () => {
     const dispatch = useDispatch();
     const {area, price_range} = useParams();
     const isMobile = useMediaQuery('(max-width: 900px)');
-    const { search_results } = useSelector(state=>state.space)
+    const { search_results } = useSelector(state=>state.space);
+    const [arrival, setArrival] = useState(false);
 
     const ifeArea = [
         {area: 'Lagere'},
@@ -30,28 +31,43 @@ const SearchResult = () => {
         {priceRanges: "#50,000 - #100,000"},
         {priceRanges: "#100,000 - #150,000"},
         {priceRanges: "#150,000 - #200,000"},
-        {priceRanges: "#200,000 - #400,000"},
-        {priceRanges: "All"},
+        {priceRanges: "₦200,000 - ₦400,000"},
+        {priceRanges: "above 400,000"},
     ];
 
     useEffect(()=>{
         dispatch(getStreamedSpaces(area, price_range))
-    },[])
+        setTimeout(()=>{
+            setArrival(true);
+        }, 3000)
+    },[]);
 
     return(
         <div className={classes.search}>
             <Box className={classes.section1}>
-                <div className={classes.yourSearch}>
-                    <Typography variant="" gutterBottom className={classes.heading}>
-                        your search results
-                    </Typography>
-                    <Typography variant="subtitle1">
-                        143 properties found in Asherifa
-                    </Typography>
-                </div>
+                {arrival ? (
+                    <div className={classes.yourSearch}>
+                        {search_results.length ? (
+                            <>
+                                <Typography variant="" gutterBottom className={classes.heading}>
+                                your search results
+                                </Typography>
+                                <Typography variant="subtitle1">
+                                    {search_results.length} spaces found for "{area}" and "{price_range}"
+                                </Typography>
+                            </>
+                        ):(
+                            <Typography variant="" gutterBottom className={classes.heading}>
+                                No Space Found
+                            </Typography>
+                        )}
+                    </div>
+                ):(
+                    <CircularProgress disableShrink />
+                )}
             </Box>
             {isMobile && (
-                <div className={classes.search2}>
+                <div className={classes.search2}> 
                     <Autocomplete className={classes.autocomplete}
                         id="free-solo-demo"
                         options={ifeArea.map((area) => area.area)}
@@ -87,68 +103,72 @@ const SearchResult = () => {
                     </div>
                 )}
                 <div className={classes.right}>
-                    {search_results?.map((result)=>(
-                        <Box className={classes.displayBox}>
-                            <div className={classes.displayImg}>
-                                <img src={image} alt="roomImg" style={{width: "100%"}}/>
-                            </div>
-                            <div className={classes.detailSection}>
-                                <div className={classes.infoDetails}>
-                                    <div className={classes.title}>
-                                        <Typography variant="h5">
-                                            {/* {result} */}
-                                        </Typography>
-                                        <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                        <ThumbUp />
-                                        <Typography variant="subtitle2">
-                                            <Link to="">Ikeja</Link> . 
-                                            <Link to="">show on map</Link> . 
-                                            2.2km from campus, 20mins walk from campus
-                                        </Typography>
+                    {arrival ? (
+                        <>
+                            {search_results?.map((result)=>(
+                                <Box className={classes.displayBox}>
+                                    <div className={classes.displayImg}>
+                                        <img src={image} alt="roomImg" style={{width: "100%"}}/>
                                     </div>
-                                    <div className={classes.goodreviews}>
-                                        <Typography variant="body1">
-                                            Good
-                                        </Typography>
-                                        <Typography variant="caption">
-                                            360 reviews
-                                        </Typography><br />
-                                        <Typography variant="caption">
-                                            scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
-                                        </Typography>
-                                    </div>
-                                </div>
-                                <div className={classes.priceFeatures}>
-                                    <div>
-                                        <Typography gutterBottom className={classes.features} variant="subtitle1">
-                                            <em>Features</em>
-                                        </Typography>
-                                        <div className={classes.roomFeatures}>
-                                            <div className={classes.properties}>
-                                                <CheckCircle className={classes.icon} />
-                                                <Typography variant="caption">Single Room</Typography>
+                                    <div className={classes.detailSection}>
+                                        <div className={classes.infoDetails}>
+                                            <div className={classes.title}>
+                                                <Typography variant="h5">
+                                                    {/* {result} */}
+                                                </Typography>
+                                                <Rating name="read-only" className={classes.rating} value={3} readOnly />
+                                                <ThumbUp />
+                                                <Typography variant="subtitle2">
+                                                    <Link to="">Ikeja</Link> . 
+                                                    <Link to="">show on map</Link> . 
+                                                    2.2km from campus, 20mins walk from campus
+                                                </Typography>
                                             </div>
-                                            <div className={classes.properties}>
-                                                <CheckCircle className={classes.icon} />
-                                                <Typography variant="caption">Water</Typography>
+                                            <div className={classes.goodreviews}>
+                                                <Typography variant="body1">
+                                                    Good
+                                                </Typography>
+                                                <Typography variant="caption">
+                                                    360 reviews
+                                                </Typography><br />
+                                                <Typography variant="caption">
+                                                    scale of 10 <Chip label="7.0" className={classes.chip} size="small" color="primary" />
+                                                </Typography>
                                             </div>
-                                            <div className={classes.properties}>
-                                                <CheckCircle className={classes.icon} />
-                                                <Typography variant="caption">Light</Typography>
+                                        </div>
+                                        <div className={classes.priceFeatures}>
+                                            <div>
+                                                <Typography gutterBottom className={classes.features} variant="subtitle1">
+                                                    <em>Features</em>
+                                                </Typography>
+                                                <div className={classes.roomFeatures}>
+                                                    <div className={classes.properties}>
+                                                        <CheckCircle className={classes.icon} />
+                                                        <Typography variant="caption">Single Room</Typography>
+                                                    </div>
+                                                    <div className={classes.properties}>
+                                                        <CheckCircle className={classes.icon} />
+                                                        <Typography variant="caption">Water</Typography>
+                                                    </div>
+                                                    <div className={classes.properties}>
+                                                        <CheckCircle className={classes.icon} />
+                                                        <Typography variant="caption">Light</Typography>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <Typography variant="h5">₦60,000</Typography>
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
-                                        <Typography variant="h5">₦60,000</Typography>
-                                    </div>
-                                </div>
-                            </div>
-                        </Box>
-                    ))}
-                    {!search_results.length && (
-                        <h1>No Space Found</h1>
+                                </Box>
+                            ))}
+                        </>
+                    ): (
+                        <CircularProgress disableShrink />
                     )}
-                {(search_results.length/10) && (
+                    
+                {(search_results.length/10) && arrival && (
                     <Pagination className={classes.pagination} count={search_results.length/10} />
                 )}
                 </div>
