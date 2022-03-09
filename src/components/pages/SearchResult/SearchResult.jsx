@@ -8,6 +8,7 @@ import { CheckCircle, Search, ThumbUp } from "@material-ui/icons";
 import { Autocomplete, Pagination, Rating } from "@material-ui/lab";
 import { getStreamedSpaces } from "../../../Redux/actions";
 import { useSelector } from 'react-redux';
+import millify from 'millify';
 import { Box, CircularProgress, Container, Chip, Typography, useMediaQuery, InputBase, Button, TextField } from "@material-ui/core";
 
 const SearchResult = () => {
@@ -16,8 +17,10 @@ const SearchResult = () => {
     const dispatch = useDispatch();
     const {area, price_range} = useParams();
     const isMobile = useMediaQuery('(max-width: 900px)');
-    const { search_results } = useSelector(state=>state.space);
+    const { search_results, no_of_pages:page_num, total_search } = useSelector(state=>state.space.search_results);
     const [arrival, setArrival] = useState(false);
+    const [paginate, setPaginate] = useState(1)
+    // const search_results = Array.from(result)
 
     const ifeArea = [
         {area: 'Lagere'},
@@ -27,20 +30,22 @@ const SearchResult = () => {
     ];
 
     const prices = [
-        {priceRanges: "#10,000 - #50,000"},
-        {priceRanges: "#50,000 - #100,000"},
-        {priceRanges: "#100,000 - #150,000"},
-        {priceRanges: "#150,000 - #200,000"},
+        {priceRanges: "₦10,000 - ₦50,000"},
+        {priceRanges: "₦50,000 - ₦100,000"},
+        {priceRanges: "₦100,000 - ₦150,000"},
+        {priceRanges: "₦150,000 - ₦200,000"},
         {priceRanges: "₦200,000 - ₦400,000"},
         {priceRanges: "above 400,000"},
     ];
 
-    useEffect(()=>{
-        dispatch(getStreamedSpaces(area, price_range))
+    useEffect(() =>{
+        dispatch(getStreamedSpaces(area, price_range, paginate));
         setTimeout(()=>{
-            setArrival(true);
-        }, 3000)
-    },[]);
+            setArrival(true)
+        }, 5000)
+    },[paginate]);
+
+    console.log(search_results)
 
     return(
         <div className={classes.search}>
@@ -53,7 +58,7 @@ const SearchResult = () => {
                                 your search results
                                 </Typography>
                                 <Typography variant="subtitle1">
-                                    {search_results.length} spaces found for "{area}" and "{price_range}"
+                                    {total_search} spaces found for "{area}" and "{price_range}"
                                 </Typography>
                             </>
                         ):(
@@ -114,14 +119,17 @@ const SearchResult = () => {
                                         <div className={classes.infoDetails}>
                                             <div className={classes.title}>
                                                 <Typography variant="h5">
-                                                    {/* {result} */}
+                                                    {result.roomType}
                                                 </Typography>
                                                 <Rating name="read-only" className={classes.rating} value={3} readOnly />
-                                                <ThumbUp />
+                                                <ThumbUp style={{fontSize: 15, color: 'rgb(200, 100, 100)'}} />
                                                 <Typography variant="subtitle2">
                                                     <Link to="">Ikeja</Link> . 
                                                     <Link to="">show on map</Link> . 
-                                                    2.2km from campus, 20mins walk from campus
+                                                    {result.compoundId__areaLocated}
+                                                </Typography>
+                                                <Typography variant="subtitle2">
+                                                    {result.compoundId__comp_name} compound
                                                 </Typography>
                                             </div>
                                             <div className={classes.goodreviews}>
@@ -157,7 +165,7 @@ const SearchResult = () => {
                                                 </div>
                                             </div>
                                             <div>
-                                                <Typography variant="h5">₦60,000</Typography>
+                                                <Typography variant="h5">₦{millify(Number(result.room_yearlyPrice).toFixed(0), {precision: 4})}</Typography>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +177,7 @@ const SearchResult = () => {
                     )}
                     
                 {(search_results.length/10) && arrival && (
-                    <Pagination className={classes.pagination} count={search_results.length/10} />
+                    <Pagination onChange={(e, page)=>setPaginate(page)} className={classes.pagination} count={page_num} />
                 )}
                 </div>
             </Container>

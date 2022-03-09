@@ -8,7 +8,7 @@ export default makeStyles(theme=>({
     },
     section1: {
         backgroundColor: colour,
-        height: "30vh",
+        height: "25vh",
         color: alpha(theme.palette.common.white, 0.8),        
         display: "flex",
         alignItems: "center",

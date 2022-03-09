@@ -65,9 +65,9 @@ const Navbar = ({ isLoggedIn: isAuthenticated }) => {
                             <Button variant="contained" className={classes.navigation} style={{backgroundColor: location === "/roommates" && "blue"}} href="/roommates">Roommates</Button>
                             <Button variant="outlined" className={classes.navigation} style={{backgroundColor: location === "/blog" && "blue"}} href="/blog">Blog</Button>
                             <Button variant="outlined" className={classes.navigation} style={{backgroundColor: location === "/community" && "blue"}} href="/community">Community</Button>
-                            <Button variant="outlined" className={classes.navigation} style={{backgroundColor: location === "/contact" && "blue"}} href="/contact">Contact</Button>
+                            {/* <Button variant="outlined" className={classes.navigation} style={{backgroundColor: location === "/contact" && "blue"}} href="/contact">Contact</Button>
                             <Button variant="outlined" className={classes.navigation} style={{backgroundColor: location === "/about" && "blue"}} href="/about">About</Button>    
-                            <Button variant="outlined" className={classes.navigation} style={{backgroundColor: location === "/support" && "blue"}} href="/support">Support</Button>    
+                            <Button variant="outlined" className={classes.navigation} style={{backgroundColor: location === "/support" && "blue"}} href="/support">Support</Button>     */}
                         </>
                     )}
                     {!isAuthPage && !isMobile && location.slice(0,14) === "/list_property" && (

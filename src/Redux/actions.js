@@ -219,9 +219,9 @@ export const submitSpace = (formData) => {
 };
 // n=b
 
-export const getStreamedSpaces = (area, price_range) => {
+export const getStreamedSpaces = (area, price_range, page) => {
     return dispatch => {
-        axiosInstance.get(`/spaces/all-searches/${area}/${price_range}/`)
+        axiosInstance.get(`/spaces/all-searches/${area}/${price_range}/${page}/`)
         .then(res=>{
             if (res.status === 200) {
                 dispatch(searchsResults(res.data))
@@ -233,4 +233,4 @@ export const getStreamedSpaces = (area, price_range) => {
             console.log(err)
         })
     }
-}
+};

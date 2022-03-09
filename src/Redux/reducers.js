@@ -40,7 +40,9 @@ const initSpace = {
         homeData: [],
     },
     formFailed: false,
-    search_results: [],
+    search_results: {
+        search_results: []
+    },
 };
 
 export const spaceReducers = (state=initSpace, action) => {
