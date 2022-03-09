@@ -2,7 +2,7 @@ import useStyles from "./style";
 import Footer from "../../Footer/Footer";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import image from "../../../assets/images/bgpic2.jpeg";
 import { CheckCircle, Search, ThumbUp } from "@material-ui/icons";
 import { Autocomplete, Pagination, Rating } from "@material-ui/lab";
@@ -15,10 +15,10 @@ const SearchResult = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {area, price_range} = useParams();
     const isMobile = useMediaQuery('(max-width: 900px)');
-    const { search_results, no_of_pages:page_num, total_search } = useSelector(state=>state.space.search_results);
-    const [arrival, setArrival] = useState(false);
+    const { search_results, no_of_pages:page_num, total_search, arrival } = useSelector(state=>state.space.search_results);
     const [paginate, setPaginate] = useState(1)
     // const search_results = Array.from(result)
 
@@ -40,12 +40,8 @@ const SearchResult = () => {
 
     useEffect(() =>{
         dispatch(getStreamedSpaces(area, price_range, paginate));
-        setTimeout(()=>{
-            setArrival(true)
-        }, 5000)
+        window.scrollTo(0,0)
     },[paginate]);
-
-    console.log(search_results)
 
     return(
         <div className={classes.search}>
@@ -111,7 +107,7 @@ const SearchResult = () => {
                     {arrival ? (
                         <>
                             {search_results?.map((result)=>(
-                                <Box className={classes.displayBox}>
+                                <Box className={classes.displayBox} onClick={()=>navigate('/single_room')}>
                                     <div className={classes.displayImg}>
                                         <img src={image} alt="roomImg" style={{width: "100%"}}/>
                                     </div>
@@ -124,7 +120,6 @@ const SearchResult = () => {
                                                 <Rating name="read-only" className={classes.rating} value={3} readOnly />
                                                 <ThumbUp style={{fontSize: 15, color: 'rgb(200, 100, 100)'}} />
                                                 <Typography variant="subtitle2">
-                                                    <Link to="">Ikeja</Link> . 
                                                     <Link to="">show on map</Link> . 
                                                     {result.compoundId__areaLocated}
                                                 </Typography>
@@ -150,17 +145,45 @@ const SearchResult = () => {
                                                     <em>Features</em>
                                                 </Typography>
                                                 <div className={classes.roomFeatures}>
+                                                    {result.kitchen&&(
+                                                        <>
+                                                            <div className={classes.properties}>
+                                                                <CheckCircle className={classes.icon} />
+                                                                <Typography variant="caption">Kitchen</Typography>
+                                                            </div>
+                                                        </>
+                                                    )}
                                                     <div className={classes.properties}>
-                                                        <CheckCircle className={classes.icon} />
-                                                        <Typography variant="caption">Single Room</Typography>
+                                                        {result.flatscreenTV&&(
+                                                            <>
+                                                                <CheckCircle className={classes.icon} />
+                                                                <Typography variant="caption">{`Flat Screen TV`}</Typography>
+                                                            </>
+                                                        )}
                                                     </div>
                                                     <div className={classes.properties}>
-                                                        <CheckCircle className={classes.icon} />
-                                                        <Typography variant="caption">Water</Typography>
+                                                        {result.noOfWindows&&(
+                                                            <>
+                                                            <CheckCircle className={classes.icon} />
+                                                            <Typography variant="caption">{`${result.noOfWindows} windows`}</Typography>
+                                                            </>
+                                                        )}
                                                     </div>
                                                     <div className={classes.properties}>
-                                                        <CheckCircle className={classes.icon} />
-                                                        <Typography variant="caption">Light</Typography>
+                                                        {result.bathtube&&(
+                                                            <>
+                                                                <CheckCircle className={classes.icon} />
+                                                                <Typography variant="caption">{'Bathtube'}</Typography>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                    <div className={classes.properties}>
+                                                        {result.cleaner&&(
+                                                            <>
+                                                                <CheckCircle className={classes.icon} />
+                                                                <Typography variant="caption">{'cleaner'}</Typography>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>

@@ -49,7 +49,7 @@ export default makeStyles(theme=>({
     resultSearch: {
         height: "250px",
         width: "100%",
-        backgroundColor: "#cca300",
+        backgroundColor: "#f0f0f0",
         padding: theme.spacing(1),
         borderRadius: theme.shape.borderRadius
     },
@@ -84,6 +84,11 @@ export default makeStyles(theme=>({
         borderRadius: theme.shape.borderRadius,
         marginTop: theme.spacing(3),
         height: "fit-content",
+        cursor: "pointer",
+        '&:hover': {
+            border: `1px solid #e68a00`,
+            boxShadow: 3
+        },
         [theme.breakpoints.down("sm")]: {
             flexDirection: "column",
         }

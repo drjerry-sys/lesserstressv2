@@ -41,6 +41,7 @@ const initSpace = {
     },
     formFailed: false,
     search_results: {
+        arrival: false,
         search_results: []
     },
 };
@@ -61,7 +62,7 @@ export const spaceReducers = (state=initSpace, action) => {
             state = { ...state, homeData: action.payload}
             return state;
         case types.SEARCH_RESULTS:
-            state = {...state, search_results: action.payload}
+            state = {...state, search_results: {...action.payload, arrival: true}}
             return state;
         default:
             return state
