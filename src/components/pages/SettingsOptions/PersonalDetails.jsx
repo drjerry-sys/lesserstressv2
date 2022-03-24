@@ -1,12 +1,15 @@
 import React from 'react';
 import useStyles from "./style";
-import { Typography, Box, Divider, Avatar, TableContainer, Table, TableRow, TableCell, TableBody, Paper } from "@material-ui/core";
+import { Typography, Chip, Box, Divider, Avatar, TableContainer, Table, TableRow, TableCell, TableBody, Paper } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 
 
 const PersonalDetails = () => {
 
     const classes = useStyles();
+    const handleEdit = (toEdit) =>{
+
+    }
 
     return (
         <div>
@@ -26,37 +29,28 @@ const PersonalDetails = () => {
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
                             >
                                 <TableCell component="th" scope="row">
-                                    Title
+                                   First Name
                                 </TableCell>
-                                <TableCell align="right">Select your title</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
+                                <TableCell align="right">Jeremiah</TableCell>
+                                <TableCell align="right"><Chip label="Edit" variant="outlined" onClick={()=>handleEdit('lname')}/></TableCell>
                             </TableRow>
                             <TableRow
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
                             >
                                 <TableCell component="th" scope="row">
-                                    Name
+                                    Last Name
                                 </TableCell>
-                                <TableCell align="right">Adedeji Jeremiah</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
+                                <TableCell align="right">Adedeji</TableCell>
+                                <TableCell align="right"><Chip label="Edit" variant="outlined" onClick={()=>handleEdit('fname')}/></TableCell>
                             </TableRow>
                             <TableRow
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
                             >
                                 <TableCell component="th" scope="row">
-                                    Title
-                                </TableCell>
-                                <TableCell align="right">Select your title</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
-                            </TableRow>
-                            <TableRow
-                            style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
-                            >
-                                <TableCell component="th" scope="row">
-                                Display name
+                                Username
                                 </TableCell>
                                 <TableCell align="right">Choose a display name</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
+                                <TableCell align="right"><Chip label="Edit" variant="outlined" onClick={()=>handleEdit('fname')}/></TableCell>
                             </TableRow>
                             <TableRow
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
@@ -64,8 +58,8 @@ const PersonalDetails = () => {
                                 <TableCell component="th" scope="row">
                                 Email address
                                 </TableCell>
-                                <TableCell align="right">drjerry000@gmail.com Verified This is the email address you use to sign in. It’s also where we send your booking confirmations.</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
+                                <TableCell align="right">drjerry000@gmail.com <Chip label="verified" color="primary" size="small"/></TableCell>
+                                <TableCell align="right"></TableCell>
                             </TableRow>
                             <TableRow
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
@@ -73,8 +67,8 @@ const PersonalDetails = () => {
                                 <TableCell component="th" scope="row">
                                 Phone number
                                 </TableCell>
-                                <TableCell align="right">Add your phone number Properties or attractions you book will use this number if they need to contact you.</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
+                                <TableCell align="right">Enter Phone Number</TableCell>
+                                <TableCell align="right"><Chip label="Edit" variant="outlined" onClick={()=>handleEdit('fname')}/></TableCell>
                             </TableRow>
                             <TableRow
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
@@ -83,16 +77,7 @@ const PersonalDetails = () => {
                                 Date of birth
                                 </TableCell>
                                 <TableCell align="right">Enter your date of birth</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
-                            </TableRow>
-                            <TableRow
-                            style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
-                            >
-                                <TableCell component="th" scope="row">
-                                Nationality
-                                </TableCell>
-                                <TableCell align="right">Select the country/region you're from</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
+                                <TableCell align="right"><Chip label="Edit" variant="outlined" onClick={()=>handleEdit('fname')}/></TableCell>
                             </TableRow>
                             <TableRow
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
@@ -101,7 +86,7 @@ const PersonalDetails = () => {
                                 Gender
                                 </TableCell>
                                 <TableCell align="right">Select your gender</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
+                                <TableCell align="right"><Chip label="Edit" variant="outlined" onClick={()=>handleEdit('fname')}/></TableCell>
                             </TableRow>
                             <TableRow
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
@@ -110,7 +95,7 @@ const PersonalDetails = () => {
                                 Address
                                 </TableCell>
                                 <TableCell align="right">Add your address</TableCell>
-                                <TableCell align="right"><Link to="">Edit</Link></TableCell>
+                                <TableCell align="right"><Chip label="Edit" variant="outlined" onClick={()=>handleEdit('fname')}/></TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

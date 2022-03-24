@@ -1,11 +1,14 @@
 import React from 'react';
 import useStyles from "./style";
 import { Link } from 'react-router-dom';
-import { Typography, Box, Divider, Avatar, TableContainer, Table, TableRow, TableCell, TableBody, Paper } from "@material-ui/core";
+import { Typography, Chip, Box, Divider, Avatar, TableContainer, Table, TableRow, TableCell, TableBody, Paper } from "@material-ui/core";
 
 const Security = () => {
 
     const classes = useStyles();
+    const handleEdit = (toEdit) =>{
+
+    }
 
     return (
         <div>
@@ -28,7 +31,7 @@ const Security = () => {
                                 Password
                                 </TableCell>
                                 <TableCell align="right">Reset your password regularly to keep your account secure</TableCell>
-                                <TableCell align="right"><Link to="">Reset</Link></TableCell>
+                                <TableCell align="right"><Chip label="Reset" variant="outlined" onClick={()=>handleEdit('fname')}/></TableCell>
                             </TableRow>
                             <TableRow
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
@@ -37,10 +40,9 @@ const Security = () => {
                                 Two-factor <br />authentication
                                 </TableCell>
                                 <TableCell align="right">
-                                Add your phone number
                                 Add a phone number to set up two-factor authentication
                                 </TableCell>
-                                <TableCell align="right"><Link to="">Set Up</Link></TableCell>
+                                <TableCell align="right"><Chip label="Set" variant="outlined" onClick={()=>handleEdit('fname')}/></TableCell>
                             </TableRow>
                             <TableRow
                             style={{ '&:last-child td, &:last-child th': { border: 0, }, }}
@@ -49,9 +51,9 @@ const Security = () => {
                                 Active sessions
                                 </TableCell>
                                 <TableCell align="right">
-                                Selecting "Sign out" will sign you out from all devices except this one. This can take up to 10 minutes.
+                                Selecting "Sign out" will sign you out from all devices except this one
                                 </TableCell>
-                                <TableCell align="right"><Link to="">Sign Out</Link></TableCell>
+                                <TableCell align="right"><Chip label="Sign out" variant="outlined" onClick={()=>handleEdit('fname')}/></TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

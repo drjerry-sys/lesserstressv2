@@ -5,10 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Apps for easy hostel searchs"
-    />
+    <meta name="description" content="Apps for easy hostel searchs" />
     <title>lesserstress</title>
   </head>
   <style>
@@ -22,5 +19,14 @@
   </style>
   <body>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', ()=>{
+          navigator.serviceWorker.register('./serviceworker.js')
+          .then(reg=> console.log('Sucess: ', reg.scope))
+          .catch(err=> console.log('Faliue', err))
+        })
+      }
+    </script>
   </body>
 </html>

@@ -33,12 +33,12 @@ const SettingsOptions = () => {
     }
 
     return (
-        <div>
+        <div className={classes.setOptions}>
             <div className={classes.forNav}></div>
             <Container>
                 <Grid container>
-                    <Grid item xs={12} sm={12} md={2} lg={4}>
-                        <div style={{  border: "1px solid #D0D0D0", marginTop: "30px" }}>
+                    <Grid item xs={12} sm={12} md={2} lg={3}>
+                        <div style={{  border: "1px solid #D0D0D0", marginTop: "30px", backgroundColor: "#fff"}}>
                             <Box className={classes.eachDiv} onClick={()=>handleClick("person")}>
                                 <div className={classes.iconDiv}><PersonAddOutlined style={{fontSize: "15px"}} /></div>
                                 <Typography variant="caption" className={classes.details}>Personal details</Typography>
@@ -70,7 +70,7 @@ const SettingsOptions = () => {
                             </Box>
                         </div>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={10} lg={8}>
+                    <Grid item xs={12} sm={12} md={10} lg={9}>
                         {pages[location]}
                     </Grid> 
                 </Grid>

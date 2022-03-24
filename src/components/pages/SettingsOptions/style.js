@@ -7,6 +7,10 @@ export default makeStyles(theme=>({
         backgroundColor: colour,
         paddingTop: theme.spacing(8)
     },
+    setOptions: {
+        backgroundColor: "#f0f0f0",
+        minHeight: '100vh'
+    },
     iconDiv: {
         height: "40px",
         width: "40px",
