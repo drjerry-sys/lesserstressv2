@@ -42,7 +42,9 @@ const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
 
     const handleSearch = () => {
         const {area, price_range} = searchInpt;
-        navigate(`/search_result/${area}/${price_range}`);
+        if (area && price_range) {
+            navigate(`/search_result/${area}/${price_range}`);
+        }
     };
 
     const handleAreas = (e, area) => {
