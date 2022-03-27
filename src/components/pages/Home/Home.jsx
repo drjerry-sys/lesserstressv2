@@ -9,14 +9,15 @@ import asherifa from "../../../assets/images/for_rent_4.jfif";
 import roommate from "../../../assets/illustrations/roommate.png";
 import priceImage from "../../../assets/illustrations/best_prices.png";
 import searchHouse from "../../../assets/illustrations/search_house.png";
-import { CheckCircle, Search, PersonPinCircle, Schedule, Home as HomeIcon } from "@material-ui/icons";
-import { Typography, TextField, Button, Grid, Card, CardContent, CardMedia, Chip, Box } from "@material-ui/core";
+import { CheckCircle, Send, Search, PersonPinCircle, Schedule, Home as HomeIcon } from "@material-ui/icons";
+import { Typography, TextField, Fab, Button, Grid, Card, CardContent, CardMedia, Chip, Box } from "@material-ui/core";
 
 const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
     
     const classes = useStyles();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [openchat, setOpenchat] = useState(false);
     const [searchInpt, setsearchInpt] = useState({area: "", price_range: ""});
 
     const spaceType = [
@@ -58,8 +59,13 @@ const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
     const handleSpace = () => {
         navigate("/list_property");
     };
+
+    const handlechat = () => {
+        setOpenchat(!openchat)
+    };
     
     return (
+        <>
         <div className={classes.home}>
             <div className={classes.wrapper}>
                 <div className={classes.homeColor}>
@@ -312,6 +318,10 @@ const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
                 </Box>
             <Footer />
         </div>
+        <Fab className={classes.chatfab} onClick={handlechat} color="secondary" aria-label="edit">
+            <Send />
+        </Fab>
+        </>
     );
 };
 

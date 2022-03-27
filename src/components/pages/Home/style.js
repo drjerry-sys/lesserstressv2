@@ -340,4 +340,10 @@ export default makeStyles(theme=>({
         width: "100%",
         objectFit: "100%"
     },
+    chatfab: {
+        position: 'fixed',
+        bottom: '25px',
+        right: '25px',
+        backgroundColor: theme.palette.white
+    }
 }));
