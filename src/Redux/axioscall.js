@@ -20,6 +20,7 @@ axiosInstance.interceptors.response.use(
         const originalRequest = response.config;
         // console.log({response})
         if (response.status ===  401 && originalRequest.url === baseUrl + '/auth/token/refresh/') {
+            
             window.location.href = '/sign_in';
         }
         if (response.data.code === 'token_not_valid' && response.status === 401 && response.statusText === 'Unauthorized') {
@@ -64,7 +65,8 @@ axiosInstance.interceptors.response.use(
             localStorage.removeItem("access_token");
             localStorage.removeItem("refresh_token");
             axiosInstance.defaults.headers['Authorization'] = null;
-            window.location.href = '/';
+            alert('server is not running')
+            // window.location.href = '/';
             return Promise.reject(error);
         }
         
