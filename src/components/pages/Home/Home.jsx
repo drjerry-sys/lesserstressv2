@@ -9,7 +9,8 @@ import asherifa from "../../../assets/images/for_rent_4.jfif";
 import roommate from "../../../assets/illustrations/roommate.png";
 import priceImage from "../../../assets/illustrations/best_prices.png";
 import searchHouse from "../../../assets/illustrations/search_house.png";
-import { CheckCircle, Send, Search, PersonPinCircle, Schedule, Home as HomeIcon } from "@material-ui/icons";
+import ChatApp from '../../ChatApp/ChatApp';
+import { CheckCircle, Chat, Search, PersonPinCircle, Schedule, Home as HomeIcon } from "@material-ui/icons";
 import { Typography, TextField, Fab, Button, Grid, Card, CardContent, CardMedia, Chip, Box } from "@material-ui/core";
 
 const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
@@ -317,10 +318,13 @@ const Home = ({ isLoggedIn: isAuthenticated, homeData }) => {
                     </div>
                 </Box>
             <Footer />
+            {openchat && (
+                <ChatApp to="admin" setOpenchat={setOpenchat} />
+            )}
+            <Fab className={classes.chatfab} onClick={handlechat} style={{backgroundColor: 'green'}} aria-label="edit">
+                <Chat style={{color: 'white'}} />
+            </Fab>
         </div>
-        <Fab className={classes.chatfab} onClick={handlechat} color="secondary" aria-label="edit">
-            <Send />
-        </Fab>
         </>
     );
 };
