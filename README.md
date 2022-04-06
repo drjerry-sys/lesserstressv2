@@ -15,6 +15,7 @@ Rewriting the whole lesserStress code in material-ui and fresh interface.
   - A payment system where monentary transactions can be made to the agent
 - Authentication System
   - All users, whether agents or customers register themselves before performing any transaction. Visitors can only view and search for accomodation.
+- Chat System for agents and customers
 
 ## Pages
 - Home Page
